@@ -1,0 +1,25 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="container">
+    <br><br>
+    <div class="registration">
+        <div class="registration_left">
+            <h2>Nouveau Espritien? <span> créer votre compte </span></h2>
+
+            <div class="registration_form">
+                <!-- Form -->
+                <form action="{{ path('fos_user_registration_register') }}" method="post" class="fos_user_registration_register">
+
+                {{ form_widget(form) }}
+                <div>
+                    <input type="submit" value="Créer mon compte" />
+                </div>
+
+                </form>
+                <!-- /Form -->
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<br><br><br>
