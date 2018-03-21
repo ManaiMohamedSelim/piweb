@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="user")
  */
-class Utilisateur extends BaseUser
+class User extends BaseUser
 {
     /**
      * @ORM\Id
@@ -27,5 +27,15 @@ class Utilisateur extends BaseUser
         parent::__construct();
         // your own logic
     }
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $niveau;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $photo;
 
 }

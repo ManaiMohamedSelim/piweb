@@ -1,8 +1,40 @@
 {% trans_default_domain 'FOSUserBundle' %}
+<br><br>
+<div class="container">
 
-{{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+    <div class="registration">
+        <div class="registration_left">
+
+            <div class="registration_form">
+                <!-- Form -->
+                <div class="tab1">
+
+                    <div class="single-bottom">
+                        <a href="{{ path ('fos_user_profile_show')}}"><p>Mes informations</p></a>
+                        <a href="{{ path ('fos_user_profile_edit')}}"><p>Modifier mes information</p></a>
+                        <a href="{{ path ('fos_user_change_password')}}"><p>Modifier mon mot de passe</p></a>
+                        <a href="{{ path ('fos_user_security_logout')}}"><p>Se déconnecter</p></a>
+                    </div>
+                </div>
+                <!-- /Form -->
+            </div>
+        </div>
+        <div class="registration_left">
+            <h2>Modifier mes informations</h2>
+            <div class="registration_form">
+                <!-- Form -->
+                {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+                {{ form_widget(form) }}
+                <div>
+                    <input type="submit" value="Valider" />
+                </div>
+                {{ form_end(form) }}
+                <!-- /Form -->
+            </div>
+        </div>
+        <div class="clearfix"></div>
     </div>
-{{ form_end(form) }}
+</div>
+
+<br><br><br><br><br><br><br><br><br><br><br><br>
+
