@@ -1,27 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6452988a-284f-4630-a958-635db89145b6" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/commandlinetools/Composer_12_03_18_12_30_c.xml" afterPath="$PROJECT_DIR$/.idea/commandlinetools/Composer_23_03_18_10_37_c.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/commandlinetools/Symfony_12_03_18_12_31_s.xml" afterPath="$PROJECT_DIR$/.idea/commandlinetools/Symfony_23_03_18_10_38_s.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/default/Layout.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/default/Layout.html.twig" />
-      <change beforePath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/Activite.php" afterPath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/Activite.php" />
-      <change beforePath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/AdressesCov.php" afterPath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/AdressesCov.php" />
-      <change beforePath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/Annonce.php" afterPath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/Annonce.php" />
-      <change beforePath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/Colocation.php" afterPath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/Colocation.php" />
-      <change beforePath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/Commentaire.php" afterPath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/Commentaire.php" />
-      <change beforePath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/Covoiturage.php" afterPath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/Covoiturage.php" />
-      <change beforePath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/Document.php" afterPath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/Document.php" />
-      <change beforePath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/Evaluation.php" afterPath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/Evaluation.php" />
-      <change beforePath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/Evenement.php" afterPath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/Evenement.php" />
-      <change beforePath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/FavorisColocation.php" afterPath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/FavorisColocation.php" />
-      <change beforePath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/Galerie.php" afterPath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/Galerie.php" />
-      <change beforePath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/Reclamation.php" afterPath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/Reclamation.php" />
-      <change beforePath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/Reservation.php" afterPath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/Reservation.php" />
-      <change beforePath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/Topic.php" afterPath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/Topic.php" />
-      <change beforePath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/User.php" afterPath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/User.php" />
-    </list>
+    <list default="true" id="6452988a-284f-4630-a958-635db89145b6" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -54,11 +34,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Reservation.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Reservation.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/UtilisateurBundle/Entity/Reservation.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="398">
               <caret line="213" column="25" lean-forward="false" selection-start-line="213" selection-start-column="25" selection-end-line="213" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Layout.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Resources/views/default/Layout.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="53" column="81" lean-forward="false" selection-start-line="53" selection-start-column="81" selection-end-line="53" selection-end-column="81" />
               <folding />
             </state>
           </provider>
@@ -342,19 +332,20 @@
       <workItem from="1521666157800" duration="5443000" />
       <workItem from="1521796970589" duration="5291000" />
       <workItem from="1521974178035" duration="12004000" />
-      <workItem from="1522070410976" duration="502000" />
+      <workItem from="1522070410976" duration="1092000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44388000" />
+    <option name="totallyTimeSpent" value="44978000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Command Line Tools Console" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.336478" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.336478" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -664,13 +655,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/default/Layout.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="69" column="38" lean-forward="false" selection-start-line="69" selection-start-column="38" selection-end-line="69" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -726,6 +710,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="398">
           <caret line="213" column="25" lean-forward="false" selection-start-line="213" selection-start-column="25" selection-end-line="213" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/default/Layout.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="53" column="81" lean-forward="false" selection-start-line="53" selection-start-column="81" selection-end-line="53" selection-end-column="81" />
           <folding />
         </state>
       </provider>
