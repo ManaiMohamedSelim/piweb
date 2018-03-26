@@ -191,28 +191,4 @@ class Reservation
         return $this->idEvenement;
     }
 
-
-    /**
-     * Set idParticipant
-     *
-     * @param \UtilisateurBundle\Entity\User $idParticipant
-     *
-     * @return Reservation
-     */
-    public function setIdParticipant(\UtilisateurBundle\Entity\User $idParticipant = null)
-    {
-        $this->idParticipant = $idParticipant;
-
-        return $this;
-    }
-
-    /**
-     * Get idParticipant
-     *
-     * @return \UtilisateurBundle\Entity\User
-     */
-    public function getIdParticipant()
-    {
-        return $this->idParticipant;
-    }
 }
