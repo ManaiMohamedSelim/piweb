@@ -1,4 +1,154 @@
 {% extends '::default/Layout.html.twig' %}
 {% block body %}
+    <div class="contact">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">Contact</li>
+            </ol>
+            <!--start contact-->
+            <h3>Contact Us</h3>
+            <div class="section group">
+                <div class="col-md-6 span_1_of_3">
+                    <section  class="sky-form">
+                        <div class="product_right">
+                            <h4 class="m_2"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Categories</h4>
+                            <div class="tab1">
+                                <ul class="place">
+                                    <li class="sort">Home Decorates</li>
+                                    <li class="by"><img src="images/do.png" alt=""></li>
+                                    <div class="clearfix"> </div>
+                                </ul>
+                                <div class="single-bottom">
+                                    <a href="#"><p>Lanterns</p></a>
+                                    <a href="#"><p>Wall Lamps</p></a>
+                                    <a href="#"><p>Table Lamps</p></a>
+                                    <a href="#"><p>Selling Lamps</p></a>
+                                </div>
+                            </div>
+                            <div class="tab2">
+                                <ul class="place">
+                                    <li class="sort">Festive Needs</li>
+                                    <li class="by"><img src="images/do.png" alt=""></li>
+                                    <div class="clearfix"> </div>
+                                </ul>
+                                <div class="single-bottom">
+                                    <a href="#"><p>Lanterns</p></a>
+                                    <a href="#"><p>Disco Lights</p></a>
+                                </div>
+                            </div>
+                            <div class="tab3">
+                                <ul class="place">
+                                    <li class="sort">Kitchen & Dining</li>
+                                    <li class="by"><img src="images/do.png" alt=""></li>
+                                    <div class="clearfix"> </div>
+                                </ul>
+                                <div class="single-bottom">
+                                    <a href="#"><p>Lights & Lamps</p></a>
+                                </div>
+                            </div>
+                            <div class="tab4">
+                                <ul class="place">
+                                    <li class="sort">Books</li>
+                                    <li class="by"><img src="images/do.png" alt=""></li>
+                                    <div class="clearfix"> </div>
+                                </ul>
+                                <div class="single-bottom">
+                                    <a href="#"><p>Standing Lamps</p></a>
+                                    <a href="#"><p>Lamps</p></a>
+                                    <a href="#"><p>Led Lamps</p></a>
+                                </div>
+                            </div>
+                            <div class="tab5">
+                                <ul class="place">
+                                    <li class="sort">Automotive</li>
+                                    <li class="by"><img src="images/do.png" alt=""></li>
+                                    <div class="clearfix"> </div>
+                                </ul>
+                                <div class="single-bottom">
+                                    <a href="#"><p>Car Lights</p></a>
+                                    <a href="#"><p>Stick Lights</p></a>
+                                    <a href="#"><p>Thread Lights</p></a>
+                                </div>
+                            </div>
+
+                            <!--script-->
+                            <script>
+                                $(document).ready(function(){
+                                    $(".tab1 .single-bottom").hide();
+                                    $(".tab2 .single-bottom").hide();
+                                    $(".tab3 .single-bottom").hide();
+                                    $(".tab4 .single-bottom").hide();
+                                    $(".tab5 .single-bottom").hide();
+
+                                    $(".tab1 ul").click(function(){
+                                        $(".tab1 .single-bottom").slideToggle(300);
+                                        $(".tab2 .single-bottom").hide();
+                                        $(".tab3 .single-bottom").hide();
+                                        $(".tab4 .single-bottom").hide();
+                                        $(".tab5 .single-bottom").hide();
+                                    })
+                                    $(".tab2 ul").click(function(){
+                                        $(".tab2 .single-bottom").slideToggle(300);
+                                        $(".tab1 .single-bottom").hide();
+                                        $(".tab3 .single-bottom").hide();
+                                        $(".tab4 .single-bottom").hide();
+                                        $(".tab5 .single-bottom").hide();
+                                    })
+                                    $(".tab3 ul").click(function(){
+                                        $(".tab3 .single-bottom").slideToggle(300);
+                                        $(".tab4 .single-bottom").hide();
+                                        $(".tab5 .single-bottom").hide();
+                                        $(".tab2 .single-bottom").hide();
+                                        $(".tab1 .single-bottom").hide();
+                                    })
+                                    $(".tab4 ul").click(function(){
+                                        $(".tab4 .single-bottom").slideToggle(300);
+                                        $(".tab5 .single-bottom").hide();
+                                        $(".tab3 .single-bottom").hide();
+                                        $(".tab2 .single-bottom").hide();
+                                        $(".tab1 .single-bottom").hide();
+                                    })
+                                    $(".tab5 ul").click(function(){
+                                        $(".tab5 .single-bottom").slideToggle(300);
+                                        $(".tab4 .single-bottom").hide();
+                                        $(".tab3 .single-bottom").hide();
+                                        $(".tab2 .single-bottom").hide();
+                                        $(".tab1 .single-bottom").hide();
+                                    })
+                                });
+                            </script>
+                            <!-- script -->
+                    </section>
+                </div>
+                <div class="col-md-6 span_2_of_3">
+                    <div class="contact-form">
+                        <form>
+                            <div>
+                                <span><label>NAME</label></span>
+                                <span><input name="userName" type="text" class="textbox"></span>
+                            </div>
+                            <div>
+                                <span><label>E-MAIL</label></span>
+                                <span><input name="userEmail" type="text" class="textbox"></span>
+                            </div>
+                            <div>
+                                <span><label>MOBILE</label></span>
+                                <span><input name="userPhone" type="text" class="textbox"></span>
+                            </div>
+                            <div>
+                                <span><label>SUBJECT</label></span>
+                                <span><textarea name="userMsg"> </textarea></span>
+                            </div>
+                            <div>
+                                <span><input type="submit" class="mybutton" value="Submit"></span>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
