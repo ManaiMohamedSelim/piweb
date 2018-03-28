@@ -1,3 +1,15 @@
 event_homepage:
     path:     /events
     defaults: { _controller: EventBundle:Default:index }
+ajouter_event:
+    path:     /addevent
+    defaults: { _controller: EventBundle:Event:ajout }
+modifier_event:
+    path:     /editevent
+    defaults: { _controller: EventBundle:Event:modifier }
+lister_event:
+    path:     /listevents
+    defaults: { _controller: EventBundle:Event:lister }
+my_events:
+    path:     /myevents
+    defaults: { _controller: EventBundle:Event:myEvents }
