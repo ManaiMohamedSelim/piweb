@@ -3,12 +3,15 @@
 namespace UtilisateurBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Evenement
  *
  * @ORM\Table(name="evenement")
  * @ORM\Entity
+ * @Vich\Uploadable
  */
 class Evenement
 {
@@ -90,6 +93,11 @@ class Evenement
      * @ORM\Column(name="Affiche", type="string", length=255, nullable=false)
      */
     private $affiche;
+
+    /**
+     * @Vich\UploadableField(mapping="event_affiche", fileNameProperty="affiche")
+     */
+    private $afficheFile;
 
     /**
      * @var string

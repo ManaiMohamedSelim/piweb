@@ -77,3 +77,15 @@ fos_user:
     from_email:
         address: "manai.mohamed.selim@gmail.com"
         sender_name: "selim"
+
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        event_affiche:
+            uri_prefix: /events/affiche
+            upload_destination: '%kernel.project_dir%/web/affiches'
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true

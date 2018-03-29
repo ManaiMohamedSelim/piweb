@@ -11,7 +11,7 @@
                 <div class="col-md-6 span_1_of_3">
                     <section  class="sky-form">
                         <div class="product_right">
-                            <h4 class="m_2"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Categories</h4>
+
                             <div class="tab1">
                                 <ul class="place">
                                     <li class="sort"><img src="{{asset('images/events_home.png')}}" alt=""></li>
@@ -60,18 +60,6 @@
                                     <a href="{{ path('lister_event') }}"><p>Liste des événements</p></a>
                                 </div>
                             </div>
-                            <div class="tab5">
-                                <ul class="place">
-                                    <li class="sort"><img src="{{asset('images/events_home.png')}}" alt=""></li>
-                                    <li class="by">Evénements</li>
-                                    <div class="clearfix"> </div>
-                                </ul>
-                                <div class="single-bottom">
-                                    <a href="{{ path('ajouter_event') }}"><p>Ajout d'un événement</p></a>
-                                    <a href="{{ path('modifier_event') }}"><p>Modifier un événement</p></a>
-                                    <a href="{{ path('lister_event') }}"><p>Liste des événements</p></a>
-                                </div>
-                            </div>
 
                             <!--script-->
                             <script>
@@ -110,13 +98,7 @@
                                         $(".tab2 .single-bottom").hide();
                                         $(".tab1 .single-bottom").hide();
                                     })
-                                    $(".tab5 ul").click(function(){
-                                        $(".tab5 .single-bottom").slideToggle(300);
-                                        $(".tab4 .single-bottom").hide();
-                                        $(".tab3 .single-bottom").hide();
-                                        $(".tab2 .single-bottom").hide();
-                                        $(".tab1 .single-bottom").hide();
-                                    })
+
                                 });
                             </script>
                             <!-- script -->

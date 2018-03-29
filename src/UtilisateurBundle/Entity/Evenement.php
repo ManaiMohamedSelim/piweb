@@ -3,12 +3,15 @@
 namespace UtilisateurBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Evenement
  *
  * @ORM\Table(name="evenement")
  * @ORM\Entity
+ * @Vich\Uploadable
  */
 class Evenement
 {
@@ -92,6 +95,13 @@ class Evenement
     private $affiche;
 
     /**
+     * @Vich\UploadableField(mapping="event_affiche", fileNameProperty="affiche")
+     */
+    private $afficheFile;
+
+    private $updatedAt;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="Etat", type="string", length=255, nullable=false)
@@ -101,9 +111,9 @@ class Evenement
     /**
      * @var integer
      *
-     * @ORM\Column(name="Prix", type="integer", nullable=false)
+     * @ORM\Column(name="Prix", type="integer", nullable=true)
      */
-    private $prix = '0';
+    private $prix;
 
 
     /**
@@ -337,6 +347,24 @@ class Evenement
     {
         return $this->affiche;
     }
+
+    public function setAfficheFile(File $affiche = null)
+    {
+        $this->afficheFile = $affiche;
+
+        if ($affiche) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+
+    }
+
+    public function getAfficheFile()
+    {
+        return $this->afficheFile;
+    }
+
 
     /**
      * Set etat

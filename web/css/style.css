@@ -1228,8 +1228,8 @@ p.para {
 }
 .btn-default {
     color: #333;
-    background-color: #fff;
-    border-color: #ccc;
+    background-color: #ed645c;
+    border-color: #337ab7;
 }
 .btm-grid{
 	border:1px solid #fff;
@@ -1338,14 +1338,14 @@ h3.ghj {
 }
 .contact-form input[type="text"],.contact-form textarea{
 		   padding: 10px;
-			display: block;
-			width: 98%;
-			border: none;
-			outline: none;
-			color: #464646;
-			font-size: 1.1em;
-			border: 1px solid rgba(85, 85, 85, 0.19);
-			-webkit-appearance:none;
+		   display: block;
+		   width: 100%;
+		   border: none;
+		   outline: none;
+		   color: #464646;
+		   font-size: 1.1em;
+		   border: 1px solid rgba(85, 85, 85, 0.19);
+		   -webkit-appearance:none;
 }
 .contact-form textarea{
 		resize:none;
