@@ -14,6 +14,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichFileType;
@@ -30,17 +31,18 @@ class EventForm extends AbstractType
             )
             ->add('typeReservation',ChoiceType::class, [
                 'choices' => ['Gratuite' => 'Gratuite', 'Payante' => 'Payante'],
-                'placeholder' => 'Veuillez choisir un type de réservation'
+                'placeholder' => 'Veuillez choisir un type de réservation',
+                    'attr' => ['class' => 'res']
                 ]
             )
             ->add('prix')
-            ->add('dateEvent',DateTimeType::class)
+            ->add('dateEvent',DateTimeType::class, ['data' => new \DateTime('now')])
             ->add('duree')
             ->add('lieu')
             ->add('nombre')
-            ->add('description')
+            ->add('description', TextareaType::class)
             ->add('afficheFile', VichFileType::class)
-            ->add('valider',SubmitType::class, ['label' => 'Click']);
+            ->add('valider',SubmitType::class, ['label' => 'Ajouter']);
     }
 
     public function configureOptions(OptionsResolver $resolver)

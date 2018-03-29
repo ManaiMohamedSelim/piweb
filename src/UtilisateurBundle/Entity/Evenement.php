@@ -5,6 +5,7 @@ namespace UtilisateurBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Evenement
@@ -33,42 +34,58 @@ class Evenement
 
     /**
      * @var string
-     *
      * @ORM\Column(name="Nom", type="string", length=255, nullable=false)
      */
     private $nom;
 
     /**
      * @var string
-     *
+     * @Assert\Choice(
+     *     choices = { "Associatif", "Culturel", "Autres" },
+     *     message = "Veuillez choisir un type pour votre événement."
+     * )
      * @ORM\Column(name="Type", type="string", length=255, nullable=false)
      */
     private $type;
 
     /**
      * @var string
-     *
+     * @Assert\Choice(
+     *     choices = { "Gratuite", "Payante" },
+     *     message = "Veuillez choisir un type de réservation."
+     * )
      * @ORM\Column(name="Type_Reservation", type="string", length=255, nullable=false)
      */
     private $typeReservation;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="Date_Event", type="datetime", nullable=true)
+     * @Assert\GreaterThanOrEqual(
+     *     value = "now",
+     *     message = "Veuillez choisir une date valide."
+     * )
+     * @ORM\Column(name="Date_Event", type="datetime", nullable=false)
      */
     private $dateEvent;
 
     /**
      * @var string
-     *
+     * @Assert\Regex(
+     *     pattern     = "/^[a-zA-Z0-9 ]+$/",
+     *     match=true,
+     *     message="Veuillez un choisir une durée valide."
+     * )
      * @ORM\Column(name="Duree", type="string", length=255, nullable=false)
      */
     private $duree;
 
     /**
      * @var string
-     *
+     * @Assert\Regex(
+     *     pattern     = "/^[a-zA-Z0-9 ]+$/",
+     *     match=true,
+     *     message="Veuillez un choisir une localisation valide"
+     * )
      * @ORM\Column(name="Lieu", type="string", length=255, nullable=false)
      */
     private $lieu;
@@ -82,7 +99,7 @@ class Evenement
 
     /**
      * @var string
-     *
+     * @Assert\Length(max=255)
      * @ORM\Column(name="Description", type="string", length=255, nullable=false)
      */
     private $description;
@@ -95,6 +112,10 @@ class Evenement
     private $affiche;
 
     /**
+     * @Assert\Image(
+     *     maxSize="5M",
+     *     mimeTypesMessage = "Veuillez uploader un fichier de type Image"
+     * )
      * @Vich\UploadableField(mapping="event_affiche", fileNameProperty="affiche")
      */
     private $afficheFile;

@@ -7,7 +7,10 @@
             {{ form_row(form.nom, { 'label': 'Titre' }) }}
             {{ form_row(form.type, { 'label': 'Type' }) }}
             {{ form_row(form.typeReservation, { 'label': 'Type de réservation' }) }}
-            {{ form_row(form.prix, { 'label': 'Prix' }) }}
+            {{ form_errors(form.prix) }}
+            {{ form_label(form.prix,null, {'label_attr':{'class' : 'prixlab'}}) }}
+            {{ form_widget(form.prix,{'attr': {'novalidate': 'novalidate', 'class' : 'prix'}}) }}
+            {#{{ form_row(form.prix, { 'label': 'Prix', 'attr': {'novalidate': 'novalidate', 'class' : 'prix'} }) }}#}
             {{ form_row(form.dateEvent, { 'label': 'Date' }) }}
             {{ form_row(form.duree, { 'label': 'Durée' }) }}
             {{ form_row(form.lieu, { 'label': 'Localisation' }) }}
@@ -20,4 +23,32 @@
 
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('.res').on('change',function() {
+                var content = $('.res').val();
+                if (content == "Gratuite"){
+                    $(".prix").hide();
+                    $(".prixlab").hide();
+                }
+                else {
+                    $(".prix").show();
+                    $(".prixlab").show();
+                }
+            });
+        });
+        $(document).ready(function() {
+            $('.res').on('keyup',function() {
+                var content = $('.res').val();
+                if (content == "Gratuite"){
+                    $(".prix").hide();
+                    $(".prixlab").hide();
+                }
+                else {
+                    $(".prix").show();
+                    $(".prixlab").show();
+                }
+            });
+        });
+    </script>
 {%  endblock %}
