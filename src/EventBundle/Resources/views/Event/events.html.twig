@@ -1,10 +1,21 @@
 {% extends '::default/Layout.html.twig' %}
 {% block body %}
     <div class="contact">
+
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        {%  else %}
+            <div class="alerts">
+                <div class="alert alert-danger" role="alert">
+                    <strong>Aucune Authentification!</strong> Pour créer un compte cliquez <a href="{{ path('fos_user_registration_register') }}">ici</a>.
+                </div>
+            </div>
+        {%  endif %}
         <div class="container">
             <ol class="breadcrumb">
-                <li><a href="index.html">Home</a></li>
-                <li class="active">Contact</li>
+                <li><a href="{{ path('homepage') }}">Home</a></li>
+                <li><a href="{{ path('event_homepage') }}">Evénements</a></li>
+                <li class="active">{% block home %}
+                    {% endblock %}</li>
             </ol>
             <!--start contact-->
             <div class="section group">

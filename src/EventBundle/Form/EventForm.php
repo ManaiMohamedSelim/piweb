@@ -12,12 +12,14 @@ namespace EventBundle\Form;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichFileType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class EventForm extends AbstractType
 {
@@ -36,12 +38,17 @@ class EventForm extends AbstractType
                 ]
             )
             ->add('prix')
-            ->add('dateEvent',DateTimeType::class, ['data' => new \DateTime('now')])
+            ->add('dateEvent',DateTimeType::class, ['data' => new \DateTime('now'),
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd HH:mm',
+                'html5' => false,
+                'attr' => ['class' => 'js-datepicker'],
+                ])
             ->add('duree')
             ->add('lieu')
             ->add('nombre')
-            ->add('description', TextareaType::class)
-            ->add('afficheFile', VichFileType::class)
+            ->add('description', TextareaType::class,['attr' => ['maxlength' => 255]])
+            ->add('afficheFile', VichImageType::class,['label'=> false])
             ->add('valider',SubmitType::class, ['label' => 'Ajouter']);
     }
 

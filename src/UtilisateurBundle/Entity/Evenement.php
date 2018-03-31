@@ -131,7 +131,10 @@ class Evenement
 
     /**
      * @var integer
-     *
+     * @Assert\GreaterThanOrEqual(
+     *     value = "1",
+     *     message = "Veuillez choisir un entier valide."
+     * )
      * @ORM\Column(name="Prix", type="integer", nullable=true)
      */
     private $prix;

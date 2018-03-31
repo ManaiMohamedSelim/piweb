@@ -22,31 +22,31 @@ class EventController extends Controller
      */
     public function ajoutAction(Request $request)
     {
+        $user = $this->getUser();
         $event = new Evenement();
         $form = $this->createForm(EventForm::class, $event);
         $form->handleRequest($request);
-        if($form->isValid()){
-            $event->setEtat("Non");
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($event);
-            $em->flush();
-            return $this->redirectToRoute('event_homepage');
+        if($user !== null) {
+            if ($form->isValid()) {
+                $event->setEtat("Non");
+                $event->setIdOrganisateur($user);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($event);
+                $em->flush();
+                return $this->redirectToRoute('event_homepage');
+            }
+            return $this->render('EventBundle:Event:ajoutevent.html.twig', ['form' => $form->createView(), 'tag' => 'Ajouter un événement']);
         }
-        return $this->render('EventBundle:Event:ajoutevent.html.twig',['form' => $form->createView()]);
-    }
+        else{
+            return $this->redirectToRoute('fos_user_registration_register');
+            }
+        }
+
+
 
     public function modifierAction(Request $request)
     {
-        $event = new Evenement();
-        $form = $this->createForm(EventForm::class, $event);
-        $form->handleRequest($request);
-        if($form->isValid()){
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($event);
-            $em->flush();
-            return $this->redirectToRoute('event_homepage');
-        }
-        return $this->render('EventBundle:Event:modifevent.html.twig',['form' => $form->createView()]);
+
     }
 
     public function listerAction()

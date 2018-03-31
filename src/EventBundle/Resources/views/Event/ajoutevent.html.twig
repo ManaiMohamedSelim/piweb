@@ -1,24 +1,73 @@
 {% extends 'EventBundle:Event:events.html.twig' %}
+{% block stylesheets %}
+    <link href="{{ asset ('event/css/bootstrap-datetimepicker.css') }}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{{ asset ('event/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" type="text/css" media="all" />
+{% endblock %}
+{% block home %}
+    {{ tag }}
+{% endblock %}
 {% block eventBody %}
     <div class="col-md-6 span_2_of_3">
         <div class="contact-form">
             {%  form_theme form 'bootstrap_4_layout.html.twig' %}
             {{ form_start(form) }}
-            {{ form_row(form.nom, { 'label': 'Titre' }) }}
-            {{ form_row(form.type, { 'label': 'Type' }) }}
-            {{ form_row(form.typeReservation, { 'label': 'Type de réservation' }) }}
-            {{ form_errors(form.prix) }}
-            {{ form_label(form.prix,null, {'label_attr':{'class' : 'prixlab'}}) }}
+
+            {{ form_label(form.nom,'Titre', {'label_attr':{'class' : 'nomlab'}}) }}
+            {{ form_widget(form.nom,{'attr': {'class' : 'nom'}}) }}
+            <div id="nom_err">
+                {{ form_errors(form.nom,{'label_attr':{'class' : 'nom_err1'}}) }}
+            </div>
+
+
+            {{ form_label(form.type,'Type d\'événement', {'label_attr':{'class' : 'typelab'}}) }}
+            {{ form_widget(form.type,{'attr': {'class' : 'type'}}) }}
+            {{ form_errors(form.type) }}
+
+            {{ form_label(form.typeReservation,'Type de réservation', {'label_attr':{'class' : 'reslab'}}) }}
+            {{ form_widget(form.typeReservation) }}
+            {{ form_errors(form.typeReservation) }}
+
+            {{ form_label(form.prix,'Prix', {'label_attr':{'class' : 'prixlab'}}) }}
             {{ form_widget(form.prix,{'attr': {'novalidate': 'novalidate', 'class' : 'prix'}}) }}
-            {#{{ form_row(form.prix, { 'label': 'Prix', 'attr': {'novalidate': 'novalidate', 'class' : 'prix'} }) }}#}
-            {{ form_row(form.dateEvent, { 'label': 'Date' }) }}
-            {{ form_row(form.duree, { 'label': 'Durée' }) }}
-            {{ form_row(form.lieu, { 'label': 'Localisation' }) }}
-            {{ form_row(form.nombre, { 'label': 'Quota' }) }}
-            {{ form_row(form.description, { 'label': 'Description' }) }}
-            {{ form_row(form.afficheFile, { 'label': 'Affiche' }) }}
+            <div id="prix_err">
+            {{ form_errors(form.prix) }}
+            </div>
 
+            {{ form_label(form.dateEvent,'Date', {'label_attr':{'class' : 'datelab'}}) }}
+            {{ form_widget(form.dateEvent) }}
+            <div id="date_err">
+            {{ form_errors(form.dateEvent) }}
+            </div>
 
+            {{ form_label(form.duree,'Durée', {'label_attr':{'class' : 'dureelab'}}) }}
+            {{ form_widget(form.duree,{'attr': {'class' : 'duree'}}) }}
+            <div id="duree_err">
+            {{ form_errors(form.duree) }}
+            </div>
+
+            {{ form_label(form.lieu,'Localisation', {'label_attr':{'class' : 'loclab'}}) }}
+            {{ form_widget(form.lieu,{'attr': {'class' : 'loc'}}) }}
+            <div id="loc_err">
+            {{ form_errors(form.lieu) }}
+            </div>
+
+            {{ form_label(form.nombre,'Quota', {'label_attr':{'class' : 'quotalab'}}) }}
+            {{ form_widget(form.nombre,{'attr': {'class' : 'quota'}}) }}
+            <div id="quota_err">
+            {{ form_errors(form.nombre) }}
+            </div>
+
+            {{ form_label(form.description,'Description', {'label_attr':{'class' : 'desclab'}}) }}
+            {{ form_widget(form.description,{'attr': {'class' : 'desc'}}) }}
+            <div id="des_err">
+            {{ form_errors(form.description) }}
+            </div>
+
+            {{ form_label(form.afficheFile,'Affiche', {'label_attr':{'class' : 'afflab'}}) }}
+            {{ form_widget(form.afficheFile,{'attr': {'class' : 'affiche'}}) }}
+            <div id="aff_err">
+            {{ form_errors(form.afficheFile) }}
+            </div>
             {{ form_end(form) }}
 
         </div>
@@ -38,17 +87,99 @@
             });
         });
         $(document).ready(function() {
-            $('.res').on('keyup',function() {
-                var content = $('.res').val();
-                if (content == "Gratuite"){
-                    $(".prix").hide();
-                    $(".prixlab").hide();
+            $('.duree').on('keyup',function() {
+                var content = $('.duree').val();
+                var numericReg = /^[a-zA-Z0-9 ]+$/;
+                if(!numericReg.test(content) && content !=="") {
+                    $('#duree_err').show();
+                    $('#duree_err').text("Veuillez choisir une durée valide").css({"font-size": "0.9em",
+                    "color": "#d85364"});
                 }
-                else {
-                    $(".prix").show();
-                    $(".prixlab").show();
+                else{
+                    $('#duree_err').hide();
                 }
             });
         });
+        $(document).ready(function() {
+            $('.loc').on('keyup',function() {
+                var content = $('.loc').val();
+                var numericReg = /^[a-zA-Z0-9 ]+$/;
+                if(!numericReg.test(content) && content !=="") {
+                    $('#loc_err').show();
+                    $('#loc_err').text("Veuillez choisir une localisation valide").css({"font-size": "0.9em",
+                        "color": "#d85364"});
+                }
+                else{
+                    $('#loc_err').hide();
+                }
+            });
+        });
+        $(document).ready(function() {
+            $('.prix').on('keyup',function() {
+                var content = $('.prix').val();
+                var numericReg = /^[+]?\d+([.]\d+)?$/;
+                if(!numericReg.test(content) && content !=="") {
+                    $('#prix_err').show();
+                    $('#prix_err').text("Veuillez choisir un entier pour votre prix").css({"font-size": "0.9em",
+                        "color": "#d85364"});
+                }
+                else{
+                    $('#prix_err').hide();
+                }
+            });
+        });
+        $(document).ready(function() {
+            $('.quota').on('keyup',function() {
+                var content = $('.quota').val();
+                var numericReg = /^[+]?\d+([.]\d+)?$/;
+                if(!numericReg.test(content) && content !=="") {
+                    $('#quota_err').show();
+                    $('#quota_err').text("Veuillez choisir un entier pour votre quota").css({"font-size": "0.9em",
+                        "color": "#d85364"});
+                }
+                else{
+                    $('#quota_err').hide();
+                }
+            });
+        });
+        $(document).ready(function() {
+            $('.desc').on('keyup',function() {
+                var i = $('.desc').val().length;
+                if($('.desc').val() !=="") {
+                    $('#des_err').show();
+                    var j = 255 - i;
+                    var msg = "Nombre de caractères atteint " + i + " , il vous reste " + j + " caractères sur 255";
+                    $('#des_err').text(msg).css({
+                        "font-size": "0.9em",
+                        "color": "#d85364"
+                    });
+                }
+                else{
+                    $('#des_err').hide();
+                }
+            });
+        });
+        $(document).ready(function() {
+                $('.js-datepicker').datetimepicker().on('changeDate', function(ev) {
+                    var d = new Date();
+                          if (ev.date.valueOf() < d.valueOf()){
+                              $('#date_err').show();
+                              var msg = "Veuillez entrer une date valide";
+                              $('#date_err').text(msg).css({
+                                  "font-size": "0.9em",
+                                  "color": "#d85364"
+                              });
+                          }
+                          else{
+                              $('#date_err').hide();
+                          }
+                 });
+        });
+
     </script>
 {%  endblock %}
+{% block javascripts %}
+    <script src="{{ asset ('event/js/bootstrap-datetimepicker.js') }}"></script>
+    <script src="{{ asset ('event/js/bootstrap-datetimepicker.min.js') }}"></script>
+
+{% endblock %}
