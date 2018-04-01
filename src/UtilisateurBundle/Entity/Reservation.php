@@ -64,5 +64,158 @@ class Reservation
     private $idReservation;
 
 
-}
 
+    /**
+     * Set idEvenement
+     *
+     * @param integer $idEvenement
+     *
+     * @return Reservation
+     */
+    public function setIdEvenement($idEvenement)
+    {
+        $this->idEvenement = $idEvenement;
+
+        return $this;
+    }
+
+    /**
+     * Get idEvenement
+     *
+     * @return integer
+     */
+    public function getIdEvenement()
+    {
+        return $this->idEvenement;
+    }
+
+    /**
+     * Set idParticipant
+     *
+     * @param integer $idParticipant
+     *
+     * @return Reservation
+     */
+    public function setIdParticipant($idParticipant)
+    {
+        $this->idParticipant = $idParticipant;
+
+        return $this;
+    }
+
+    /**
+     * Get idParticipant
+     *
+     * @return integer
+     */
+    public function getIdParticipant()
+    {
+        return $this->idParticipant;
+    }
+
+    /**
+     * Set typeReservation
+     *
+     * @param string $typeReservation
+     *
+     * @return Reservation
+     */
+    public function setTypeReservation($typeReservation)
+    {
+        $this->typeReservation = $typeReservation;
+
+        return $this;
+    }
+
+    /**
+     * Get typeReservation
+     *
+     * @return string
+     */
+    public function getTypeReservation()
+    {
+        return $this->typeReservation;
+    }
+
+    /**
+     * Set tarif
+     *
+     * @param float $tarif
+     *
+     * @return Reservation
+     */
+    public function setTarif($tarif)
+    {
+        $this->tarif = $tarif;
+
+        return $this;
+    }
+
+    /**
+     * Get tarif
+     *
+     * @return float
+     */
+    public function getTarif()
+    {
+        return $this->tarif;
+    }
+
+    /**
+     * Set numeroTicket
+     *
+     * @param string $numeroTicket
+     *
+     * @return Reservation
+     */
+    public function setNumeroTicket($numeroTicket)
+    {
+        $this->numeroTicket = $numeroTicket;
+
+        return $this;
+    }
+
+    /**
+     * Get numeroTicket
+     *
+     * @return string
+     */
+    public function getNumeroTicket()
+    {
+        return $this->numeroTicket;
+    }
+
+    /**
+     * Set etat
+     *
+     * @param string $etat
+     *
+     * @return Reservation
+     */
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    /**
+     * Get etat
+     *
+     * @return string
+     */
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+
+    /**
+     * Get idReservation
+     *
+     * @return integer
+     */
+    public function getIdReservation()
+    {
+        return $this->idReservation;
+    }
+}

@@ -1,0 +1,21 @@
+{% extends '::default/Layout.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+    <br><br>
+    <div class="registration">
+    <div class="registration_left">
+    <h2>Partager un document</h2>
+
+    <div class="registration_form">
+        {{ form(Form) }}
+
+        {{ form_widget(Form.Valider, {'attr' : { 'class' : 'btn btn-primary btn-lg full-width' }}) }}
+    </div>
+    </div>
+        <div class="clearfix"></div>
+    </div>
+    </div>
+    <br><br><br>
+{% endblock %}

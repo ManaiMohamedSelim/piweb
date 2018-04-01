@@ -42,5 +42,62 @@ class FavorisColocation
     private $idColocation;
 
 
-}
 
+    /**
+     * Get idFav
+     *
+     * @return integer
+     */
+    public function getIdFav()
+    {
+        return $this->idFav;
+    }
+
+    /**
+     * Set idUser
+     *
+     * @param \UtilisateurBundle\Entity\User $idUser
+     *
+     * @return FavorisColocation
+     */
+    public function setIdUser(\UtilisateurBundle\Entity\User $idUser = null)
+    {
+        $this->idUser = $idUser;
+
+        return $this;
+    }
+
+    /**
+     * Get idUser
+     *
+     * @return \UtilisateurBundle\Entity\User
+     */
+    public function getIdUser()
+    {
+        return $this->idUser;
+    }
+
+    /**
+     * Set idColocation
+     *
+     * @param \UtilisateurBundle\Entity\Colocation $idColocation
+     *
+     * @return FavorisColocation
+     */
+    public function setIdColocation(\UtilisateurBundle\Entity\Colocation $idColocation = null)
+    {
+        $this->idColocation = $idColocation;
+
+        return $this;
+    }
+
+    /**
+     * Get idColocation
+     *
+     * @return \UtilisateurBundle\Entity\Colocation
+     */
+    public function getIdColocation()
+    {
+        return $this->idColocation;
+    }
+}

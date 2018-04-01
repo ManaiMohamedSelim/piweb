@@ -106,5 +106,302 @@ class Evenement
     private $id;
 
 
-}
 
+    /**
+     * Set idOrganisateur
+     *
+     * @param integer $idOrganisateur
+     *
+     * @return Evenement
+     */
+    public function setIdOrganisateur($idOrganisateur)
+    {
+        $this->idOrganisateur = $idOrganisateur;
+
+        return $this;
+    }
+
+    /**
+     * Get idOrganisateur
+     *
+     * @return integer
+     */
+    public function getIdOrganisateur()
+    {
+        return $this->idOrganisateur;
+    }
+
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     *
+     * @return Evenement
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return Evenement
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set typeReservation
+     *
+     * @param string $typeReservation
+     *
+     * @return Evenement
+     */
+    public function setTypeReservation($typeReservation)
+    {
+        $this->typeReservation = $typeReservation;
+
+        return $this;
+    }
+
+    /**
+     * Get typeReservation
+     *
+     * @return string
+     */
+    public function getTypeReservation()
+    {
+        return $this->typeReservation;
+    }
+
+    /**
+     * Set dateEvent
+     *
+     * @param \DateTime $dateEvent
+     *
+     * @return Evenement
+     */
+    public function setDateEvent($dateEvent)
+    {
+        $this->dateEvent = $dateEvent;
+
+        return $this;
+    }
+
+    /**
+     * Get dateEvent
+     *
+     * @return \DateTime
+     */
+    public function getDateEvent()
+    {
+        return $this->dateEvent;
+    }
+
+    /**
+     * Set duree
+     *
+     * @param string $duree
+     *
+     * @return Evenement
+     */
+    public function setDuree($duree)
+    {
+        $this->duree = $duree;
+
+        return $this;
+    }
+
+    /**
+     * Get duree
+     *
+     * @return string
+     */
+    public function getDuree()
+    {
+        return $this->duree;
+    }
+
+    /**
+     * Set lieu
+     *
+     * @param string $lieu
+     *
+     * @return Evenement
+     */
+    public function setLieu($lieu)
+    {
+        $this->lieu = $lieu;
+
+        return $this;
+    }
+
+    /**
+     * Get lieu
+     *
+     * @return string
+     */
+    public function getLieu()
+    {
+        return $this->lieu;
+    }
+
+    /**
+     * Set nombre
+     *
+     * @param integer $nombre
+     *
+     * @return Evenement
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return integer
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Evenement
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set affiche
+     *
+     * @param string $affiche
+     *
+     * @return Evenement
+     */
+    public function setAffiche($affiche)
+    {
+        $this->affiche = $affiche;
+
+        return $this;
+    }
+
+    /**
+     * Get affiche
+     *
+     * @return string
+     */
+    public function getAffiche()
+    {
+        return $this->affiche;
+    }
+
+    /**
+     * Set etat
+     *
+     * @param string $etat
+     *
+     * @return Evenement
+     */
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    /**
+     * Get etat
+     *
+     * @return string
+     */
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+
+    /**
+     * Set prix
+     *
+     * @param integer $prix
+     *
+     * @return Evenement
+     */
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    /**
+     * Get prix
+     *
+     * @return integer
+     */
+    public function getPrix()
+    {
+        return $this->prix;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+}
