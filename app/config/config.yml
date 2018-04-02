@@ -89,3 +89,7 @@ vich_uploader:
             inject_on_load: false
             delete_on_update: true
             delete_on_remove: true
+gregwar_image:
+    cache_dir:  '/cache'
+    throw_exception: true
+    web_dir: '%kernel.project_dir%/web/affiches'
