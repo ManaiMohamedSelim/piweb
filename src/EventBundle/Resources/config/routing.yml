@@ -13,3 +13,7 @@ lister_event:
 my_events:
     path:     /myevents
     defaults: { _controller: EventBundle:Event:myEvents }
+details_event:
+    path:     /details
+    defaults: { _controller: EventBundle:Event:details }
+

@@ -2,6 +2,41 @@
 {% block stylesheets %}
     <link href="{{ asset ('event/css/bootstrap-datetimepicker.css') }}" rel="stylesheet" type="text/css" media="all" />
     <link href="{{ asset ('event/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" type="text/css" media="all" />
+    <style type="text/css">
+        label[for="eventbundle_event_nom"] {
+            color: dodgerblue;
+        }
+        label[for="eventbundle_event_type"] {
+            color: dodgerblue;
+        }
+        label[for="eventbundle_event_typeReservation"] {
+            color: dodgerblue;
+        }
+        label[for="eventbundle_event_prix"] {
+            color: dodgerblue;
+        }
+        label[for="eventbundle_event_dateEvent"] {
+            color: dodgerblue;
+        }
+        label[for="eventbundle_event_duree"] {
+            color: dodgerblue;
+        }
+        label[for="eventbundle_event_lieu"] {
+             color: dodgerblue;
+         }
+        label[for="eventbundle_event_nombre"] {
+            color: dodgerblue;
+        }
+        label[for="eventbundle_event_description"] {
+            color: dodgerblue;
+        }
+        label[for="afflab"] {
+            color: dodgerblue;
+        }
+
+
+    </style>
+
 {% endblock %}
 {% block home %}
     {{ tag }}
@@ -174,6 +209,11 @@
                               $('#date_err').hide();
                           }
                  });
+        });
+        $(document).ready(function() {
+            $('.afflab').css({
+                        "color" : "#1e90ff"
+                    })
         });
 
     </script>

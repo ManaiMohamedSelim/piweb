@@ -20,7 +20,7 @@ class AppKernel extends Kernel
             new UtilisateurBundle\UtilisateurBundle(),
             new EventBundle\EventBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
-            new Gregwar\ImageBundle\GregwarImageBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
