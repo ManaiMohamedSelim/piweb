@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6452988a-284f-4630-a958-635db89145b6" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/EventBundle/Controller/EventController.php" afterPath="$PROJECT_DIR$/src/EventBundle/Controller/EventController.php" />
-      <change beforePath="$PROJECT_DIR$/src/EventBundle/Resources/config/routing.yml" afterPath="$PROJECT_DIR$/src/EventBundle/Resources/config/routing.yml" />
-      <change beforePath="$PROJECT_DIR$/src/EventBundle/Resources/views/Event/listevents.html.twig" afterPath="$PROJECT_DIR$/src/EventBundle/Resources/views/Event/listevents.html.twig" />
-      <change beforePath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/EvenementRepository.php" afterPath="$PROJECT_DIR$/src/UtilisateurBundle/Entity/EvenementRepository.php" />
-    </list>
+    <list default="true" id="6452988a-284f-4630-a958-635db89145b6" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -64,7 +58,7 @@
         <entry file="file://$PROJECT_DIR$/src/UtilisateurBundle/Entity/EvenementRepository.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="325">
-              <caret line="64" column="1" lean-forward="true" selection-start-line="64" selection-start-column="1" selection-end-line="64" selection-end-column="1" />
+              <caret line="64" column="1" lean-forward="false" selection-start-line="64" selection-start-column="1" selection-end-line="64" selection-end-column="1" />
               <folding>
                 <marker date="1522890666283" expanded="true" signature="317:434" ph="SELECT * FRO... evenement" />
               </folding>
@@ -513,12 +507,12 @@
       <workItem from="1522486991037" duration="6178000" />
       <workItem from="1522703724025" duration="10601000" />
       <workItem from="1522750926849" duration="35714000" />
-      <workItem from="1522831386896" duration="15440000" />
+      <workItem from="1522831386896" duration="15652000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="185888000" />
+    <option name="totallyTimeSpent" value="186100000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -948,7 +942,7 @@
     <entry file="file://$PROJECT_DIR$/src/UtilisateurBundle/Entity/EvenementRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="325">
-          <caret line="64" column="1" lean-forward="true" selection-start-line="64" selection-start-column="1" selection-end-line="64" selection-end-column="1" />
+          <caret line="64" column="1" lean-forward="false" selection-start-line="64" selection-start-column="1" selection-end-line="64" selection-end-column="1" />
           <folding>
             <marker date="1522890666283" expanded="true" signature="317:434" ph="SELECT * FRO... evenement" />
           </folding>
