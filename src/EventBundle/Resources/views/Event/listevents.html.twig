@@ -8,32 +8,10 @@
             <table id="myTable" class="table table-bordered table-condensed table-hover table-striped display responsive nowrap" >
                 <thead>
                 <tr>
-                    <th class="col-md-1 col-xs-1">{{ knp_pagination_sortable(pagination, 'Titre', 'e.nom') }}</th>
-                    <th class="col-md-1 col-xs-1">{{ knp_pagination_sortable(pagination, 'Type', 'e.type') }}</th>
-                    <th class="col-md-1 col-xs-1">{{ knp_pagination_sortable(pagination, 'Type Réservation', 'e.typeReservation') }}</th>
-                    <th class="col-md-1 col-xs-1">{% if pagination.isSorted('e.dateEvent') %} class="sorted"{% endif %}
-                        {{ knp_pagination_sortable(pagination, 'Reservation', 'e.dateEvent') }}</th>
-                    <th class="col-md-1 col-xs-1">{{ knp_pagination_sortable(pagination, 'Durée', 'e.duree') }}</th>
-                    <th class="col-md-1 col-xs-1">{{ knp_pagination_sortable(pagination, 'Localisation', 'e.lieu') }}</th>
-                    <th class="col-md-1 col-xs-1">{{ knp_pagination_sortable(pagination, 'Quota', 'e.nombre') }}</th>
-                    <th class="col-md-1 col-xs-1">Détails</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for event in pagination %}
-                    <tr scope="row" {% if loop.index is odd %}class="color"{% endif %}>
-                        <td><span class="glyphicon glyphicon-plus"></span> {{ event.nom }}</td>
-                        <td>{{ event.type }}</td>
-                        <td>{{ event.typeReservation }}</td>
-                        <td>{{ event.dateEvent|date('Y-m-d H:i:s') }}</td>
-                        <td>{{ event.duree }}</td>
-                        <td>{{ event.lieu }}</td>
-                        <td>{{ event.nombre }}</td>
-                        <td><a href="{{path('details_event',{'id' : event.id})
-                            }}" target="_blank"><span class="glyphicon glyphicon-plus"></span></a></td>
-                    </tr>
-                {% endfor %}
-                </tbody>
+                    <th class="col-md-1 col-xs-1"> Titre </th>
+                    <th class="col-md-1 col-xs-1"> Type</th>
+                    <th class="col-md-1 col-xs-1"> Date </th>
+
             </table>
         </div>
     </div>
@@ -42,13 +20,13 @@
             $('#myTable').dataTable({
                 "processing": true,
                 "serverSide": true,
-                "ajax": "{{ path('lister_event') }}",
+                "ajax": "{{ path('data_datatable') }}",
                 "sAjaxDataProp": "data",
                 "pageLength": 10,
                 "columns":[
                     {"data": "nom"},
                     {"data": "type"},
-                    {"data": "dateEvent"}
+                    {"data": "DateEvent"}
                 ]
             });
             document.getElementById('myTable').style.width = "100%";

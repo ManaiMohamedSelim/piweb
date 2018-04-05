@@ -16,4 +16,7 @@ my_events:
 details_event:
     path:     /details
     defaults: { _controller: EventBundle:Event:details }
+data_datatable:
+    path:     /data_datatable
+    defaults: { _controller: EventBundle:Event:data }
 

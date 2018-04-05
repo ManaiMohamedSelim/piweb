@@ -46,7 +46,7 @@ class EvenementRepository extends EntityRepository
 
         if ($query) {
             $qb
-                ->andWhere('u.nom like :query')
+                ->andWhere('e.nom like :query')
                 ->setParameter('query', "%".$query."%")
             ;
         }

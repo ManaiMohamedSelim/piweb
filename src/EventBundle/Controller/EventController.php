@@ -49,6 +49,11 @@ class EventController extends Controller
     {
 
     }
+
+    public function listerAction(Request $request){
+        return $this->render('EventBundle:Event:listevents.html.twig',['events'=>null,
+            'tag'=> 'Liste des événements']);
+    }
     public function lister1Action(Request $request)
     {
         $em    = $this->get('doctrine.orm.entity_manager');
@@ -78,7 +83,7 @@ class EventController extends Controller
         return $this->render('EventBundle:Event:details.html.twig', ['event' => $event, 'events' => null, 'tag' => 'Détails']);
     }
 
-    public function listerAction(Request $request)
+    public function dataAction(Request $request)
     {
         $length = $request->get('length');
         $length = $length && ($length!=-1)?$length:0;
@@ -109,9 +114,8 @@ class EventController extends Controller
             ];
         }
 
-        $response = new Response(json_encode($output), 200, ['Content-Type' => 'application/json']);
-        return $this->render('EventBundle:Event:listevents.html.twig',['response' => $response,'events'=>null,
-            'tag'=> 'Liste des événements']);
+        return new Response(json_encode($output), 200, ['Content-Type' => 'application/json']);
+
     }
 
 
