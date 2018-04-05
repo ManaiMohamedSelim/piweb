@@ -1,7 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6452988a-284f-4630-a958-635db89145b6" name="Default" comment="" />
+    <list default="true" id="6452988a-284f-4630-a958-635db89145b6" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/app/Resources/views/bootstrap_4_layout.html.twig" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/Nouveau dossier/coin-slider.zip" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/Nouveau dossier/coin-slider/coin-slider-styles.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/Nouveau dossier/coin-slider/coin-slider.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/Nouveau dossier/coin-slider/coin-slider.min.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/affiches/000003798_imageArticlePrincipaleLarge.bmp" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/affiches/10308395_662025810556761_265749464958264670_n.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/affiches/10857872_1048170771866912_453824007264988145_n.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/affiches/1521_911343205628726_8453741259157130048_n.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/affiches/580614_10200219982931122_1451142654_n.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/affiches/984234_782372315131305_3309270545984270763_n.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/affiches/Sanstitre.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/affiches/eve.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/affiches/fallback.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/Nouveau dossier/bootstrap-4.0.0-dist.zip" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/Nouveau dossier/css/bootstrap-grid.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/Nouveau dossier/css/bootstrap-grid.css.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/Nouveau dossier/css/bootstrap-grid.min.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/Nouveau dossier/css/bootstrap-grid.min.css.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/Nouveau dossier/css/bootstrap-reboot.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/Nouveau dossier/css/bootstrap-reboot.css.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/Nouveau dossier/css/bootstrap-reboot.min.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/Nouveau dossier/css/bootstrap-reboot.min.css.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/Nouveau dossier/css/bootstrap.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/Nouveau dossier/css/bootstrap.css.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/Nouveau dossier/css/bootstrap.min.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/Nouveau dossier/css/bootstrap.min.css.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/Nouveau dossier/js/bootstrap.bundle.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/Nouveau dossier/js/bootstrap.bundle.js.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/Nouveau dossier/js/bootstrap.bundle.min.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/Nouveau dossier/js/bootstrap.bundle.min.js.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/Nouveau dossier/js/bootstrap.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/Nouveau dossier/js/bootstrap.js.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/Nouveau dossier/js/bootstrap.min.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/Nouveau dossier/js/bootstrap.min.js.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/css/bootstrap-datetimepicker.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/css/bootstrap-datetimepicker.min.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/css/coin-slider-styles.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/css/jquery.dataTables.min.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/bootstrap-datetimepicker.fr.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/bootstrap-datetimepicker.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/bootstrap-datetimepicker.min.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/carousel.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/coin-slider.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/coin-slider.min.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/dataTables.responsive.min.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/jquery.dataTables.min.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.ar.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.az.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.bg.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.bn.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.ca.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.cs.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.da.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.de.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.ee.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.el.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.es.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.fi.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.fr.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.he.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.hr.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.hu.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.hy.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.id.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.is.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.it.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.ja.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.ka.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.ko.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.lt.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.lv.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.ms.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.nb.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.nl.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.no.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.pl.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.pt-BR.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.pt.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.ro.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.rs-latin.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.rs.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.ru.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.sk.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.sl.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.sv.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.sw.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.th.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.tr.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.ua.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.uk.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.zh-CN.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/event/js/locales/bootstrap-datetimepicker.zh-TW.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/images/activities.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/images/events_home.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/images/galleries.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/images/mes_reservations.png" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,11 +123,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="listevents.html.twig" pinned="false" current-in-tab="false">
+      <file leaf-file-name="listevents.html.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/EventBundle/Resources/views/Event/listevents.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="28" column="39" lean-forward="false" selection-start-line="28" selection-start-column="39" selection-end-line="28" selection-end-column="39" />
+            <state relative-caret-position="308">
+              <caret line="31" column="68" lean-forward="false" selection-start-line="31" selection-start-column="68" selection-end-line="31" selection-end-column="68" />
               <folding />
             </state>
           </provider>
@@ -54,7 +153,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EvenementRepository.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="EvenementRepository.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/UtilisateurBundle/Entity/EvenementRepository.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="325">
@@ -231,8 +330,8 @@
         <option value="$PROJECT_DIR$/src/EventBundle/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/src/EventBundle/Controller/EventController.php" />
         <option value="$PROJECT_DIR$/src/EventBundle/Resources/config/routing.yml" />
-        <option value="$PROJECT_DIR$/src/EventBundle/Resources/views/Event/listevents.html.twig" />
         <option value="$PROJECT_DIR$/src/UtilisateurBundle/Entity/EvenementRepository.php" />
+        <option value="$PROJECT_DIR$/src/EventBundle/Resources/views/Event/listevents.html.twig" />
       </list>
     </option>
   </component>
@@ -507,12 +606,12 @@
       <workItem from="1522486991037" duration="6178000" />
       <workItem from="1522703724025" duration="10601000" />
       <workItem from="1522750926849" duration="35714000" />
-      <workItem from="1522831386896" duration="15652000" />
+      <workItem from="1522831386896" duration="15901000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="186100000" />
+    <option name="totallyTimeSpent" value="186349000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -931,14 +1030,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/EventBundle/Resources/views/Event/listevents.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="28" column="39" lean-forward="false" selection-start-line="28" selection-start-column="39" selection-end-line="28" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/UtilisateurBundle/Entity/EvenementRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="325">
@@ -946,6 +1037,14 @@
           <folding>
             <marker date="1522890666283" expanded="true" signature="317:434" ph="SELECT * FRO... evenement" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EventBundle/Resources/views/Event/listevents.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="31" column="68" lean-forward="false" selection-start-line="31" selection-start-column="68" selection-end-line="31" selection-end-column="68" />
+          <folding />
         </state>
       </provider>
     </entry>
