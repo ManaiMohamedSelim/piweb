@@ -19,4 +19,7 @@ details_event:
 data_datatable:
     path:     /data_datatable
     defaults: { _controller: EventBundle:Event:data }
+test_event:
+    path:     /test
+    defaults: { _controller: EventBundle:Event:test }
 

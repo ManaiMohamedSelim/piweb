@@ -11,6 +11,7 @@ namespace EventBundle\Controller;
 
 use EventBundle\Form\EventForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use UtilisateurBundle\Entity\Evenement;
 use Symfony\Component\HttpFoundation\Response;
@@ -50,26 +51,26 @@ class EventController extends Controller
 
     }
 
+    public function testAction(Request $request){
+        if ($request->isMethod("POST")) {
+            if ($request->isXmlHttpRequest()) {
+                $event = new Evenement();
+                $select = $request->get('select');
+                return new JsonResponse($select);
+            }
+        }
+
+
+    }
+
     public function listerAction(Request $request){
         return $this->render('EventBundle:Event:listevents.html.twig',['events'=>null,
-            'tag'=> 'Liste des événements']);
-    }
-    public function lister1Action(Request $request)
-    {
-        $em    = $this->get('doctrine.orm.entity_manager');
-        $dql   = "SELECT e FROM UtilisateurBundle:Evenement e";
-        $query = $em->createQuery($dql);
+            'tag'=> 'Liste des événements', 'select'=> null]);
 
-        $paginator  = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $query, /* query NOT result */
-            $request->query->getInt('page', 1)/*page number*/,
-            3/*limit per page*/
-        );
 
-        // parameters to template
-        return $this->render('EventBundle:Event:listevents.html.twig', ['events' => null,'pagination' => $pagination, 'tag' => 'Liste des événements']);
+
     }
+
 
     public function myEventsAction()
     {
@@ -93,7 +94,7 @@ class EventController extends Controller
 
         $search = $request->get('search');
         $filters = [
-            'query' => @$search['value']
+            'query' => @$search['value'],
         ];
 
         $events = $this->getDoctrine()->getRepository('UtilisateurBundle:Evenement')->search(
@@ -105,18 +106,62 @@ class EventController extends Controller
             'recordsFiltered' => count($this->getDoctrine()->getRepository('UtilisateurBundle:Evenement')->search($filters, 0, false)),
             'recordsTotal' => count($this->getDoctrine()->getRepository('UtilisateurBundle:Evenement')->search(array(), 0, false))
         );
-
         foreach ($events as $event) {
-            $output['data'][] = [
-                'nom' => $event->getNom(),
-                'type' => $event->getType(),
-                'DateEvent' => $event->getDateEvent()->format('Y-m-d H:i:s'),
-            ];
+            if ($event->getTypeReservation() == "Gratuite" ){
+                $output['data'][] = [
+                    'nom' => "<span class=\"glyphicon glyphicon-plus\"></span>".$event->getNom(),
+                    'type' => $event->getType(),
+                    'typeRes' => $event->getTypeReservation(),
+                    'prix' => "Entrée gratuite",
+                    'DateEvent' => $event->getDateEvent()->format('Y-m-d H:i:s'),
+                    'duree' => $event->getDuree(),
+                    'lieu' => $event->getLieu(),
+                    'nombre' => $event->getNombre(),
+                    'Description' => $event->getDescription(),
+                    'Affiche' => '<img class="aff" src="/affiches/'.$event->getAffiche().'"/>',
+                    'Details' => "<a href=".$this->generateUrl('details_event',['id' => $event->getID()])." target=\"_blank\"><span class=\"glyphicon glyphicon-plus\"></span></a>"
+                ];
+            }
+            else{
+                $output['data'][] = [
+                    'nom' => "<span class=\"glyphicon glyphicon-plus\"></span>".$event->getNom(),
+                    'type' => $event->getType(),
+                    'typeRes' => $event->getTypeReservation(),
+                    'prix' => $event->getPrix().' DT',
+                    'DateEvent' => $event->getDateEvent()->format('Y-m-d H:i:s'),
+                    'duree' => $event->getDuree(),
+                    'lieu' => $event->getLieu(),
+                    'nombre' => $event->getNombre(),
+                    'Description' => $event->getDescription(),
+                    'Affiche' => '<img class="aff" src="/affiches/'.$event->getAffiche().'"/>',
+                    'Details' => "<a href=".$this->generateUrl('details_event',['id' => $event->getID()])." target=\"_blank\"><span class=\"glyphicon glyphicon-plus\"></span></a>"
+                ];
+
+            }
+
         }
 
         return new Response(json_encode($output), 200, ['Content-Type' => 'application/json']);
 
     }
+
+    public function lister1Action(Request $request)
+    {
+        $em    = $this->get('doctrine.orm.entity_manager');
+        $dql   = "SELECT e FROM UtilisateurBundle:Evenement e";
+        $query = $em->createQuery($dql);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            3/*limit per page*/
+        );
+
+        // parameters to template
+        return $this->render('EventBundle:Event:listevents.html.twig', ['events' => null,'pagination' => $pagination, 'tag' => 'Liste des événements']);
+    }
+
 
 
 

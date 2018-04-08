@@ -44,12 +44,21 @@ class EvenementRepository extends EntityRepository
             ->from('UtilisateurBundle:Evenement', 'e')
         ;
 
-        if ($query) {
+        if ($query){
             $qb
                 ->andWhere('e.nom like :query')
+                ->orWhere('e.type like :query')
+                ->orWhere('e.typeReservation like :query')
+                ->orWhere('e.duree like :query')
+                ->orWhere('e.dateEvent like :query')
+                ->orWhere('e.lieu like :query')
+                ->orWhere('e.nombre like :query')
+                ->orWhere('e.prix like :query')
                 ->setParameter('query', "%".$query."%")
             ;
+
         }
+        $qb->orderBy('e.dateEvent', 'DESC');
 
         if ($max) {
             $preparedQuery = $qb->getQuery()
