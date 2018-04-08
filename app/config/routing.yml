@@ -1,10 +1,14 @@
-event:
-    resource: "@EventBundle/Resources/config/routing.yml"
-    prefix:   /event
-
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+event:
+    resource: "@EventBundle/Resources/config/routing.yml"
+    prefix:   /event
+
+document:
+    resource: "@DocumentBundle/Resources/config/routing.yml"
+    prefix:   /    

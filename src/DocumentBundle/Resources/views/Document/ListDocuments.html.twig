@@ -1,0 +1,71 @@
+{% extends '::default/Layout.html.twig' %}
+
+{% block body %}
+<br><br>
+    <div class="product-model">
+        <div class="container">
+
+            <h2>Liste des documents</h2>
+            <div class="col-md-9 product-model-sec">
+    {% for doc in docs %}
+                {% if doc.etat == 'publique' %}
+                <a href="{{ path('detail_document', {'id': doc.id }) }}"><div class="product-grid">
+                        <div class="more-product"><span> </span></div>
+                        <div class="product-img b-link-stripe b-animate-go  thickbox">
+                            <img src="{{ asset('images/pdf.png') }}" class="img-responsive" alt="">
+                            <div class="b-wrapper">
+                                <h4 class="b-animate b-from-left  b-delay03">
+                                    <button><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>Voir le contenu</button>
+                                </h4>
+                            </div>
+                        </div></a>
+                <div class="product-info simpleCart_shelfItem">
+                    <div class="product-info-cust prt_name">
+                        <h4>{{ doc.titre }}</h4>
+                        <span class="item_price">Niveau: {{ doc.niveau }}</span>
+                        <span class="item_price">Matiére: {{ doc.matiere }}</span>
+                        <div class="clearfix"> </div>
+                    </div>
+
+                </div>
+            </div>
+                    {% endif %}
+            {% endfor %}
+
+    </div>
+
+    <div class="rsidebar span_1_of_left">
+        <section  class="sky-form">
+            <div class="product_right">
+                <div class="tab1">
+                    <ul class="place">
+                        <li class="sort">Filtre</li>
+                        <li class="by"><img src="images/do.png" alt=""></li>
+                        <div class="clearfix"> </div>
+                    </ul>
+                    <br>
+                    <form method="post" action="{{ path('recherche_document') }}">
+                        <div class="form-group">
+                            <label for="sel1">Selectionner matiére:</label>
+                            <select name="filter" class="form-control" id="sel1">
+                                <option>3A</option>
+                                <option>3B</option>
+                                <option>4BI</option>
+                            </select>
+                        </div>
+                        <br>
+                        <input type="submit" class="item_add items" value="Touver...">
+                    </form>
+                </div>
+        </section>
+
+
+    </div>
+    </div>
+    <center><div class="navigation">
+    {{ knp_pagination_render(docs) }}
+</div></center>
+    </div>
+    </div>
+
+{% endblock %}

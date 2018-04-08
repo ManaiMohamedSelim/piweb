@@ -1,0 +1,43 @@
+{% extends '::default/Layout.html.twig' %}
+
+{% block body %}
+
+    <div class="product">
+        <div class="container">
+            <div class="product-price1">
+                <div class="top-sing">
+                    <div class="rsidebar span_1_of_left">
+                        <section  class="sky-form">
+                            <div class="product_right">
+                                <div class="tab1">
+                                    <ul class="place">
+                                        <li class="sort">Actions</li>
+                                        <li class="by"><img src="images/do.png" alt=""></li>
+                                        <div class="clearfix"> </div>
+                                    </ul>
+                                    <div class="single-bottom">
+                                        <a href="{{ path('liste_document') }}"><p>liste des documents</p></a>
+                                        <a href="{{ path('partager_document') }}"><p>partager un document</p></a>
+                                        <a href="{{ path('liste_attente_document') }}"><p>mes documents en attente</p></a>
+                                    </div>
+                                </div>
+
+                        </section>
+                    </div>
+                    <div class="col-md-5 single-top-in simpleCart_shelfItem">
+                        <div class="single-para ">
+                            <h4>Titre: {{ doc.titre }} </h4>
+                            <h5 class="item_price">Niveau: {{ doc.niveau }} - Matiére: {{ doc.matiere }}</h5>
+                            <p><h4>Description: </h4> <br>{{ doc.description }}</p>
+                            <a href="#" class="add-cart item_add">Consulter document</a>
+                        </div>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div><br>
+                {{ socialButtons() }}
+            </div>
+        </div>
+    </div>
+    <!---->
+
+{% endblock %}

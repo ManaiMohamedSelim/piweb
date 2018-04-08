@@ -1,0 +1,31 @@
+document_homepage:
+    path:     /docbundle
+    defaults: { _controller: DocumentBundle:Default:index }
+
+partager_document:
+    path:     /ajouter_document
+    defaults: { _controller: DocumentBundle:Document:ajouter }
+
+liste_document:
+    path:     /liste_document
+    defaults: { _controller: DocumentBundle:Document:liste }
+
+liste_attente_document:
+    path:     /liste_attente_document
+    defaults: { _controller: DocumentBundle:Document:listeAttente }
+
+detail_document:
+    path:     /detail_document/{id}
+    defaults: { _controller: DocumentBundle:Document:detail }
+
+supprimer_document:
+    path:     /supprimer_document/{id}
+    defaults: { _controller: DocumentBundle:Document:supprimer }
+
+modifier_document:
+    path:     /modifier_document/{id}
+    defaults: { _controller: DocumentBundle:Document:modifier }
+
+recherche_document:
+    path:     /recherche_document
+    defaults: { _controller: DocumentBundle:Document:recherche }
