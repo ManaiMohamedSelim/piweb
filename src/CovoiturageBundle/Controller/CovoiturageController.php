@@ -44,7 +44,7 @@ class CovoiturageController extends Controller
 
         return $this->render('CovoiturageBundle:Covoiturage:Lister.html.twig',array(
             "covoiturages"=>$covoiturages,
-            "notifiableEntity"=>$this->getUser(),
+            "notifiableEntity"=> $this->getUser(),
             "nManager"=>$manager
         ));
 
