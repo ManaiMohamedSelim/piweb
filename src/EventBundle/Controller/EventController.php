@@ -10,11 +10,13 @@ namespace EventBundle\Controller;
 
 
 use EventBundle\Form\EventForm;
+use EventBundle\Form\ReservationForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use UtilisateurBundle\Entity\Evenement;
 use Symfony\Component\HttpFoundation\Response;
+use UtilisateurBundle\Entity\Reservation;
 
 class EventController extends Controller
 {
@@ -51,18 +53,6 @@ class EventController extends Controller
 
     }
 
-    public function testAction(Request $request){
-        if ($request->isMethod("POST")) {
-            if ($request->isXmlHttpRequest()) {
-                $event = new Evenement();
-                $select = $request->get('select');
-                return new JsonResponse($select);
-            }
-        }
-
-
-    }
-
     public function listerAction(Request $request){
         return $this->render('EventBundle:Event:listevents.html.twig',['events'=>null,
             'tag'=> 'Liste des événements', 'select'=> null]);
@@ -79,9 +69,37 @@ class EventController extends Controller
 
     public function detailsAction(Request $request){
         $id = $request->get('id');
+        $user = $this->getUser();
+        $reservation = new Reservation();
         $em = $this->getDoctrine()->getManager();
         $event = $em->getRepository('UtilisateurBundle:Evenement')->find($id);
-        return $this->render('EventBundle:Event:details.html.twig', ['event' => $event, 'events' => null, 'tag' => 'Détails']);
+        $form = $this->createForm(ReservationForm::class, $reservation);
+        $form->handleRequest($request);
+        if($user !== null) {
+            if ($form->isValid()) {
+                $numTicket = count($em->getRepository('UtilisateurBundle:Reservation')->findBy(["idEvenement" => $event, "etat" => "Confirmé"]));
+                $reservation->setIdParticipant($user);
+                $reservation->setIdEvenement($event);
+                $reservation->setTypeReservation($event->getTypeReservation());
+                if ($event->getTypeReservation() == "Payante") {
+                    $reservation->setTarif($event->getPrix());
+                }
+                if ($numTicket) {
+                    $reservation->setNumeroTicket($numTicket + 1);
+                } else {
+                    $reservation->setNumeroTicket(1);
+                }
+                $reservation->setEtat("Confirmé");
+
+                $event->addReservation($reservation);
+                $em->persist($reservation);
+                $em->flush();
+            }
+        }
+
+        return $this->render('EventBundle:Event:details.html.twig', ['event' => $event, 'events' => null, 'tag' => 'Détails',
+                                 'form' => $form->createView()
+            ]);
     }
 
     public function dataAction(Request $request)
@@ -160,6 +178,38 @@ class EventController extends Controller
 
         // parameters to template
         return $this->render('EventBundle:Event:listevents.html.twig', ['events' => null,'pagination' => $pagination, 'tag' => 'Liste des événements']);
+    }
+
+    public function reserverAction(Request $request,$id){
+        if ($request->isMethod('POST')) {
+            $em = $this->getDoctrine()->getManager();
+            $event = $em->getRepository('UtilisateurBundle:Evenement')->findOneBy(["id" => $id]);
+            $numTicket = count($em->getRepository('UtilisateurBundle:Reservation')->findBy(["IdEvenement" => $event, "Etat" => "Confirmé"]));
+            $user = $this->getUser();
+            $reservation = new Reservation();
+            $reservation->setIdEvenement($user);
+            $reservation->setIdEvenement($event);
+            $reservation->setTypeReservation($event->getTypeReservation());
+            if ($event->getTypeReservation() == "Payante") {
+                $reservation->setTarif($event->getPrix());
+            }
+            if ($numTicket) {
+                $reservation->setNumeroTicket($numTicket + 1);
+            } else {
+                $reservation->setNumeroTicket(1);
+            }
+            $reservation->setEtat("Confirmé");
+
+            $event->getReservations()->addReservation($reservation);
+            $em->persist($reservation);
+            $em->flush();
+            return $this->redirectToRoute('event_homepage');
+        }
+
+    }
+
+    public function commenterAction($id){
+
     }
 
 

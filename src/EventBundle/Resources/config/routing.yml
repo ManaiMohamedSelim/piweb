@@ -22,4 +22,6 @@ data_datatable:
 test_event:
     path:     /test
     defaults: { _controller: EventBundle:Event:test }
-
+reserver_event:
+    path:     /details/{id]
+    defaults: { _controller: EventBundle:Event:reserver }

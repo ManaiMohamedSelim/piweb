@@ -146,7 +146,7 @@ class Evenement
     private $commentaires;
 
     /**
-     * @ORM\OneToMany (targetEntity="UtilisateurBundle\Entity\Reservation", mappedBy="idEvenement")
+     * @ORM\OneToMany (targetEntity="UtilisateurBundle\Entity\Reservation", mappedBy="aenement")
      */
     private $reservations;
 

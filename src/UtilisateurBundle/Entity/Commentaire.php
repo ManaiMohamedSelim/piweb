@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Commentaire
  *
- * @ORM\Table(name="commentaire", indexes={@ORM\Index(name="fk_document_id", columns={"id_document"}), @ORM\Index(name="fk_collocation_id", columns={"id_collocation"}), @ORM\Index(name="fk_covoiturage_id", columns={"id_covoiturage"}), @ORM\Index(name="fk_event_id", columns={"ID_Evenement"}), @ORM\Index(name="id_user", columns={"id_user"}), @ORM\Index(name="id_reclamation", columns={"id_topic"})})
+ * @ORM\Table(name="commentaire", indexes={@ORM\Index(name="fk_document_id", columns={"id_document"}), @ORM\Index(name="fk_collocation_id", columns={"id_collocation"}), @ORM\Index(name="fk_covoiturage_id", columns={"id_covoiturage"}), @ORM\Index(name="id_user", columns={"id_user"}), @ORM\Index(name="id_reclamation", columns={"id_topic"})})
  * @ORM\Entity
  */
 class Commentaire
@@ -22,14 +22,13 @@ class Commentaire
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_covoiturage", type="integer", nullable=true)
+     *@ORM\Column(name="id_covoiturage", type="integer", nullable=true)
      */
     private $idCovoiturage;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="ID_Evenement", type="integer", nullable=true)
+     *@ORM\ManyToOne (targetEntity="UtilisateurBundle\Entity\Evenement", inversedBy="commentaires")
+     *@ORM\JoinColumn(name="ID_Evenement", referencedColumnName="ID")
      */
     private $idEvenement;
 
@@ -150,29 +149,6 @@ class Commentaire
         return $this->idCovoiturage;
     }
 
-    /**
-     * Set idEvenement
-     *
-     * @param integer $idEvenement
-     *
-     * @return Commentaire
-     */
-    public function setIdEvenement($idEvenement)
-    {
-        $this->idEvenement = $idEvenement;
-
-        return $this;
-    }
-
-    /**
-     * Get idEvenement
-     *
-     * @return integer
-     */
-    public function getIdEvenement()
-    {
-        return $this->idEvenement;
-    }
 
     /**
      * Set post
@@ -350,5 +326,29 @@ class Commentaire
     public function getIdTopic()
     {
         return $this->idTopic;
+    }
+
+    /**
+     * Set idEvenement
+     *
+     * @param \UtilisateurBundle\Entity\Evenement $idEvenement
+     *
+     * @return Commentaire
+     */
+    public function setIdEvenement(\UtilisateurBundle\Entity\Evenement $idEvenement = null)
+    {
+        $this->idEvenement = $idEvenement;
+
+        return $this;
+    }
+
+    /**
+     * Get idEvenement
+     *
+     * @return \UtilisateurBundle\Entity\Evenement
+     */
+    public function getIdEvenement()
+    {
+        return $this->idEvenement;
     }
 }
