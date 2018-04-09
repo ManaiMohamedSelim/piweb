@@ -42,6 +42,23 @@ class Reclamation
      */
     private $id;
 
+    /**
+     * @var \UtilisateurBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="UtilisateurBundle\Entity\User",inversedBy="reclamations")
+     * @ORM\JoinColumns({
+     * @ORM\JoinColumn(name="id_user", referencedColumnName="id")
+     * })
+     */
+    private $idUser;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="etat", type="text", nullable=false)
+     */
+    private $etat="attente";
 
 
     /**
@@ -124,5 +141,53 @@ class Reclamation
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set idUser.
+     *
+     * @param \UtilisateurBundle\Entity\User|null $idUser
+     *
+     * @return Reclamation
+     */
+    public function setIdUser(\UtilisateurBundle\Entity\User $idUser = null)
+    {
+        $this->idUser = $idUser;
+
+        return $this;
+    }
+
+    /**
+     * Get idUser.
+     *
+     * @return \UtilisateurBundle\Entity\User|null
+     */
+    public function getIdUser()
+    {
+        return $this->idUser;
+    }
+
+    /**
+     * Set etat.
+     *
+     * @param string $etat
+     *
+     * @return Reclamation
+     */
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    /**
+     * Get etat.
+     *
+     * @return string
+     */
+    public function getEtat()
+    {
+        return $this->etat;
     }
 }

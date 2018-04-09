@@ -1,7 +1,7 @@
 {% extends '::default/Layout.html.twig' %}
 
 {% block body %}
-
+    {{ form_start(Form) }}
     <div class="container">
         <br><br>
         <div class="registration">
@@ -12,11 +12,12 @@
 
                     {{ form(Form) }}
 
-
+                    <input type="submit" value="Modifier" />
                 </div>
             </div>
             <div class="clearfix"></div>
         </div>
     </div>
+    {{ form_end(Form) }}
     <br><br><br>
 {% endblock %}

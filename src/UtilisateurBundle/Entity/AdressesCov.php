@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * AdressesCov
  *
  * @ORM\Table(name="adresses_cov", uniqueConstraints={@ORM\UniqueConstraint(name="nom", columns={"nom"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="CovoiturageBundle\Repository\AdressesCovRepository")
  */
 class AdressesCov
 {
@@ -125,4 +125,5 @@ class AdressesCov
     {
         return $this->id;
     }
+
 }

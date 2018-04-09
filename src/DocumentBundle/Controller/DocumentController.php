@@ -4,8 +4,14 @@ namespace DocumentBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use UtilisateurBundle\Entity\Document;
-use UtilisateurBundle\Form\DocumentType;
+use DocumentBundle\Form\DocumentType;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+
 
 class DocumentController extends Controller
 {
@@ -19,6 +25,7 @@ class DocumentController extends Controller
 
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
+                $doc->upload();
                 $em->persist($doc);
                 $em->flush();
                 return $this->redirectToRoute("liste_document");
@@ -32,10 +39,28 @@ class DocumentController extends Controller
 
     public function listeAction(Request $request)
     {
+
         $em = $this->getDoctrine()->getManager();
-        $list_documents = $em->getRepository("UtilisateurBundle:Document")->findAll();
+        $list_documents = $em->getRepository("UtilisateurBundle:Document")->findBy(array('etat'=>'publique'));
+/////////////////////////////////////////////////////////////////////
 
         $docs  = $this->get('knp_paginator')->paginate($list_documents, $request->query->getInt('page', 1), 6);
+
+        if ($request->isMethod("POST")) {
+            if ($request->isXmlHttpRequest()) {
+                $serializer = new Serializer(
+                    array(
+                        new ObjectNormalizer()
+                    )
+                );
+                $docs = $em->getRepository("UtilisateurBundle:Document")->findDoc($request->get('filter'));
+                //print_r($modeles);
+                $jsonContent = $serializer->normalize($docs);
+                return new JsonResponse($jsonContent);
+
+            }
+        }
+////////////////////////////////////////////////////////////////////////
 
         return $this->render("DocumentBundle:Document:ListDocuments.html.twig",
             array(
@@ -63,10 +88,12 @@ class DocumentController extends Controller
         $id = $request->get("id");
         $em = $this->getDoctrine()->getManager();
         $doc = $em->getRepository("UtilisateurBundle:Document")->find($id);
+        $coms = $em->getRepository("UtilisateurBundle:Commentaire")->findByIdDocument($id);
 
         return $this->render("DocumentBundle:Document:DetailDocument.html.twig",
             array(
-                "doc" => $doc
+                "doc" => $doc,
+                "coms"=>$coms
             )
         );
     }
@@ -92,6 +119,7 @@ class DocumentController extends Controller
         $form->handleRequest($request);
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $doc->upload();
             $em->persist($doc);
             $em->flush();
             return $this->redirectToRoute("liste_attente_document");
@@ -103,12 +131,13 @@ class DocumentController extends Controller
             ));
     }
 
-    public function rechercheAction(Request $request)
+    /*public function rechercheAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         if ($request->isMethod("POST")) {
             $filter = $request->get("filter");
-            $list_documents = $em->getRepository("UtilisateurBundle:Document")->findBy(array("niveau" => $filter));
+            $list_documents = $em->getRepository("UtilisateurBundle:Document")
+                                 ->findBy(array("niveau" => $filter, "etat" => "publique"));
 
             $docs = $this->get('knp_paginator')->paginate($list_documents, $request->query->getInt('page', 1), 6);
         }
@@ -117,6 +146,6 @@ class DocumentController extends Controller
                 "docs" => $docs
             )
         );
-    }
+    }*/
 
 }

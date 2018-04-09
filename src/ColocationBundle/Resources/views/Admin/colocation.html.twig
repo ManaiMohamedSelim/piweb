@@ -1,0 +1,84 @@
+{% extends '::default/LayoutAdmin.html.twig' %}
+
+{% block stylesheets %}
+
+    <link href="{{ asset ('css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{{ asset ('css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
+{% endblock %}
+
+{% block body %}
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="#">Accueil</a>
+        </li>
+        <li class="breadcrumb-item active">Colocations</li>
+    </ol>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fa fa-table"></i> La liste des colocations</div>
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Auteur</th>
+                        <th>Adresse</th>
+                        <th>Type de Colocation</th>
+                        <th>Photo</th>
+                        <th>Prix</th>
+                        <th>Type de Maison</th>
+                        <th style="width:10px">Place Disponible</th>
+                        <th>Opérations</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for colocation in colocation %}
+                        <tr>
+                            <td>{{ colocation.idUser.username }}</td>
+                            <td>{{ colocation.adresse }}</td>
+                            <td>{{ colocation.typeColocation }}</td>
+                            <td><img src="{{ asset ('uploads/'~colocation.path) }}"id="yop"></td>
+                            {% if colocation.typeColocation=='Annonce' %}
+                            <td>{{ colocation.prix }}</td>
+                            {% elseif colocation.typeColocation=='Demande' %}
+                                <td>Inexistant</td>
+                                {% endif %}
+                            <td>{{ colocation.typeMaison }}</td>
+                            <td>{{ colocation.placeDispo }}</td>
+
+                        {% if colocation.typeColocation=='Annonce' %}
+                            <td> <a href="{{ path('admin_modifier_coloc',{'id':colocation.id}) }}" >Update</a><br>
+                                <a href="{{ path('delete_coloc',{'id':colocation.id}) }}" ><span class="label label-danger">Delete</span></a></td>
+
+                        {% elseif colocation.typeColocation=='Demande' %}
+                            <td> <a href="{{ path('admin_modifier_demande',{'id':colocation.id}) }}" >Update</a><br>
+                                <a href="{{ path('delete_coloc',{'id':colocation.id}) }}" ><span class="label label-danger">Delete</span></a></td>{% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+    <style>
+
+        #yop{
+
+            height: 200px;
+            width: 300px;
+
+        }
+
+
+    </style>
+
+
+{% endblock %}

@@ -1,0 +1,71 @@
+colocation_homepage:
+    path:     /
+    defaults: { _controller: ColocationBundle:Default:index }
+ajout_colocation:
+    path:     /ajoutcoloc
+    defaults: { _controller: ColocationBundle:Colocation:ajoutColocation }
+affich_colocation:
+    path:     /affichcoloc
+    defaults: { _controller: ColocationBundle:Colocation:affichColocation }
+affich_demande:
+    path:     /affichdemande
+    defaults: { _controller: ColocationBundle:Colocation:affichDemande }
+show_colocation:
+    path:     /showcoloc
+    defaults: { _controller: ColocationBundle:Colocation:showColocation }
+show_annonce:
+    path:     /showannonce
+    defaults: { _controller: ColocationBundle:Colocation:showAnnonce }
+demande_colocation:
+    path:     /demandcoloc
+    defaults: { _controller: ColocationBundle:Colocation:demandeColocation }
+mesannonce_colocation:
+    path:     /mesanncoloc
+    defaults: { _controller: ColocationBundle:Colocation:mesannonceColocation }
+delete_annonce:
+    path:     /deleteannonce
+    defaults: { _controller: ColocationBundle:Colocation:supprimerColocation }
+modifier_annonce:
+    path:     /modifannonce
+    defaults: { _controller: ColocationBundle:Colocation:modifierColocation }
+favoris_annonce:
+    path:     /favoris
+    defaults: { _controller: ColocationBundle:Colocation:favoris }
+non_favoris:
+    path:     /nonfavoris
+    defaults: { _controller: ColocationBundle:Colocation:Nonfavoris }
+mes_favoris:
+    path:     /mesfavoris
+    defaults: { _controller: ColocationBundle:Colocation:mesfavoris }
+show_demande:
+    path:     /showdemande
+    defaults: { _controller: ColocationBundle:Colocation:showDemande }
+demande_detail:
+    path:     /detaildemande
+    defaults: { _controller: ColocationBundle:Colocation:detailDemande }
+mes_demande:
+    path:     /mesdemande
+    defaults: { _controller: ColocationBundle:Colocation:mesDemande }
+delete_demande:
+    path:     /deletedemande
+    defaults: { _controller: ColocationBundle:Colocation:supprimerDemande }
+modifier_demande:
+    path:     /modifierdemande
+    defaults: { _controller: ColocationBundle:Colocation:modifierDemande }
+envoi_sms:
+    path:     /envoisms
+    defaults: { _controller: ColocationBundle:Colocation:call }
+admin_afficher_colocation:
+    path:     /admin/colocation
+    defaults: { _controller: ColocationBundle:Admin:affichecolocation }
+admin_modifier_coloc:
+    path:     /admin/modif
+    defaults: { _controller: ColocationBundle:Admin:updatecolocation }
+delete_coloc:
+    path:     /admin/delete
+    defaults: { _controller: ColocationBundle:Admin:deletecolocation }
+admin_modifier_demande:
+    path:     /admin/modifdemande
+    defaults: { _controller: ColocationBundle:Admin:updatedemande }
+
+

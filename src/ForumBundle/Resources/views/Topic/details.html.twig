@@ -1,0 +1,187 @@
+{% extends '::default/Layout.html.twig' %}
+{% block title %}
+    Le topic {{ topic.sujet }}
+{% endblock %}
+{%  block body %}
+    <link href="{{ asset ('css/facebook.css') }}" rel="stylesheet" type="text/css" media="all" />
+
+    <div class="product" style="overflow-y:scroll;">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="index.html">Accueil</a></li>
+            <li class="active">Détails</li>
+        </ol>
+        <div class="product-price1">
+            <div class="top-sing">
+                <div class="col-md-7 single-top">
+
+                        <ul class="slides">
+                                <div class="thumb-image"> <img src="{{ asset ('uploads/images/'~topic.imageName) }}" data-imagezoom="true" class="img-responsive" id="yopimg" alt=""/>
+                                </div>
+                        </ul>
+                    <div id="yopdiv"> "{{ socialButtons( {'googleplus':false,'linkedin':false,'twitter':false,'pinterest':false} ) }}"</div>
+
+                    <script src="{{ asset('js/imagezoom.js') }}"></script>
+
+                    <script defer src="{{ asset('js/jquery.flexslider.js')}}"></script>
+                    <script>
+                        // Can also be used with $(document).ready()
+                        $(window).load(function() {
+                            $('.flexslider').flexslider({
+                                animation: "slide",
+                                controlNav: "thumbnails"
+                            });
+                        });
+                    </script>
+
+                </div>
+                <div class="col-md-5 single-top-in simpleCart_shelfItem">
+                    <div class="single-para ">
+                        <h2 style="margin-top: 40px">{{ topic.sujet }} </h2>
+                        <h5 class="item_price" style="margin-bottom: 50px">Published by {{ topic.idUser.username }} on {{ topic.date|date}}</h5>
+                        <h4 class="para">{{ topic.description }}</h4>
+                            <div class="prdt-info-grid">
+                        <div class="check">
+                        </div>
+                        <a href="#" class="add-cart item_add" id="comment">Commenter</a>
+                                <form method="post" action="{{ path('ajt_comm') }}" id="putcomm">
+                                <div>
+                                <input type="text" class="text" name="idcomm" id="commenter" style="margin-top: 50px" hidden>
+                                </div>
+                                    <input type="hidden" value="{{ topic.id }}" name="id">
+                                </form>
+                                <div class="well"  hidden id="commentaire">
+
+                                    <script>
+                                        var currentdate = new Date();
+                                        function dateDiff(date1){
+                                            var date = new Date(date1);
+                                            var diff = {}                           // Initialisation du retour
+                                            var tmp = currentdate - date;
+                                            tmp = Math.floor(tmp/1000);             // Nombre de secondes entre les 2 dates
+                                            diff.sec = tmp % 60;                    // Extraction du nombre de secondes
+
+                                            tmp = Math.floor((tmp-diff.sec)/60);    // Nombre de minutes (partie entière)
+                                            diff.min = tmp % 60;                    // Extraction du nombre de minutes
+
+                                            tmp = Math.floor((tmp-diff.min)/60);    // Nombre d'heures (entières)
+                                            diff.hour = tmp % 24;                   // Extraction du nombre d'heures
+
+                                            tmp = Math.floor((tmp-diff.hour)/24);   // Nombre de jours restants
+                                            diff.day = tmp;
+
+
+                                            return diff;
+                                        }
+                                    </script>
+
+                                    {% for c in comment %}
+                                        <p><b><img src="{{ asset('uploads/images/'~c.idUser.photo) }} "id="imgcomm">      {{ c.idUser.username }}:  </b>{{c.contenu}} </p>
+
+                                        {% if c.idUser.id != app.user.id %}
+                                        {% if c.etatCommentaire != "reported" %}
+
+                                        <a href="{{ path('report_commentaire',{"idc":c.id,"idt":topic.id}) }}" id="report">Signaler  </a>
+                                        {% endif %}
+                                        {% endif %}
+                                        {% if c.idUser.id == app.user.id %}
+                                        <a href="{{ path('supprimer_commentaire',{"idc":c.id,"idt":topic.id}) }}" id="report">Supprimer  </a>
+                                        {% endif %}
+
+
+
+
+                                            <p id="{{ c.id }}" class="pcomment">  </p><br><br>
+
+
+                                        <script>
+
+                                            var y = dateDiff("{{ c.post|date }}");
+                                            if(y.sec>0 && y.min<59)
+                                                document.getElementById("{{ c.id }}").innerText =y.day + " jrs";
+                                            else if(y.min>0 && y.hour<1)
+                                                document.getElementById("{{ c.id }}").innerText =y.day + " jrs";
+                                            else if(y.day>0)
+                                                document.getElementById("{{ c.id }}").innerText =y.day + " jrs";
+                                            else if(y.hour > 0)
+                                                document.getElementById("{{ c.id }}").innerText =y.hour +  " hrs";
+                                        </script>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+    <script>
+        $(document).ready(function () {
+
+            $("#comment").click(function(){
+                $("#commenter").show()
+                $("#commentaire").slideDown().css('overflow-y','scroll');
+
+
+
+            });
+
+            // $("#vide").click(function(){
+            //
+            //     $("#commentaire").hide()
+            //     $("#commenter").hide()
+            // });
+
+
+            });
+    </script>
+    <style type="text/css">
+        #commentaire {
+            margin-top: 50px;
+            height: 200px;
+        }
+        .pcomment{
+            color: #616770;
+            display: inline;
+
+
+
+        }
+
+        #yopimg{
+
+            height: 400px;
+            width: 500px;
+
+        }
+        #yopdiv{
+
+            position: relative;
+            bottom: 200px;
+            left: 50px;
+
+        }
+
+        #imgcomm{
+            height: 20px;
+            width: 20px;
+
+
+        }
+
+    </style>
+
+    {%  endblock  %}
+
+
+
+
+
+

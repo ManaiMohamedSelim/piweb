@@ -1,0 +1,21 @@
+covoiturage_homepage:
+    path:     /
+    defaults: { _controller: CovoiturageBundle:Default:index }
+covoiturage_Lister:
+    path:     /Lister
+    defaults: { _controller: CovoiturageBundle:Covoiturage:Lister }
+covoiturage_Afficher:
+    path:     /Afficher
+    defaults: { _controller: CovoiturageBundle:Covoiturage:Afficher }
+covoiturage_Ajouter:
+    path:     /Ajouter
+    defaults: { _controller: CovoiturageBundle:Covoiturage:Ajouter }
+covoiturage_Modifier:
+    path:     /Modifier
+    defaults: { _controller: CovoiturageBundle:Covoiturage:Modifier }
+covoiturage_Supprimer:
+    path:     /Supprimer
+    defaults: { _controller: CovoiturageBundle:Covoiturage:Supprimer }
+covoiturage_Chercher:
+    path:     /Chercher
+    defaults: { _controller: CovoiturageBundle:Covoiturage:Chercher }

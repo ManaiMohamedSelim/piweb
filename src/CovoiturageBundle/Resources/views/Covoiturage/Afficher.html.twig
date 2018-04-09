@@ -1,0 +1,66 @@
+{% extends '::default/Layout.html.twig' %}
+{% block body %}
+<div class="contact">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="">Home</a></li>
+            <li class="active">Covoiturage</li>
+        </ol>
+        <div style="margin-left: 1000px">{{ twitterButton() }}</div>
+
+    <section class="container" onload="initMap()">
+        <br>
+        <br>
+        <div class="col-md-6"><h4 class="ghj">From</h4>
+            <div class="well" style="width: 300px">{{c.depart}}</div>
+        </div>
+        <div class="col-md-6" > <h4 class="ghj">To</h4>
+            <div class="well" style="width: 300px">{{c.destination}}</div></div>
+        <div class="col-md-6"> <h4 class="ghj">Date</h4>
+            <div class="well" style="width: 300px">{{c.date | date}}</div></div>
+    </section>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+    <div id="map" style="width: 700px;margin-left: 200px"></div>
+    </div>
+    <br><br>
+    {% if c.idU==current_user %}
+    <section class="container" >
+    <a href="{{ path('covoiturage_Modifier',{'IdC':c.id,'depart':c.depart,'destination':c.destination,'date':c.date}) }}">  <button class="col-md-6" style="width: 150px">Modifier</button></a>
+        <a href="{{ path('covoiturage_Supprimer',{'IdC':c.id}) }}">  <button class="col-md-6" style="width: 150px;margin-left: 700px">Supprimer</button></a>
+    </section>
+    {% endif %}
+
+
+</div>
+    <script>
+
+        function initMap() {
+            var uluru = {lat: 36.898392, lng: 10.1875433};
+            var depart = {lat: {{ depart.lat }}, lng: {{ depart.lng }}};
+            var dest = {lat: {{ dest.lat }}, lng: {{ dest.lng }}};
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 8,
+                center: uluru
+            });
+            var marker1 = new google.maps.Marker({
+                position: depart,
+                map: map,
+                label: 'A'
+            });
+            var marker2 = new google.maps.Marker({
+                position: dest,
+                map: map,
+                label: 'B'
+            });
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtT0VIFnzSavgT5p6UO9Lp92fd7KJVCs0&callback=initMap">
+    </script>
+
+{% endblock %}

@@ -17,12 +17,19 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new Nomaya\SocialBundle\NomayaSocialBundle(),
+            new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
+            new Mgilet\NotificationBundle\MgiletNotificationBundle(),
+            new Sonata\NotificationBundle\SonataNotificationBundle(),
+            new Ob\HighchartsBundle\ObHighchartsBundle(),
             new UtilisateurBundle\UtilisateurBundle(),
+            new CovoiturageBundle\CovoiturageBundle(),
+            new ColocationBundle\ColocationBundle(),
+            new DocumentBundle\DocumentBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new ForumBundle\ForumBundle(),
             new EventBundle\EventBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
-            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
-            new DocumentBundle\DocumentBundle(),
-            new Nomaya\SocialBundle\NomayaSocialBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

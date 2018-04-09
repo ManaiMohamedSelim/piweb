@@ -1,7 +1,7 @@
 {% extends '::default/Layout.html.twig' %}
 
 {% block body %}
-
+    {{ form_start(Form) }}
     <div class="container">
     <br><br>
     <div class="registration">
@@ -11,11 +11,13 @@
     <div class="registration_form">
         {{ form(Form) }}
 
-        {{ form_widget(Form.Valider, {'attr' : { 'class' : 'btn btn-primary btn-lg full-width' }}) }}
+        <input type="submit" value="Ajouter" />
     </div>
     </div>
         <div class="clearfix"></div>
     </div>
     </div>
+    {{ form_end(Form) }}
     <br><br><br>
+
 {% endblock %}

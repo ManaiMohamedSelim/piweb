@@ -1,0 +1,126 @@
+{% extends '::default/LayoutAdmin.html.twig' %}
+{% block body %}
+    <h1>Modification de Colocation </h1>
+    <div class="contact-form">
+    {{ form_start(Form) }}
+
+
+
+            {{ form_widget(Form) }}
+            <input type="submit" value="Modifier" />
+
+
+    {{ form_end(Form) }}
+    </div>
+
+    <style>
+
+        .contact {
+            padding-bottom: 3em;
+        }
+        .section {
+            clear: both;
+            padding: 0px;
+            margin: 0px;
+        }
+        .group:before,
+        .group:after {
+            content:"";
+            display:table;
+        }
+        .group:after {
+            clear:both;
+        }
+        .group {
+            zoom:1;
+        }
+        .span_2_of_3 {
+            width: 70%;
+            padding:1.5%;
+        }
+        .span_1_of_3 {
+            width: 30%;
+            padding:1.5%;
+        }
+        .span_2_of_3  h4,
+        .span_1_of_3  h4 {
+            font-size: 1.3em;
+            padding: 0.5em 0;
+            color: #00a0dc;
+        }
+        .contact-form{
+            position:relative;
+            padding-bottom:30px;
+        }
+        .contact-form div{
+            padding:5px 0;
+        }
+        .contact-form span{
+            display:block;
+            font-size: 0.9em;
+            padding-bottom:5px;
+            color: #012231;
+            text-transform: uppercase;
+        }
+        .contact-form input[type="text"],.contact-form textarea{
+            padding: 10px;
+            display: block;
+            width: 98%;
+            border: none;
+            outline: none;
+            color: #464646;
+            font-size: 1.1em;
+            border: 1px solid rgba(85, 85, 85, 0.19);
+            -webkit-appearance:none;
+        }
+        .contact-form textarea{
+            resize:none;
+            height:120px;
+        }
+        .contact-form input[type="submit"]{
+            background:#00a0dc;
+            color: #fff;
+            padding: 12px 30px;
+            font-size: 1.1em;
+            text-transform: uppercase;
+            display: block;
+            transition: 0.5s ease;
+            -o-transition: 0.5s ease;
+            -webkit-transition: 0.5s ease;
+            cursor:pointer;
+            border:2px solid #00a0dc;
+        }
+        .contact-form input[type="submit"]:hover{
+            background: transparent;
+            color: #00a0dc;
+            border:2px solid #00a0dc;
+        }
+        .company_address{
+            padding-top:26px;
+        }
+        .company_address p{
+            font-size: 1em;
+            color: rgba(85, 81, 81, 0.84);
+            line-height: 1.8em;
+        }
+        .company_address p span{
+            text-decoration:underline;
+            color:#012231;
+            cursor:pointer;
+            transition: 0.5s ease;
+            -o-transition: 0.5s ease;
+            -webkit-transition: 0.5s ease;
+        }
+        .company_address p span:hover{
+            color:#00B895;
+        }
+        .map iframe{
+            width:100%;
+            border:none;
+        }
+
+    </style>
+
+
+
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends '::default/LayoutAdmin.html.twig' %}
+
+{% block stylesheets %}
+
+    <link href="{{ asset ('css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{{ asset ('css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
+{% endblock %}
+
+{% block body %}
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="#">Accueil</a>
+        </li>
+        <li class="breadcrumb-item active">Publications</li>
+    </ol>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fa fa-table"></i> La liste des publications</div>
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Auteur</th>
+                        <th>Photo</th>
+                        <th>Sujet</th>
+                        <th>Contenu</th>
+                        <th>Date de publication</th>
+                        <th>Opérations</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for t in topics %}
+                    <tr>
+                        <td>{{ t.idUser.username }}</td>
+                        <td><img src="{{ asset ('uploads/images/'~t.imageName) }}"id="yop"></td>
+                        <td>{{ t.sujet }}</td>
+                        <td>{{ t.description }}</td>
+                        <td>{{ t.date|date }}</td>
+                        <td> <a href="{{ path('admin_modifier_topic',{'id':t.id}) }}" >Update</a>
+                            <a href="{{ path('admin_supprimer_topic',{'id':t.id}) }}" ><span class="label label-danger">Delete</span></a></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+<style>
+
+    #yop{
+
+        height: 200px;
+        width: 300px;
+
+    }
+
+
+</style>
+
+
+{% endblock %}

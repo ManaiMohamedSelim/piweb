@@ -1,0 +1,40 @@
+{% extends '::default/LayoutAdmin.html.twig' %}
+
+{% block body %}
+
+
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Etudiant</th>
+            <th>Titre</th>
+            <th>Description</th>
+            <th>Nom document</th>
+            <th>niveau</th>
+            <th>Matiére</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+    {% for doc in docs %}
+        {% if doc.etat == 'en attente' %}
+        <tr>
+            <td>{{ doc.id }}</td>
+            <td>{{ doc.idUser }}</td>
+            <td>{{ doc.titre }}</td>
+            <td>{{ doc.description }}</td>
+            <td>{{ doc.path }}</td>
+            <td>{{ doc.niveau }}</td>
+            <td>{{ doc.matiere }}</td>
+            <td>
+                <a href="{{ path('validation_documentAdmin', {'id': doc.id }) }}"> Détail </a>
+                <a href="{{ path('supprimer_documentAdmin', {'id': doc.id }) }}"> Supprimer </a>
+            </td>
+        </tr>
+        {% endif %}
+    {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

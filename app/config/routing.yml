@@ -1,3 +1,19 @@
+forum:
+    resource: "@ForumBundle/Resources/config/routing.yml"
+    prefix:   /forum
+
+document:
+    resource: "@DocumentBundle/Resources/config/routing.yml"
+    prefix:   /
+
+colocation:
+    resource: "@ColocationBundle/Resources/config/routing.yml"
+    prefix:   /colocation
+
+covoiturage:
+    resource: "@CovoiturageBundle/Resources/config/routing.yml"
+    prefix:   /covoiturage
+
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
@@ -5,10 +21,11 @@ app:
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
+mgilet_notifications:
+    resource: "@MgiletNotificationBundle/Controller/"
+    prefix: /notifications
+    
 event:
     resource: "@EventBundle/Resources/config/routing.yml"
     prefix:   /event
 
-document:
-    resource: "@DocumentBundle/Resources/config/routing.yml"
-    prefix:   /    

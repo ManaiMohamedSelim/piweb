@@ -1,0 +1,169 @@
+{% extends '::default/Layout.html.twig' %}
+{% block title %}
+    Mes topics
+{% endblock %}
+{%  block body %}
+    <div class="product-model">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li><a href="index.html">Accueil</a></li>
+                <li class="active">Liste de mes publications</li>
+            </ol>
+            <h2>Mes topics</h2>
+
+            <div class="col-md-9 product-model-sec">
+                {% for t in topic %}
+                    <div class="product-grid">
+                        <div class="more-product"><span> </span></div>
+                        <div class="product-img b-link-stripe b-animate-go  thickbox">
+                            <img src="{{ asset ('uploads/images/'~t.imageName) }}" class="img-responsive" alt="" id="img">
+
+                            <div class="b-wrapper">
+                                <h4 class="b-animate b-from-left  b-delay03">
+                                    <button onclick="location.href='{{ path('details',{'id':t.id}) }}'" id="btn"><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>Voir le contenu</button>
+                                </h4>
+                            </div>
+                        </div></a>
+                        <div class="product-info simpleCart_shelfItem">
+                            <div class="product-info-cust prt_name">
+                                <h3 class="b3">
+                                <a href="{{ path('modifier_topic',{'id':t.id}) }}" style="margin-left:20"><span class="label label-info">Update</span></a>
+                                <a href="{{ path('delete_topic',{'id':t.id}) }}" style="margin-left: 5"><span class="label label-danger">Delete</span></a>
+                                </h3>
+                                <span class="item_price" style="margin-left: 20">Sujet: {{ t.sujet }}</span>
+                                <span class="item_price" style="margin-left: 20">Auteur: {{ t.idUser.username }}</span>
+                                <div class="clearfix"> </div>
+                            </div>
+
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+            <!--script-->
+            <script>
+                $(document).ready(function(){
+                    $(".tab1 .single-bottom").hide();
+                    $(".tab2 .single-bottom").hide();
+                    $(".tab3 .single-bottom").hide();
+                    $(".tab4 .single-bottom").hide();
+                    $(".tab5 .single-bottom").hide();
+
+                    $(".tab1 ul").click(function(){
+                        $(".tab1 .single-bottom").slideToggle(300);
+                        $(".tab2 .single-bottom").hide();
+                        $(".tab3 .single-bottom").hide();
+                        $(".tab4 .single-bottom").hide();
+                        $(".tab5 .single-bottom").hide();
+                    })
+                    $(".tab2 ul").click(function(){
+                        $(".tab2 .single-bottom").slideToggle(300);
+                        $(".tab1 .single-bottom").hide();
+                        $(".tab3 .single-bottom").hide();
+                        $(".tab4 .single-bottom").hide();
+                        $(".tab5 .single-bottom").hide();
+                    })
+                    $(".tab3 ul").click(function(){
+                        $(".tab3 .single-bottom").slideToggle(300);
+                        $(".tab4 .single-bottom").hide();
+                        $(".tab5 .single-bottom").hide();
+                        $(".tab2 .single-bottom").hide();
+                        $(".tab1 .single-bottom").hide();
+                    })
+                    $(".tab4 ul").click(function(){
+                        $(".tab4 .single-bottom").slideToggle(300);
+                        $(".tab5 .single-bottom").hide();
+                        $(".tab3 .single-bottom").hide();
+                        $(".tab2 .single-bottom").hide();
+                        $(".tab1 .single-bottom").hide();
+                    })
+                    $(".tab5 ul").click(function(){
+                        $(".tab5 .single-bottom").slideToggle(300);
+                        $(".tab4 .single-bottom").hide();
+                        $(".tab3 .single-bottom").hide();
+                        $(".tab2 .single-bottom").hide();
+                        $(".tab1 .single-bottom").hide();
+                    })
+                });
+            </script>
+            <!-- script -->
+            </section>
+            <!---->
+            <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+            <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+            <script type='text/javascript'>//<![CDATA[
+                $(window).load(function(){
+                    $( "#slider-range" ).slider({
+                        range: true,
+                        min: 0,
+                        max: 100000,
+                        values: [ 500, 100000 ],
+                        slide: function( event, ui ) {  $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+                        }
+                    });
+                    $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) + " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+
+                });//]]>
+            </script>
+            <!---->
+
+
+        </div>
+        <div class="text-center">
+            {{ knp_pagination_render(topic) }}
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <script>
+
+
+
+        $('.deleteUser').click(function (e) {
+
+            var getUrl = Routing.generate('delete_user', {'id': $(this).attr('id')});
+            e.preventDefault();
+
+            $.ajax({
+                type: 'delete',
+                url:  getUrl,
+                data: $(this).serialize(),
+                success: function (response) {
+                    location.reload();
+                    console.log("borrado");
+                },
+                error: function (response) {
+                    console.log("no borrado");
+                }
+            });
+        });
+
+    </script>
+
+
+    <style type="text/css">
+        #cnt {
+            display: block;
+            margin : auto;
+        }
+        #img{
+
+            height: 200px;
+            width: 400px;
+
+        }
+        #page{
+            float: none;
+            display: inline-block;
+            overflow: hidden;
+            text-align: center;
+
+        }
+
+
+    </style>
+
+
+
+{% endblock %}

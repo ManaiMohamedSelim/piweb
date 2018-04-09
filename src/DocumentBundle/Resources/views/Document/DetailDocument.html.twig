@@ -29,15 +29,38 @@
                             <h4>Titre: {{ doc.titre }} </h4>
                             <h5 class="item_price">Niveau: {{ doc.niveau }} - Matiére: {{ doc.matiere }}</h5>
                             <p><h4>Description: </h4> <br>{{ doc.description }}</p>
-                            <a href="#" class="add-cart item_add">Consulter document</a>
+                            <a href="{{ asset('uploads/' ~ doc.path) }}" class="add-cart item_add">Consulter document</a>
+                        </div><br>
+                        {{ socialButtons() }}
+                        <br><br><br>
+                        <table class="table table-striped">
+
+                            <tbody>
+                        {% for com in coms %}
+                            <tr>
+                              <th>{{ com.idUser }}:</th>
+                              <td>{{ com.contenu }} <br> {{ com.post | date() }}</td>
+                            </tr>
+                        {% endfor %}
+                            </tbody>
+                        </table>
+                        <div class="registration_form">
+                        <form method="post" action="{{ path('ajouter_commentaire') }}" id="putcomm">
+                            <div>
+                                <input type="text" class="text" name="idcomm" id="commenter" style="margin-top: 50px" placeholder="commnter le document..." >
+                            </div>
+
+                        </form>
+                        </div>
                         </div>
                     </div>
+
                     <div class="clearfix"> </div>
-                </div><br>
-                {{ socialButtons() }}
+
             </div>
         </div>
     </div>
     <!---->
+
 
 {% endblock %}

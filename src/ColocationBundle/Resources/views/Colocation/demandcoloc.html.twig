@@ -1,0 +1,16 @@
+{% extends '::default/Layout.html.twig' %}
+{% block body %}
+    <h1>Demande de Colocation </h1>
+
+    {{ form_start(Form) }}
+    <div class="container">
+        <div class="registration_form">
+
+            {{ form_widget(Form) }}
+            <input type="submit" value="Demander" />
+        </div>
+    </div>
+    {{ form_end(Form) }}
+
+
+{% endblock %}

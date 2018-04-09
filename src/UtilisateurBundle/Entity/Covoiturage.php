@@ -4,11 +4,12 @@ namespace UtilisateurBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * Covoiturage
  *
  * @ORM\Table(name="covoiturage", indexes={@ORM\Index(name="id_u", columns={"id_u"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="CovoiturageBundle\Repository\CovoiturageRepository")
  */
 class Covoiturage
 {

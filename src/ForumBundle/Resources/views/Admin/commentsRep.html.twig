@@ -1,0 +1,67 @@
+{% extends '::default/LayoutAdmin.html.twig' %}
+
+{% block stylesheets %}
+
+    <link href="{{ asset ('css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{{ asset ('css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
+{% endblock %}
+
+{% block body %}
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="#">Accueil</a>
+        </li>
+        <li class="breadcrumb-item active">Commentaires signalés</li>
+    </ol>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fa fa-table"></i> La liste des commentaires signalés</div>
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Auteur</th>
+                        <th>Topic concerné</th>
+                        <th>Contenu</th>
+                        <th>Date de publication</th>
+                        <th>Opérations</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for c in commentaires %}
+                        <tr>
+                            <td>{{ c.idUser.username }}</td>
+                            <td>{{ c.idTopic.sujet }}</td>
+                            <td>{{ c.contenu }}</td>
+                            <td>{{ c.post|date }}</td>
+                                <td><a href="{{ path('admin_supprimer_comm',{'id':c.id}) }}" ><span class="label label-danger">Delete</span></a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+    <style>
+
+        #yop{
+
+            height: 200px;
+            width: 300px;
+
+        }
+
+
+    </style>
+
+
+{% endblock %}

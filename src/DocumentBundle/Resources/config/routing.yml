@@ -29,3 +29,19 @@ modifier_document:
 recherche_document:
     path:     /recherche_document
     defaults: { _controller: DocumentBundle:Document:recherche }
+
+ajouter_commentaire:
+    path:     /ajouter_commentaire
+    defaults: { _controller: DocumentBundle:Commentaire:ajouter }
+
+liste_documentAdmin:
+    path:     /admin/
+    defaults: { _controller: DocumentBundle:Admin:liste }
+
+validation_documentAdmin:
+    path:     /admin/validation _document/{id}
+    defaults: { _controller: DocumentBundle:Admin:validation }
+
+supprimer_documentAdmin:
+    path:     /admin/supprimer_document/{id}
+    defaults: { _controller: DocumentBundle:Admin:supprimer }

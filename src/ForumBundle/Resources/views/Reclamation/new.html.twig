@@ -1,0 +1,38 @@
+{% extends '::default/Layout.html.twig' %}
+{% block title %}
+    Réclamer
+{% endblock %}
+{% block body %}
+
+    <div class="product-model" style="height: 800px">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li><a href="index.html">Accueil</a></li>
+                <li class="active">Réclamer</li>
+            </ol>
+            <h2>Veuillez remplir les champs</h2>
+                    <div class="contact-form" >
+
+                        {{ form_start(form) }}
+
+
+                        {{ form_widget(form) }}
+
+                        <input type="submit" value="Réclamer" id="sub">
+
+                        {{ form_end(form) }}
+                    </div>
+        </div>
+    </div>
+
+
+    <style type="text/css">
+        #sub {
+            display: block;
+            margin : auto;
+        }
+
+    </style>
+
+
+{% endblock %}

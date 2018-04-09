@@ -1,0 +1,42 @@
+{% extends '::default/Layout.html.twig' %}
+{% block body %}
+    <div class="product">
+        <div class="container">
+            <div class="product-price1">
+                <div class="top-sing">
+                    <div class="col-md-7 single-top">
+                        <div class="flexslider">
+                            <ul class="slides">
+                                <li data-thumb="images/si.jpg">
+                                    <div class="thumb-image"> <img src="{{ asset('uploads/'~colocation.path ) }}" data-imagezoom="true" class="img-responsive" alt=""/> </div>
+                                </li>
+                            </ul>
+                            "{{ socialButtons( {'googleplus':false,'linkedin':false,'pinterest':false,'twitter':false} ) }}"
+                        </div>
+                        <script src="{{ asset('js/imagezoom.js') }}j"></script>
+                    </div>
+                    <div class="col-md-5 single-top-in simpleCart_shelfItem">
+                        <div class="single-para ">
+                            <h4>Adresse : {{ colocation.adresse }} </h4>
+                            <h5 class="item_price">Auteur : {{ colocation.idUser.username }}  </h5>
+                            <p class="para"></p>
+                            <p class="para">{{ colocation.description }} Lorem ipsum dolor sit amet, consectetuer adipiscing elit, Vivamus porttitor tincidunt elementum nisi a, euismod rhoncus urna. Curabitur scelerisque vulputate diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat</p>
+                            <div class="prdt-info-grid">
+                                <ul>
+                                    <li>- Nombre de collocataire souhaité : {{ colocation.placeDispo }}</li>
+                                    <li>- Sexe : {{ colocation.sexe }}</li>
+                                    <li>- Type De Maison : {{ colocation.typeMaison }}</li>
+                                </ul>
+                            </div>
+                            <a href="{{path ('envoi_sms',{"id":colocation.id} )}}" class="add-cart item_add">CHOISIR ANNONCE</a>
+                            <a href="{{ path('affich_demande') }}" class="add-cart item_add">Les Demandes</a>
+                        </div>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ asset('js/imagezoom.js') }}"></script>
+{% endblock %}

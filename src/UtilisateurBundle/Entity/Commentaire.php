@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Commentaire
  *
  * @ORM\Table(name="commentaire", indexes={@ORM\Index(name="fk_document_id", columns={"id_document"}), @ORM\Index(name="fk_collocation_id", columns={"id_collocation"}), @ORM\Index(name="fk_covoiturage_id", columns={"id_covoiturage"}), @ORM\Index(name="id_user", columns={"id_user"}), @ORM\Index(name="id_reclamation", columns={"id_topic"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ForumBundle\Repository\CommentaireRepository")
  */
 class Commentaire
 {
@@ -98,9 +98,9 @@ class Commentaire
     /**
      * @var \UtilisateurBundle\Entity\Topic
      *
-     * @ORM\ManyToOne(targetEntity="UtilisateurBundle\Entity\Topic")
+     * @ORM\ManyToOne(targetEntity="UtilisateurBundle\Entity\Topic",inversedBy="comments")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_topic", referencedColumnName="id")
+     * @ORM\JoinColumn(name="id_topic", referencedColumnName="id")
      * })
      */
     private $idTopic;
