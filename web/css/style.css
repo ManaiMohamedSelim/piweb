@@ -891,7 +891,7 @@ ul.place li{
 	padding: 6px;
 }
 ul.place li {
-	color: #8c8c8c;
+	color: #ed645c;
 	text-decoration: none;
 	cursor: pointer;
 }
@@ -902,7 +902,8 @@ ul.place li.sort{
 	float:left;
 }
 ul.place li.by{
-	float:right;
+	float: none;
+	text-align:  center;
 }
 .single-bottom p{
 	font-size:0.9em;
@@ -933,7 +934,7 @@ span.amount {
 .product-model h2,h2.top,.contact h3{
   font-size: 2.5em;
   font-family: 'Dosis-Bold';
-  color: #333;
+  color: #ed645c;
   text-align:center;
 }
 ul.dropdown-menu1 li a:hover{
@@ -1227,8 +1228,8 @@ p.para {
 }
 .btn-default {
     color: #333;
-    background-color: #fff;
-    border-color: #ccc;
+    background-color: #ed645c;
+    border-color: #337ab7;
 }
 .btm-grid{
 	border:1px solid #fff;
@@ -1321,42 +1322,6 @@ h3.ghj {
 	padding: 0.5em 0;
 	color: #00a0dc;
 }
-.contact-form button{
-	background:#00a0dc;
-	color: #fff;
-	padding: 12px 30px;
-	font-size: 1.1em;
-	text-transform: uppercase;
-	display: block;
-	transition: 0.5s ease;
-	-o-transition: 0.5s ease;
-	-webkit-transition: 0.5s ease;
-	cursor:pointer;
-	border:2px solid #00a0dc;
-}
-.contact-form button:hover{
-	background: transparent;
-	color: #00a0dc;
-	border:2px solid #00a0dc;
-}
-.contact button{
-	background:#00a0dc;
-	color: #fff;
-	padding: 12px 30px;
-	font-size: 1.1em;
-	text-transform: uppercase;
-	display: block;
-	transition: 0.5s ease;
-	-o-transition: 0.5s ease;
-	-webkit-transition: 0.5s ease;
-	cursor:pointer;
-	border:2px solid #00a0dc;
-}
-.contact button:hover{
-	background: transparent;
-	color: #00a0dc;
-	border:2px solid #00a0dc;
-}
 .contact-form{
 	position:relative;
 	padding-bottom:30px;
@@ -1368,19 +1333,19 @@ h3.ghj {
 	display:block;
 	font-size: 0.9em;
 	padding-bottom:5px;
-	color: #012231;
+	color: #d85364;
 	text-transform: uppercase;
 }
 .contact-form input[type="text"],.contact-form textarea{
 		   padding: 10px;
-			display: block;
-			width: 98%;
-			border: none;
-			outline: none;
-			color: #464646;
-			font-size: 1.1em;
-			border: 1px solid rgba(85, 85, 85, 0.19);
-			-webkit-appearance:none;
+		   display: block;
+		   width: 100%;
+		   border: none;
+		   outline: none;
+		   color: #464646;
+		   font-size: 1.1em;
+		   border: 1px solid rgba(85, 85, 85, 0.19);
+		   -webkit-appearance:none;
 }
 .contact-form textarea{
 		resize:none;

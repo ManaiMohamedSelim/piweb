@@ -1,0 +1,117 @@
+{% extends 'EventBundle:Event:events.html.twig' %}
+{% block stylesheets %}
+    <link href="{{ asset ('event/css/comment.css') }}" rel="stylesheet" type="text/css" media="all" />
+    <style>
+        .form-inline {
+            float: right; !important;
+        }
+        .comm {
+            float:right; !important;
+            color: #fff; !important;
+            background-color: #00a0dc; !important;
+            border-color: #00a0dc; !important;
+        }
+    </style>
+{% endblock %}
+{% block home %}
+    {{ tag }}
+{% endblock %}
+{% block eventBody %}
+    {% if event %}
+    <div class="col-md-6 span_2_of_3">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-title">
+                    <h3> {{ event.nom }}</h3> </br>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div id="collapse1" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <img class="img-responsive center-block" src="{{ asset ('affiches/'~ event.affiche)}}"/>
+                            <br>
+                            <div class="col-md-10 cta-button">
+                                    <p> Description: <br>
+                                        {{ event.description }}</p>
+                            </div>
+                            <br>
+                            <div class="product-auction-form">
+                                {{ form(form) }}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="product-widget ">
+                    <ul class="list-group">
+
+                        <li class="list-group-item"> <span class="badge">{{ event.type }} </span> Type d'événement</li>
+                        <li class="list-group-item"> <span class="badge">{{ event.typeReservation }}</span> Type de réservation</li>
+                        <li class="list-group-item"> <span class="badge">{{ event.dateEvent | date('d F Y H:i') }}	</span> Date</li>
+                        <li class="list-group-item"> <span class="badge">{{ event.duree }}</span>Durée</li>
+                        <li class="list-group-item"> <span class="badge">{{ event.lieu }}</span>Localisation</li>
+                        <li class="list-group-item"> <span class="badge">{{ event.nombre }}</span> Quota</li>
+                        <li class="list-group-item"> <span class="badge">No</span> Places disponibles </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="comments">
+                    <div class="comment-wrap">
+                        <div class="photo">
+                            <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg')"></div>
+                        </div>
+                        <div class="comment-block">
+                            <form method="POST">
+                                <textarea name="commentaire" id="" cols="30" rows="3" placeholder="Add comment..."></textarea>
+                                <button type="submit" name="commentaire" class="btn btn-danger comm">Commenter</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="comment-wrap">
+                        <div class="photo">
+                            <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg')"></div>
+                        </div>
+                        <div class="comment-block">
+                            <p class="comment-text">Lorem ipsum dolor sit amet, consectetur ad</p>
+                            <div class="bottom-comment">
+                                <div class="comment-date">Aug 24, 2014 @ 2:35 PM</div>
+                                <ul class="comment-actions">
+                                    <li class="complain">Complain</li>
+                                    <li class="reply">Reply</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comment-wrap">
+                        <div class="photo">
+                            <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/felipenogs/128.jpg')"></div>
+                        </div>
+                        <div class="comment-block">
+                            <p class="comment-text">veniam fuga corporis totam.</p>
+                            <div class="bottom-comment">
+                                <div class="comment-date">Aug 23, 2014 @ 10:32 AM</div>
+                                <ul class="comment-actions">
+                                    <li class="complain">Complain</li>
+                                    <li class="reply">Reply</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+                </div>
+    </div>
+{% endif %}
+{% endblock %}

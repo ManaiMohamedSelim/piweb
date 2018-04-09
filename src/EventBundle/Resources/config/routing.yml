@@ -1,0 +1,27 @@
+event_homepage:
+    path:     /events
+    defaults: { _controller: EventBundle:Default:index }
+ajouter_event:
+    path:     /addevent
+    defaults: { _controller: EventBundle:Event:ajout }
+modifier_event:
+    path:     /editevent
+    defaults: { _controller: EventBundle:Event:modifier }
+lister_event:
+    path:     /listevents
+    defaults: { _controller: EventBundle:Event:lister }
+my_events:
+    path:     /myevents
+    defaults: { _controller: EventBundle:Event:myEvents }
+details_event:
+    path:     /details
+    defaults: { _controller: EventBundle:Event:details }
+data_datatable:
+    path:     /data_datatable
+    defaults: { _controller: EventBundle:Event:data }
+test_event:
+    path:     /test
+    defaults: { _controller: EventBundle:Event:test }
+reserver_event:
+    path:     /details/{id]
+    defaults: { _controller: EventBundle:Event:reserver }

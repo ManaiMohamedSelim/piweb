@@ -24,3 +24,8 @@ fos_user:
 mgilet_notifications:
     resource: "@MgiletNotificationBundle/Controller/"
     prefix: /notifications
+    
+event:
+    resource: "@EventBundle/Resources/config/routing.yml"
+    prefix:   /event
+

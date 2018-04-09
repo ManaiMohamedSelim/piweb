@@ -1,0 +1,194 @@
+{% extends '::default/Layout.html.twig' %}
+{% block stylesheets %}
+    <style>
+        .item img {
+            height: 450px !important;
+            width: 850px !important;
+        }
+
+        .carousel-inner h3 { color: #ed645c }
+        .carousel-inner p {
+            color: black;
+            text-align: center;
+        }
+
+    </style>
+{% endblock %}
+{% block body %}
+    <div class="contact">
+
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        {%  else %}
+            <div class="alerts">
+                <div class="alert alert-danger" role="alert">
+                    <strong>Aucune Authentification!</strong> Pour créer un compte cliquez <a href="{{ path('fos_user_registration_register') }}">ici</a>.
+                </div>
+            </div>
+        {%  endif %}
+        <div class="container">
+            <ol class="breadcrumb">
+                <li><a href="{{ path('homepage') }}">Home</a></li>
+                <li><a href="{{ path('event_homepage') }}">Evénements</a></li>
+                <li class="active">{% block home %}
+                        {{ tag }}
+                    {% endblock %}</li>
+            </ol>
+            <!--start contact-->
+            <div class="section group">
+                <div class="col-md-6 span_1_of_3">
+                    <section  class="sky-form">
+                        <div class="product_right">
+
+                            <div class="tab1">
+                                <ul class="place">
+                                    <li class="sort"><img src="{{asset('images/events_home.png')}}" alt=""></li>
+                                    <li class="by">Evénements</li>
+                                    <div class="clearfix"> </div>
+                                </ul>
+                                <div class="single-bottom">
+                                    <a href="{{ path('ajouter_event') }}"><p>Ajout d'un événement</p></a>
+                                    <a href="{{ path('my_events') }}"><p>Mes événements</p></a>
+                                    <a href="{{ path('lister_event') }}"><p>Liste des événements</p></a>
+                                </div>
+                            </div>
+                            <div class="tab2">
+                                <ul class="place">
+                                    <li class="sort"><img src="{{asset('images/activities.png')}}" alt=""></li>
+                                    <li class="by">Activités</li>
+                                    <div class="clearfix"> </div>
+                                </ul>
+                                <div class="single-bottom">
+                                    <a href="{{ path('ajouter_event') }}"><p>Ajout d'un événement</p></a>
+                                    <a href="{{ path('modifier_event') }}"><p>Modifier un événement</p></a>
+                                    <a href="{{ path('lister_event') }}"><p>Liste des événements</p></a>
+                                </div>
+                            </div>
+                            <div class="tab3">
+                                <ul class="place">
+                                    <li class="sort"><img src="{{asset('images/galleries.png')}}" alt=""></li>
+                                    <li class="by">Galleries</li>
+                                    <div class="clearfix"> </div>
+                                </ul>
+                                <div class="single-bottom">
+                                    <a href="{{ path('ajouter_event') }}"><p>Ajout d'un événement</p></a>
+                                    <a href="{{ path('modifier_event') }}"><p>Modifier un événement</p></a>
+                                    <a href="{{ path('lister_event') }}"><p>Liste des événements</p></a>
+                                </div>
+                            </div>
+                            <div class="tab4">
+                                <ul class="place">
+                                    <li class="sort"><img src="{{asset('images/mes_reservations.png')}}" alt=""></li>
+                                    <li class="by">Mes réservations</li>
+                                    <div class="clearfix"> </div>
+                                </ul>
+                                <div class="single-bottom">
+                                    <a href="{{ path('ajouter_event') }}"><p>Ajout d'un événement</p></a>
+                                    <a href="{{ path('modifier_event') }}"><p>Modifier un événement</p></a>
+                                    <a href="{{ path('lister_event') }}"><p>Liste des événements</p></a>
+                                </div>
+                            </div>
+
+                            <!--script-->
+                            <script>
+                                $(document).ready(function(){
+                                    $(".tab1 .single-bottom").hide();
+                                    $(".tab2 .single-bottom").hide();
+                                    $(".tab3 .single-bottom").hide();
+                                    $(".tab4 .single-bottom").hide();
+                                    $(".tab5 .single-bottom").hide();
+
+                                    $(".tab1 ul").click(function(){
+                                        $(".tab1 .single-bottom").slideToggle(300);
+                                        $(".tab2 .single-bottom").hide();
+                                        $(".tab3 .single-bottom").hide();
+                                        $(".tab4 .single-bottom").hide();
+                                        $(".tab5 .single-bottom").hide();
+                                    })
+                                    $(".tab2 ul").click(function(){
+                                        $(".tab2 .single-bottom").slideToggle(300);
+                                        $(".tab1 .single-bottom").hide();
+                                        $(".tab3 .single-bottom").hide();
+                                        $(".tab4 .single-bottom").hide();
+                                        $(".tab5 .single-bottom").hide();
+                                    })
+                                    $(".tab3 ul").click(function(){
+                                        $(".tab3 .single-bottom").slideToggle(300);
+                                        $(".tab4 .single-bottom").hide();
+                                        $(".tab5 .single-bottom").hide();
+                                        $(".tab2 .single-bottom").hide();
+                                        $(".tab1 .single-bottom").hide();
+                                    })
+                                    $(".tab4 ul").click(function(){
+                                        $(".tab4 .single-bottom").slideToggle(300);
+                                        $(".tab5 .single-bottom").hide();
+                                        $(".tab3 .single-bottom").hide();
+                                        $(".tab2 .single-bottom").hide();
+                                        $(".tab1 .single-bottom").hide();
+                                    })
+
+                                });
+                            </script>
+                            <!-- script -->
+                    </section>
+
+                </div>
+                {%  if events %}
+                <div class="col-md-6 span_2_of_3">
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            {% for event in events %}
+                                <li data-target="#carousel" data-slide-to="{{ loop.index0 }}" {% if loop.index0 == 0 %} class="active" {% endif %}></li>
+                            {% endfor %}
+                        </ol>
+                        <div class="carousel-inner">
+                            {% for event in events %}
+                                <div {% if loop.index0 == 0 %} class="item active" {% else %} class="item" {% endif %}>
+                                    <a href="{{path('details_event',{'id' : event.id})}}">
+                                    <img class="img-responsive center-block" src="{{ asset ('affiches/'~ event.affiche)}}"/>
+                                    </a>
+                                    <div class="carousel-caption">
+                                        <h3 class="titre">{{ event.nom }}</h3>
+                                        <p class="desc">{{ event.description }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <a class="carousel-control left" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control right"  role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+                        {% endif %}
+                {% block eventBody %}
+                    <script>
+                        $(document).ready(function() {
+                            $("#myCarousel").carousel({
+                                interval: false,
+                            });
+                        });
+
+                    </script>
+                    <script>
+
+                        $(".left").click(function(){
+                            $("#myCarousel").carousel("prev");
+                        });
+                        $(".right").click(function(){
+                            $("#myCarousel").carousel("next");
+                        });
+                    </script>
+                {% endblock %}
+                {% block javascripts %}
+                    <script src="{{ asset ('event/js/carousel.js') }}"></script>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

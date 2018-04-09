@@ -1,0 +1,64 @@
+{% extends 'EventBundle:Event:events.html.twig' %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{asset ('event/css/jquery.dataTables.min.css')}}">
+    <style>
+        .aff {
+            height: 45px !important;
+            width: 85px !important;
+        }
+        .table {
+            width: 100% !important;
+        }
+    </style>
+{% endblock %}
+{% block eventBody %}
+    <div class="col-md-6 span_2_of_3">
+        <div class="table-responsive ">
+            <table id="myTable" style="width: 100% !important;" class="table table-bordered table-condensed table-hover table-striped display responsive nowrap" >
+                <thead>
+                <tr>
+                    <th class="col-md-1 col-xs-1"> Titre </th>
+                    <th class="col-md-1 col-xs-1"> Type</th>
+                    <th class="col-md-1 col-xs-1"> Type de réservation</th>
+                    <th class="col-md-1 col-xs-1"> Prix</th>
+                    <th class="col-md-1 col-xs-1"> Date </th>
+                    <th class="col-md-1 col-xs-1"> Durée</th>
+                    <th class="col-md-1 col-xs-1"> Localisation </th>
+                    <th class="col-md-1 col-xs-1"> Quota</th>
+                    <th class="col-md-1 col-xs-1"> Description</th>
+                    <th class="col-md-1 col-xs-1"> Affiche</th>
+                    <th class="col-md-1 col-xs-1"> Détails</th>
+
+            </table>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#myTable').dataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": "{{ path('data_datatable') }}",
+                "sAjaxDataProp": "data",
+                "pageLength": 5,
+                "columns":[
+                    {"data": "nom"},
+                    {"data": "type"},
+                    {"data": "typeRes"},
+                    {"data": "prix"},
+                    {"data": "DateEvent"},
+                    {"data": "duree"},
+                    {"data": "lieu"},
+                    {"data": "nombre"},
+                    {"data": "Description"},
+                    {"data": "Affiche"},
+                    {"data" : "Details"}
+                ],
+                "retrieve": true
+            });
+        });
+    </script>
+{%  endblock %}
+{%  block javascripts %}
+<script type="text/javascript" src="{{asset ('event/js/jquery.dataTables.min.js')}}"></script>
+<script type="text/javascript" src="{{asset ('event/js/dataTables.responsive.min.js')}}"></script>
+{% endblock %}

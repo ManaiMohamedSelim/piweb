@@ -28,6 +28,8 @@ class AppKernel extends Kernel
             new DocumentBundle\DocumentBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new ForumBundle\ForumBundle(),
+            new EventBundle\EventBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

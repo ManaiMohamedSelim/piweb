@@ -7,6 +7,8 @@ imports:
     - { resource: "@ColocationBundle/Resources/config/services.yml" }
     - { resource: "@DocumentBundle/Resources/config/services.yml" }
     - { resource: "@ForumBundle/Resources/config/services.yml" }
+    - { resource: "@EventBundle/Resources/config/services.yml" }
+
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -64,6 +66,35 @@ doctrine:
         auto_generate_proxy_classes: '%kernel.debug%'
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+        dql:
+                    datetime_functions:
+                        date:           Oro\ORM\Query\AST\Functions\SimpleFunction
+                        time:           Oro\ORM\Query\AST\Functions\SimpleFunction
+                        timestamp:      Oro\ORM\Query\AST\Functions\SimpleFunction
+                        convert_tz:     Oro\ORM\Query\AST\Functions\DateTime\ConvertTz
+                    numeric_functions:
+                        timestampdiff:  Oro\ORM\Query\AST\Functions\Numeric\TimestampDiff
+                        dayofyear:      Oro\ORM\Query\AST\Functions\SimpleFunction
+                        dayofmonth:     Oro\ORM\Query\AST\Functions\SimpleFunction
+                        dayofweek:      Oro\ORM\Query\AST\Functions\SimpleFunction
+                        week:           Oro\ORM\Query\AST\Functions\SimpleFunction
+                        day:            Oro\ORM\Query\AST\Functions\SimpleFunction
+                        hour:           Oro\ORM\Query\AST\Functions\SimpleFunction
+                        minute:         Oro\ORM\Query\AST\Functions\SimpleFunction
+                        month:          Oro\ORM\Query\AST\Functions\SimpleFunction
+                        quarter:        Oro\ORM\Query\AST\Functions\SimpleFunction
+                        second:         Oro\ORM\Query\AST\Functions\SimpleFunction
+                        year:           Oro\ORM\Query\AST\Functions\SimpleFunction
+                        sign:           Oro\ORM\Query\AST\Functions\Numeric\Sign
+                        pow:            Oro\ORM\Query\AST\Functions\Numeric\Pow
+                        round:          Oro\ORM\Query\AST\Functions\Numeric\Round
+                    string_functions:
+                        md5:            Oro\ORM\Query\AST\Functions\SimpleFunction
+                        group_concat:   Oro\ORM\Query\AST\Functions\String\GroupConcat
+                        concat_ws:      Oro\ORM\Query\AST\Functions\String\ConcatWs
+                        cast:           Oro\ORM\Query\AST\Functions\Cast
+                        replace:        Oro\ORM\Query\AST\Functions\String\Replace
+                        date_format:    Oro\ORM\Query\AST\Functions\String\DateFormat
 
 
 # Swiftmailer Configuration
@@ -74,6 +105,7 @@ swiftmailer:
     password: '%mailer_password%'
     spool: { type: memory }
 
+#config fos_userBundle
 fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
     firewall_name: main
@@ -81,7 +113,20 @@ fos_user:
     from_email:
         address: "manai.mohamed.selim@gmail.com"
         sender_name: "selim"
+        
+vich_uploader:
+    db_driver: orm
 
+    mappings:
+        event_affiche:
+            uri_prefix: /web/affiches
+            upload_destination: '%kernel.project_dir%/web/affiches'
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+# configuration NomayaSocialButtonsBundle
 nomaya_social:
     buttons:
         facebook:
@@ -89,15 +134,15 @@ nomaya_social:
             locale:         "fr_FR"
             send:           false
             width:          300
-            showFaces:      true
+            showFaces:      false
             layout:         "button_count"
         twitter:
             url:            null
             locale:         "fr"
-            message:        "Je veux partager cet annonce de covoiturage avec vous"
+            message:        "Je veux partager ça avec vous"
             text:           "Tweet"
-            via:            "L'Equipe espritentraide.tn"
-            tag:            "espritentraide"
+            via:            "L'Equipe cartedevisitevirtuelle.fr"
+            tag:            "ttot"
         googleplus:
             url:            null
             locale :        "fr"
@@ -130,5 +175,4 @@ knp_paginator:
         pagination: '@KnpPaginator/Pagination/twitter_bootstrap_v3_pagination.html.twig'     # sliding pagination controls template
         sortable: '@KnpPaginator/Pagination/sortable_link.html.twig' # sort link template
         filtration: '@KnpPaginator/Pagination/filtration.html.twig'  # filters template
-
 
