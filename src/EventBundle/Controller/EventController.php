@@ -9,11 +9,13 @@
 namespace EventBundle\Controller;
 
 
+use EventBundle\Form\CommentaireForm;
 use EventBundle\Form\EventForm;
 use EventBundle\Form\ReservationForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use UtilisateurBundle\Entity\Commentaire;
 use UtilisateurBundle\Entity\Evenement;
 use Symfony\Component\HttpFoundation\Response;
 use UtilisateurBundle\Entity\Reservation;
@@ -71,34 +73,56 @@ class EventController extends Controller
         $id = $request->get('id');
         $user = $this->getUser();
         $reservation = new Reservation();
+        $commentaire = new Commentaire();
+
+        //initialisation des formulaires
+        $formRes = $this->createForm(ReservationForm::class, $reservation);
+        $formCom = $this->createForm(CommentaireForm::class, $commentaire);
+            $formCom->handleRequest($request);
+            $formRes->handleRequest($request);
+
         $em = $this->getDoctrine()->getManager();
         $event = $em->getRepository('UtilisateurBundle:Evenement')->find($id);
-        $form = $this->createForm(ReservationForm::class, $reservation);
-        $form->handleRequest($request);
-        if($user !== null) {
-            if ($form->isValid()) {
-                $numTicket = count($em->getRepository('UtilisateurBundle:Reservation')->findBy(["idEvenement" => $event, "etat" => "Confirmé"]));
-                $reservation->setIdParticipant($user);
-                $reservation->setIdEvenement($event);
-                $reservation->setTypeReservation($event->getTypeReservation());
-                if ($event->getTypeReservation() == "Payante") {
-                    $reservation->setTarif($event->getPrix());
-                }
-                if ($numTicket) {
-                    $reservation->setNumeroTicket($numTicket + 1);
-                } else {
-                    $reservation->setNumeroTicket(1);
-                }
-                $reservation->setEtat("Confirmé");
+        $dispo = $event->getNombre() - count($em->getRepository('UtilisateurBundle:Reservation')->findBy(["idEvenement" => $event, "etat" => "Confirmé"]));
+        if ($dispo == 0){
+            $dispo = "Complet";
+        }
+        else {
+            if ($user !== null) {
+                if ($formRes->isValid() && $request->request->has($formRes->getName())) {
+                    $numTicket = count($em->getRepository('UtilisateurBundle:Reservation')->findBy(["idEvenement" => $event, "etat" => "Confirmé"]));
+                    $reservation->setIdParticipant($user);
+                    $reservation->setIdEvenement($event);
+                    $reservation->setTypeReservation($event->getTypeReservation());
+                    if ($event->getTypeReservation() == "Payante") {
+                        $reservation->setTarif($event->getPrix());
+                    }
+                    if ($numTicket) {
+                        $reservation->setNumeroTicket($numTicket + 1);
+                    } else {
+                        $reservation->setNumeroTicket(1);
+                    }
+                    $reservation->setEtat("Confirmé");
 
-                $event->addReservation($reservation);
-                $em->persist($reservation);
-                $em->flush();
+                    $event->addReservation($reservation);
+                    $em->persist($reservation);
+                    $em->flush();
+                }
             }
         }
 
+        // Partie commentaires
+        if ($formCom->isValid() && $request->request->has($formCom->getName())) {
+            $commentaire->setIdEvenement($event);
+            $commentaire->setIdUser($user);
+            $commentaire->setEtatCommentaire("OK");
+            $event->addCommentaire($commentaire);
+            $em->persist($commentaire);
+            $em->flush();
+        }
+
         return $this->render('EventBundle:Event:details.html.twig', ['event' => $event, 'events' => null, 'tag' => 'Détails',
-                                 'form' => $form->createView()
+                                 'formRes' => $formRes->createView(),'dispo' => $dispo, 'formCom' => $formCom->createView()
             ]);
     }
 

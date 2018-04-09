@@ -2,7 +2,7 @@
 {% block stylesheets %}
     <link href="{{ asset ('event/css/comment.css') }}" rel="stylesheet" type="text/css" media="all" />
     <style>
-        .form-inline {
+        .btn-danger {
             float: right; !important;
         }
         .comm {
@@ -40,7 +40,19 @@
                             </div>
                             <br>
                             <div class="product-auction-form">
-                                {{ form(form) }}
+                                {%  form_theme formRes 'bootstrap_4_layout.html.twig' %}
+                                    {% for reservation in event.reservations %}
+
+                                        {% if reservation.idParticipant.id == app.user.id %}
+                                {{ form_start(formRes) }}
+                                {{ form_widget(formRes.valider, {'disabled' : true}) }}
+                                {{ form_end(formRes) }}
+
+                                {% else %}
+                                    {{ form(formRes) }}
+                                {% endif %}
+                                    {% endfor %}
+
                             </div>
                         </div>
                     </div>
@@ -51,11 +63,12 @@
 
                         <li class="list-group-item"> <span class="badge">{{ event.type }} </span> Type d'événement</li>
                         <li class="list-group-item"> <span class="badge">{{ event.typeReservation }}</span> Type de réservation</li>
+                        {% if event.prix %}<li class="list-group-item"> <span class="badge"> {{ event.prix }} DT </span> Prix</li>{% endif %}
                         <li class="list-group-item"> <span class="badge">{{ event.dateEvent | date('d F Y H:i') }}	</span> Date</li>
                         <li class="list-group-item"> <span class="badge">{{ event.duree }}</span>Durée</li>
                         <li class="list-group-item"> <span class="badge">{{ event.lieu }}</span>Localisation</li>
                         <li class="list-group-item"> <span class="badge">{{ event.nombre }}</span> Quota</li>
-                        <li class="list-group-item"> <span class="badge">No</span> Places disponibles </li>
+                        <li class="list-group-item"> <span class="badge">{{ dispo }}</span> Places disponibles </li>
                     </ul>
                 </div>
 
@@ -69,37 +82,21 @@
                             <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg')"></div>
                         </div>
                         <div class="comment-block">
-                            <form method="POST">
-                                <textarea name="commentaire" id="" cols="30" rows="3" placeholder="Add comment..."></textarea>
-                                <button type="submit" name="commentaire" class="btn btn-danger comm">Commenter</button>
-                            </form>
+                            {%  form_theme formCom 'bootstrap_4_layout.html.twig' %}
+                            {{ form(formCom) }}
                         </div>
                     </div>
 
-                    <div class="comment-wrap">
-                        <div class="photo">
-                            <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg')"></div>
-                        </div>
-                        <div class="comment-block">
-                            <p class="comment-text">Lorem ipsum dolor sit amet, consectetur ad</p>
-                            <div class="bottom-comment">
-                                <div class="comment-date">Aug 24, 2014 @ 2:35 PM</div>
-                                <ul class="comment-actions">
-                                    <li class="complain">Complain</li>
-                                    <li class="reply">Reply</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
+                    {%  if event.commentaires %}
+                        {% for commentaire in event.commentaires %}
                     <div class="comment-wrap">
                         <div class="photo">
                             <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/felipenogs/128.jpg')"></div>
                         </div>
                         <div class="comment-block">
-                            <p class="comment-text">veniam fuga corporis totam.</p>
+                            <p class="comment-text">{{ commentaire.contenu }}</p>
                             <div class="bottom-comment">
-                                <div class="comment-date">Aug 23, 2014 @ 10:32 AM</div>
+                                <div class="comment-date">{{ commentaire.post | date(' d F Y H:i') }}</div>
                                 <ul class="comment-actions">
                                     <li class="complain">Complain</li>
                                     <li class="reply">Reply</li>
@@ -107,6 +104,10 @@
                             </div>
                         </div>
                     </div>
+                       {% endfor %}
+                    {% endif %}
+
+
                 </div>
 
             </div>

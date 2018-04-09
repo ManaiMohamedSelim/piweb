@@ -2,7 +2,9 @@
 
 namespace UtilisateurBundle\Entity;
 
+use Doctrine\DBAL\Types\DateTimeType;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Commentaire
@@ -37,12 +39,16 @@ class Commentaire
      *
      * @ORM\Column(name="Post", type="datetime", nullable=true)
      */
-    private $post = 'CURRENT_TIMESTAMP';
+    private $post;
 
     /**
      * @var string
      *
      * @ORM\Column(name="Contenu", type="string", length=255, nullable=false)
+     * @Assert\Length(
+     *     max=255,
+     *     maxMessage = "Votre commentaire ne doit pas dépasser {{ limit }} caractères"
+     *               )
      */
     private $contenu;
 
@@ -98,6 +104,11 @@ class Commentaire
      * })
      */
     private $idTopic;
+
+    public function __construct()
+    {
+        $this->post = new \DateTime();
+    }
 
 
 
