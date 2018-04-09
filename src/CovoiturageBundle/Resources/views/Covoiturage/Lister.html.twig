@@ -1,0 +1,196 @@
+{% extends '::default/Layout.html.twig' %}
+{% block stylesheets %}
+    <link href="{{ asset ('skins/line/red.css') }}" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('Select_css/nice-select.css') }}">
+  <style>
+      .slidecontainer {
+          width: 100%;
+      }
+
+      .slider {
+          -webkit-appearance: none;
+          width: 100%;
+          height: 25px;
+          background: #d3d3d3;
+          outline: none;
+          opacity: 0.7;
+          -webkit-transition: .2s;
+          transition: opacity .2s;
+      }
+
+      .slider:hover {
+          opacity: 1;
+      }
+
+      .slider::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 25px;
+          height: 25px;
+          background: #EC7575;
+          cursor: pointer;
+      }
+
+      .slider::-moz-range-thumb {
+          width: 25px;
+          height: 25px;
+          background: #EC7575;
+          cursor: pointer;
+      }
+  </style>
+{% endblock %}
+  {% block javascripts %}
+      <script type="text/javascript" src="{{ asset('js/icheck.js') }}"></script>
+      <script src="{{ asset('Select_js/jquery.nice-select.js') }}"></script>
+
+      <script>
+
+          function UpdateCov() {
+
+              $.ajax({
+                  type: 'POST',
+                  url: "{{ path("covoiturage_Chercher") }}",
+                  data: { date: textDate,
+                      input:  $("#search").val(),
+                      type : $('input[name=iCheck]:checked').val(),
+                      SortBy : $('select').val()
+                  },
+                  success: function (data) {
+                      $('#container').hide();
+                      $('#covoiturages').html("<div id=\"container\"  class=\"container\"> </div>");
+                      $.each(data,function(k,el){
+                          $('#container').append(
+
+                              " <div class=\"col-md-3 feature-grid\">\n" +
+                              "                    <a><img src=\"{{ asset('images/Ressources/DefaultUser.png') }}\" alt=\"\"/>\n" +
+                              "                      <p>"+el.idU.username+"</p>"+
+                              "                        <div class=\"arrival-info\">\n" +
+                              "                            <h4>From</h4>\n" +
+                              "                            <p>"+el.depart+"</p>\n" +
+                              "                            <h4>To</h4>\n" +
+                              "                            <p>"+el.destination+"</p>\n" +
+                              "                        </div>\n" +
+                              "                        <div class=\"viw\">\n" +
+                              "                                <a href=\"/covoiturage/Afficher?id="+el.id+"\"><span class=\"glyphicon glyphicon-eye-open\" aria-hidden=\"true\"></span>View</a>\n" +
+                              "                        </div>\n" +
+                              "                    </a>\n" +
+                              "                </div>"
+
+
+                          )
+
+                      })
+                  }
+              })
+          }
+          var slider = document.getElementById("myRange");
+          var output = document.getElementById("demo");
+          var today=new Date();
+          prev = 0;
+          textDate = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate()
+          slider.oninput = function() {
+              if(this.value>prev){
+                  today.setDate(today.getDate()+(this.value-prev));
+                  prev=this.value;
+              }else {
+                  today.setDate(today.getDate()+(this.value-prev));
+                  prev=this.value;
+              }
+              if(this.value==0)
+                  output.innerHTML = 'Today';
+              else
+                  output.innerHTML = today.getDate()+"/"+(today.getMonth()+1)+"/"+today.getFullYear();
+              textDate = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate()
+              UpdateCov();
+          };
+            $( document ).ready(function() {
+                $('select').niceSelect();
+                $('input[name=iCheck]').each(function(){
+                    var self = $(this),
+                        label = self.next(),
+                        label_text = label.text();
+
+                    label.remove();
+                    self.iCheck({
+                        checkboxClass: 'icheckbox_line-red',
+                        radioClass: 'iradio_line-red',
+                        insert: '<div class="icheck_line-icon"></div>' + label_text
+                    });
+                });
+                $("#search").keyup(function(){
+                  UpdateCov();
+              });
+                $('input[name=iCheck]').on('ifChecked', function(event){
+                    UpdateCov();
+                });
+                $('select').change(function(){
+                    UpdateCov();
+                });
+                UpdateCov();
+          });
+
+      </script>
+  {% endblock %}
+{% block body %}
+
+   <br>
+    <br>
+    <div>
+        {{ mgilet_notification_count(notifiableEntity) }}
+        {{ mgilet_notification_render(notifiableEntity) }}
+    </div>
+    <div class="container well">
+
+         <div class="col-md-3 "><h4>Recherche : </h4><br><input type="text" id="search"></div>
+        <div class="col-md-5">
+            <div class="slidecontainer">
+                <p>Date Range:</p>
+                <input type="range" min="0" max="365" value="0" class="slider" id="myRange">
+                <br>
+               <span id="demo">Today</span>
+            </div>
+                </div>
+        <div class="col-md-3">
+            <input type="radio" name="iCheck" value="0">
+            <label>Annonces</label>
+            <br>
+            <input type="radio" name="iCheck" value="1">
+            <label>Offres</label>
+            <br>
+            <input type="radio" name="iCheck"  value="2" checked>
+            <label>Tous</label></div>
+        </div>
+<div style="margin-left: 500px" id="select"><select >
+        <option value="date">Tri par Date</option>
+        <option value="nom">Tri par Nom</option>
+    </select></div>
+
+
+
+    <div id="covoiturages" class="items">
+        <div id="container" class="container">
+            {% for c in covoiturages %}
+
+                <div class="col-md-3 feature-grid">
+                    {% if(c.idU.photo==null) %}
+                    <a><img src="{{ asset('images/Ressources/DefaultUser.png') }}" alt=""/>
+                        {% endif %}
+                        <div class="arrival-info">
+                            <p>{{ c.idU.username }}</p>
+                            <h4>From</h4>
+                            <p>{{ c.depart }}</p>
+                            <h4>To</h4>
+                            <p>{{ c.destination }}</p>
+                        </div>
+                        <div class="viw">
+                                <a href="{{ path('covoiturage_Afficher',{'id':c.id}) }}"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>View</a>
+                        </div>
+                    </a>
+                </div>
+
+
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

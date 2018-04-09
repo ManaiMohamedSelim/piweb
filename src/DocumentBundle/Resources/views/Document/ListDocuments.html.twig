@@ -1,0 +1,123 @@
+{% extends '::default/Layout.html.twig' %}
+
+{% block body %}
+<br><br>
+    <div class="product-model">
+        <div class="container">
+
+            <h2>Liste des documents</h2>
+            <div id="result"></div>
+            <div class="col-md-9 product-model-sec" id="init">
+    {% for doc in docs %}
+                <a href="{{ path('detail_document', {'id': doc.id }) }}"><div class="product-grid">
+                        <div class="more-product"><span> </span></div>
+                        <div class="product-img b-link-stripe b-animate-go  thickbox">
+                            <img src="{{ asset('images/pdf.png') }}" class="img-responsive" alt="">
+                            <div class="b-wrapper">
+                                <h4 class="b-animate b-from-left  b-delay03">
+                                    <button><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>Voir le contenu</button>
+                                </h4>
+                            </div>
+                        </div>
+                </a>
+                <div class="product-info simpleCart_shelfItem">
+                    <div class="product-info-cust prt_name">
+                        <h4>{{ doc.titre }}</h4>
+                        <span class="item_price">Niveau: {{ doc.niveau }}</span>
+                        <span class="item_price">Matiére: {{ doc.matiere }}</span>
+                        <div class="clearfix"> </div>
+                    </div>
+
+                </div>
+            </div>
+
+            {% endfor %}
+
+    </div>
+
+    <div class="rsidebar span_1_of_left">
+        <section  class="sky-form">
+            <div class="product_right">
+                <div class="tab1">
+                    <ul class="place">
+                        <li class="sort">Filtre</li>
+                        <li class="by"><img src="images/do.png" alt=""></li>
+                        <div class="clearfix"> </div>
+                    </ul>
+                    <br>
+                    <form method="post">
+                        <input type="text" placeholder="recherche..." name="filter" id="filter">
+                    </form>
+                </div>
+
+
+    </div>
+    </div>
+    <center><div class="navigation">
+    {{ knp_pagination_render(docs) }}
+</div></center>
+    </div>
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+
+            $("#filter").keyup(function(){
+                console.log("ttt");
+
+                var filter = $("#filter").val();
+                var data = {"filter":filter};
+                $.ajax({
+                    type: "post",
+                    url: "{{ path('liste_document') }}",
+                    data:data,
+                    success: function(data){
+                        $("#result").html('<div class="col-md-9 product-model-sec" id="xd">'+'</div>')
+                        $.each(data,function(k,v){
+
+                            $("#init").hide();
+                            $("#xd").append(
+
+                                '<div class="product-grid">'+
+                                '<div class="more-product">'+'</div>'+
+                                '<div class="product-img b-link-stripe b-animate-go  thickbox">'+
+                                '<img src="/images/pdf.png",  class="img-responsive"  >'+
+                                '<div class="b-wrapper">'+
+                                '<h4 class="b-animate b-from-left  b-delay03">'+
+                                ' <button onclick="location.href=\'\/piweb/web/app_dev.php/detail_document?id='+v.id+'\'\">' +
+                                '<span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>Voir le contenu</button>'+
+                                '</h4>'+
+                                '</div>'+
+                                '</div>'+
+                                '<div class="product-info simpleCart_shelfItem">'+
+                                '<div class="product-info-cust prt_name">'+
+                                '<span class="item_price">Niveau: '+v.niveau+'</span>'+
+                                '<span class="item_price">Matiére: '+v.matiere+'</span>'+
+                                '<div class="clearfix">'+ '</div>'+
+                                '</div>'+
+                                '</div>'+
+                                '</div>'
+                            );
+                            if ($("#filter").val()==''){
+
+                                $("#init").show();
+                                $("#result").empty();
+
+                            }
+
+                        })
+
+
+                    }
+
+
+
+                });
+
+            });
+
+
+        });
+    </script>
+{% endblock %}

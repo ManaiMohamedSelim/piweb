@@ -1,0 +1,84 @@
+forum_homepage:
+    path:     /
+    defaults: { _controller: ForumBundle:Default:index }
+
+ajouter_topic:
+    path:     /ajouterTopic
+    defaults: { _controller: ForumBundle:Topic:new }
+
+afficher_topics:
+   path:     /list
+   defaults: { _controller: ForumBundle:Topic:afficher }
+
+afficher_mes_topics:
+   path:     /mesTopics
+   defaults: { _controller: ForumBundle:Topic:mesTopics }
+
+details:
+   path:     /details
+   defaults: { _controller: ForumBundle:Topic:details }
+
+ajt_comm:
+   path:     /commenter
+   defaults: { _controller: ForumBundle:Commentaire:ajouter }
+
+delete_topic:
+   path:     /deleteTopic
+   defaults: { _controller: ForumBundle:Topic:delete }
+
+modifier_topic:
+   path:     /modifierTopic
+   defaults: { _controller: ForumBundle:Topic:modifier }
+
+topicAjax:
+   path:     /recherche
+   defaults: { _controller: ForumBundle:Topic:topicAjax }
+
+ajouter_reclamation:
+    path:     /ajouterReclamation
+    defaults: { _controller: ForumBundle:Reclamation:new }
+
+consulter_reclamation:
+    path:     /reclamation
+    defaults: { _controller: ForumBundle:Reclamation:afficher }
+
+report_commentaire:
+   path:     /reportComm
+   defaults: { _controller: ForumBundle:Commentaire:report }
+
+supprimer_commentaire:
+   path:     /supprimerCommentaire
+   defaults: { _controller: ForumBundle:Commentaire:delete }
+
+accueil_topics:
+   path:     /chartAction
+   defaults: { _controller: ForumBundle:Topic:chart }
+
+admin_afficher_topics:
+    path:     /admin/topics
+    defaults: { _controller: ForumBundle:Admin:topics }
+
+admin_afficher_reclamations:
+    path:     /admin/reclamations
+    defaults: { _controller: ForumBundle:Admin:reclamations }
+
+admin_approuver_reclamation:
+    path:     /admin/approuver
+    defaults: { _controller: ForumBundle:Admin:approuver }
+
+admin_afficher_commentaires_reportes:
+    path:     /admin/commentaires
+    defaults: { _controller: ForumBundle:Admin:commentRep }
+
+admin_modifier_topic:
+    path:     /admin/upTopic
+    defaults: { _controller: ForumBundle:Admin:upTopic }
+
+admin_supprimer_topic:
+    path:     /admin/deleteTopic
+    defaults: { _controller: ForumBundle:Admin:deleteTopic }
+
+admin_supprimer_comm:
+    path:     /admin/deleteComm
+    defaults: { _controller: ForumBundle:Admin:deleteComm }
+

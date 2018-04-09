@@ -1,0 +1,259 @@
+{% extends '::default/Layout.html.twig' %}
+{% block title %}
+    Liste des Colocation
+{% endblock %}
+{%  block body %}
+
+    <div class="product-model">
+        <div class="container" id="cnt">
+            <ol class="breadcrumb">
+                <li><a href="index.html">Accueil</a></li>
+                <li class="active">Liste des Colocation</li>
+            </ol>
+            <form method="post">
+                <input id="prixx" type="text" name="prixx" placeholder="rechercher">
+            </form>
+
+            <h2>Liste des Colocation publiés</h2>
+            <div id="result"></div>
+            <div>
+                <div class="col-md-9 product-model-sec" id="init">
+                {% for colocation in colocations %}
+                    <div class="product-grid">
+                        {% set n = 0 %}
+                        {% for fav in listfav  %}
+                        {% if fav.idColocation.id!=colocation.id %}
+                            {% set n = n+1 %}
+                          {% endif %}
+                        {% endfor %}
+                        {% if listfav|length > n %}
+                        <img id="{{ colocation.id }}" src="{{ asset ('uploads/star1.png') }}" class="img-responsive" alt="" style="margin-left: 170px" onclick="starAction({{ colocation.id  }})">
+                        {% else %}
+                            <img id="{{ colocation.id }}" src="{{ asset ('uploads/star0.png') }}" class="img-responsive" alt="" style="margin-left: 170px" onclick="starAction({{ colocation.id  }})">
+
+                        {% endif %}
+                        <div class="more-product"><span> </span></div>
+                        <div class="product-img b-link-stripe b-animate-go  thickbox">
+                            <img src="{{ asset ('uploads/'~colocation.path) }}" class="img-responsive" alt="" id="img">
+
+                            <div class="b-wrapper">
+                                <h4 class="b-animate b-from-left  b-delay03">
+                                    <button onclick="location.href='{{ path('show_annonce',{'id':colocation.id}) }}'"><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>Voir le contenu</button>
+                                </h4>
+                            </div>
+
+                        </div>
+
+                        <div class="product-info simpleCart_shelfItem">
+                            <div class="product-info-cust prt_name">
+
+                                <span class="item_price">Prix: {{ colocation.prix }} </span>
+                                <span class="item_price">Auteur: {{ colocation.idUser.username }}</span>
+
+
+
+
+
+
+                                <div class="clearfix"> </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                {% endfor %}
+            </div>
+
+
+            <!--script-->
+            <script>
+                $(document).ready(function(){
+                    $(".tab1 .single-bottom").hide();
+                    $(".tab2 .single-bottom").hide();
+                    $(".tab3 .single-bottom").hide();
+                    $(".tab4 .single-bottom").hide();
+                    $(".tab5 .single-bottom").hide();
+
+                    $(".tab1 ul").click(function(){
+                        $(".tab1 .single-bottom").slideToggle(300);
+                        $(".tab2 .single-bottom").hide();
+                        $(".tab3 .single-bottom").hide();
+                        $(".tab4 .single-bottom").hide();
+                        $(".tab5 .single-bottom").hide();
+                    })
+                    $(".tab2 ul").click(function(){
+                        $(".tab2 .single-bottom").slideToggle(300);
+                        $(".tab1 .single-bottom").hide();
+                        $(".tab3 .single-bottom").hide();
+                        $(".tab4 .single-bottom").hide();
+                        $(".tab5 .single-bottom").hide();
+                    })
+                    $(".tab3 ul").click(function(){
+                        $(".tab3 .single-bottom").slideToggle(300);
+                        $(".tab4 .single-bottom").hide();
+                        $(".tab5 .single-bottom").hide();
+                        $(".tab2 .single-bottom").hide();
+                        $(".tab1 .single-bottom").hide();
+                    })
+                    $(".tab4 ul").click(function(){
+                        $(".tab4 .single-bottom").slideToggle(300);
+                        $(".tab5 .single-bottom").hide();
+                        $(".tab3 .single-bottom").hide();
+                        $(".tab2 .single-bottom").hide();
+                        $(".tab1 .single-bottom").hide();
+                    })
+                    $(".tab5 ul").click(function(){
+                        $(".tab5 .single-bottom").slideToggle(300);
+                        $(".tab4 .single-bottom").hide();
+                        $(".tab3 .single-bottom").hide();
+                        $(".tab2 .single-bottom").hide();
+                        $(".tab1 .single-bottom").hide();
+                    })
+                });
+            </script>
+            <!-- script -->
+            </section>
+            <!---->
+            <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+            <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+            <script type='text/javascript'>//<![CDATA[
+                function starAction(id) {
+
+                    if(document.getElementById(id).src=="http://127.0.0.1:8000/uploads/star0.png"){
+                        document.getElementById(id).src="{{ asset ('uploads/star1.png')}}";
+
+                        $.ajax({
+                            type: "post",
+                            url: "{{ path('favoris_annonce') }}",
+                            data: {"id":id} ,
+
+                        })
+                    }else {
+                        document.getElementById(id).src="{{ asset ('uploads/star0.png')}}";
+                        $.ajax({
+                            type: "post",
+                            url: "{{ path('non_favoris') }}",
+                            data: {"id":id} ,
+
+                        })
+                    }
+
+                }
+                $(window).load(function(){
+                    $( "#slider-range" ).slider({
+                        range: true,
+                        min: 0,
+                        max: 100000,
+                        values: [ 500, 100000 ],
+                        slide: function( event, ui ) {  $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+                        }
+                    });
+                    $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) + " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+
+                });//]]>
+            </script>
+            <!---->
+
+
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <style type="text/css">
+        #cnt {
+            display: block;
+            margin : auto;
+        }
+        #img{
+
+            height: 200px;
+            width: 400px;
+
+        }
+        #page{
+            float: none;
+            display: inline-block;
+            overflow: hidden;
+            text-align: center;
+
+        }
+
+
+    </style>
+    <ul>
+        <li>
+            <a href="{{ path('ajout_colocation') }}">Creér une nouvelle annonce</a>
+        </li>
+    </ul>
+    <script>
+
+
+
+        $(document).ready(function () {
+
+            $("#prixx").keyup(function(){
+                console.log("ttt");
+
+                var filter = $("#prixx").val();
+                var data = {"prixx":filter};
+                $.ajax({
+                    type: "post",
+                    url: "{{ path('affich_colocation') }}",
+                    data:data,
+                    success: function(data){
+                        $("#result").html('<div class="col-md-9 product-model-sec" id="xd">'+'</div>')
+                        $.each(data,function(k,v){
+                            $("#init").hide();
+                            $("#xd").append(
+
+                                '<div class="product-grid">'+
+                                '<div class="more-product">'+'</div>'+
+                                '<div class="product-img b-link-stripe b-animate-go  thickbox">'+
+                                '<img src="/uploads/'+v.path+'",  class="img-responsive"  >'+
+                                '<div class="b-wrapper">'+
+                                '<h4 class="b-animate b-from-left  b-delay03">'+
+                                ' <button onclick="location.href=\'\/colocation/showcoloc?id='+v.id+'\'\">' +
+                                '<span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>Voir le contenu</button>'+
+                                '</h4>'+
+                                '</div>'+
+                                '</div>'+
+                                '<div class="product-info simpleCart_shelfItem">'+
+                                '<div class="product-info-cust prt_name">'+
+                                '<span class="item_price">Prix: '+v.prix+'</span>'+
+                                '<span class="item_price">Auteur: '+v.idUser.username+'</span>'+
+                                '<div class="clearfix">'+ '</div>'+
+                                '</div>'+
+                                '</div>'+
+                                '</div>'
+                            );
+                            if ($("#prixx").val()==''){
+
+                                $("#init").show();
+                                $("#result").empty();
+
+                            }
+
+                        })
+
+
+                    }
+
+
+
+                });
+
+            });
+
+
+        });
+
+
+
+
+    </script>
+
+{% endblock %}

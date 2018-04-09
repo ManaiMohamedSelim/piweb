@@ -1,0 +1,213 @@
+{% extends '::default/Layout.html.twig' %}
+{%  block body %}
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+    <div class="contact">
+    <div class="container">
+    <ol class="breadcrumb">
+        <li><a href="">Home</a></li>
+        <li class="active">Covoiturage</li>
+    </ol>
+
+    <div class="col-md-6 span_1_of_3">
+        <div class="contact-form">
+            {{ form(Form) }}
+            <datalist id="Adresses">
+                {% for A in Adresses %}
+                <option value="{{ A.nom }}" ></option>
+                {% endfor %}
+            </datalist>
+        </div>
+    </div>
+    <div class="col-md-6 span_2_of_3">
+        <div id="map" style="width: 500px;margin-left: 200px">
+
+        </div>
+    </div>
+    </div>
+    </div>
+    <script>
+        function placeDepMarker(location) {
+            marker1.setPosition(location);
+
+        }
+        function placeDestMarker(location) {
+            marker2.setPosition(location);
+
+        }
+        function NewAdr(text) {
+
+            var option=$("#Adresses option");
+            if (option.filter(function (t) {
+                    return this.value==text;
+                }).length) return false;
+            return true;
+        }
+        function activateListener(){
+            google.maps.event.addListener(map, 'click', function(event) {
+                if(document.getElementById("utilisateurbundle_covoiturage_depart").value==document.getElementById("utilisateurbundle_covoiturage_destination").value)
+                    alert("Please choose two different adresses");
+                else if(NewAdr(document.getElementById("utilisateurbundle_covoiturage_depart").value)) {
+                    placeDepMarker(event.latLng);
+                    leftclick++;
+                    if(leftclick>=1) {
+                        $.ajax({
+                            type: 'POST',
+                            url: "{{ path("covoiturage_Ajouter") }}",
+                            data: {
+                                depart: document.getElementById("utilisateurbundle_covoiturage_depart").value,
+                                deplat: marker1.getPosition().lat(),
+                                deplng: marker1.getPosition().lng(),
+                                test: leftclick
+                            },
+                            success: function (data) {
+                                alert("jawk behy");
+                            }
+                        });
+                    }
+                }
+            });
+            google.maps.event.addListener(map, 'rightclick', function(event) {
+                if(document.getElementById("utilisateurbundle_covoiturage_depart").value==document.getElementById("utilisateurbundle_covoiturage_destination").value)
+                    alert("Please choose two different adresses");
+                else if(NewAdr(document.getElementById("utilisateurbundle_covoiturage_destination").value)) {
+                    placeDestMarker(event.latLng);
+                    rightclick++;
+
+                    if(rightclick>=1) {
+                        $.ajax({
+                            type: 'POST',
+                            url: "{{ path("covoiturage_Ajouter") }}",
+                            data: {
+                                depart: document.getElementById("utilisateurbundle_covoiturage_destination").value,
+                                deplat: marker2.getPosition().lat(),
+                                deplng: marker2.getPosition().lng(),
+                                test: rightclick
+                            },
+                            success: function (data) {
+                                alert("jawk behy");
+                            }
+                        });
+                    }
+                }
+
+            });
+        }
+
+        function initMap() {
+            var uluru = {lat: 36.898392, lng: 10.1875433};
+            nullpoint={lat: 0, lng: 0};
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 8,
+                center: uluru
+            });
+
+            marker1 = new google.maps.Marker({
+                position: nullpoint,
+                map: map,
+                label: 'A'
+            });
+            marker2 = new google.maps.Marker({
+                position: nullpoint,
+                map: map,
+                label: 'B'
+            });
+            leftclick=0;
+            rightclick=0;
+            activateListener();
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtT0VIFnzSavgT5p6UO9Lp92fd7KJVCs0&callback=initMap">
+    </script>
+    <script>
+        function checkDateInpuWithTodays() {
+            //get today's date in string
+            var todayDate = new Date();
+            //need to add one to get current month as it is start with 0
+            var todayMonth = todayDate.getMonth() + 1;
+            var todayDay = todayDate.getDate();
+            var todayYear = todayDate.getFullYear();
+            var todayDateText = todayYear + "-" + todayMonth + "-" + todayDay;
+            //
+
+//get date input from SharePoint DateTime Control
+            var inputDay = document.getElementById('utilisateurbundle_covoiturage_date_day').selectedIndex+1;
+            var inputMonth = document.getElementById('utilisateurbundle_covoiturage_date_month').selectedIndex+1;
+            var inputYear = document.getElementById('utilisateurbundle_covoiturage_date_year').selectedIndex+2013;
+            var inputDateText=inputYear+"-"+inputMonth+"-"+inputDay;
+            //
+
+//Convert both input to date type
+
+            var inputToDate =new Date(inputDateText);
+            var todayToDate = Date.parse(todayDateText);
+
+            return (inputToDate >= todayToDate);
+        }
+
+        $(document).ready(function () {
+            $('form[name="utilisateurbundle_covoiturage"]').submit(function (e) {
+
+                if(!checkDateInpuWithTodays()){
+                    e.preventDefault();
+                    alert("Invalid Date Entered !");
+                }
+                if(marker1.getPosition().lat()==0 || marker2.getPosition().lat()==0) {
+                    e.preventDefault();
+                    alert("You need to point the Start and Arrival position on the map  !");
+                }
+                if(document.getElementById("utilisateurbundle_covoiturage_depart").value==document.getElementById("utilisateurbundle_covoiturage_destination").value){
+                    e.preventDefault();
+                    alert("Please choose two different adresses");
+                }
+
+            });
+
+            $("#utilisateurbundle_covoiturage_depart").change(function () {
+                if(!NewAdr(document.getElementById("utilisateurbundle_covoiturage_depart").value)) {
+                    leftclick = 0;
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ path("covoiturage_Ajouter") }}",
+                        data: {
+                            depart: document.getElementById("utilisateurbundle_covoiturage_depart").value,
+                            test: 0
+                        },
+                        success: function (data) {
+                            var pos = {lat: data['lat'], lng: data['lng']};
+                            placeDepMarker(pos);
+                        }
+                    });
+                } else {
+                    var pos = {lat: 0, lng: 0};
+                    placeDepMarker(pos);
+                }
+
+
+            });
+            $("#utilisateurbundle_covoiturage_destination").change(function () {
+                if(!NewAdr(document.getElementById("utilisateurbundle_covoiturage_destination").value)) {
+                    righttclick = 0;
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ path("covoiturage_Ajouter") }}",
+                        data: {
+                            depart: document.getElementById("utilisateurbundle_covoiturage_destination").value,
+                            test: 0
+                        },
+                        success: function (data) {
+                            var pos = {lat: data['lat'], lng: data['lng']};
+                            placeDestMarker(pos);
+                        }
+                    });
+                }else placeDestMarker(nullpoint);
+            });
+
+        });
+    </script>
+{% endblock %}

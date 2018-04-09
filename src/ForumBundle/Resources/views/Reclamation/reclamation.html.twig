@@ -1,0 +1,46 @@
+{% extends '::default/Layout.html.twig' %}
+{% block title %}
+    Réclamation
+
+{% endblock %}
+{% block body %}
+         {% if reclamation.etat=='attente' %}
+        <div class="alert alert-info" role="alert" style="background-size: auto" id="ladiv">
+            <h3><p id="msgrec"style="text-align: center"><strong>{{ app.user.username }}, </strong> votre réclamation est en cours de traitement.</p></h3>
+        </div>
+        {% elseif reclamation.etat=='approuve' %}
+
+    <div class="alert alert-success" role="alert" style="background-size: auto" id="ladiv1">
+        <h3><p id="msgrec1"style="text-align: center"><strong>BINGO {{ app.user.username }}!!!</strong> votre réclamation a bien été approuvée</p></h3>
+    </div>
+    {% endif %}
+
+
+    <style>
+
+        #ladiv{
+
+            height: 500px;
+
+        }
+        #msgrec{
+
+            margin-top: 200px;
+
+        }
+
+        #ladiv1{
+
+            height: 500px;
+
+        }
+        #msgrec1{
+
+            margin-top: 200px;
+
+        }
+
+    </style>
+
+
+{% endblock %}

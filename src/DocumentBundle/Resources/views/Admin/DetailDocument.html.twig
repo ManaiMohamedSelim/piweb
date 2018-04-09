@@ -1,0 +1,38 @@
+{% extends '::default/LayoutAdmin.html.twig' %}
+
+{% block body %}
+<br><br>
+    <table class="table table-bordered"  width="100%" cellspacing="0">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Etudiant</th>
+            <th>Titre</th>
+            <th>Description</th>
+            <th>niveau</th>
+            <th>Matiére</th>
+            <th>Contenu</th>
+            <th>Etat</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+                <tr>
+                    <td>{{ doc.id }}</td>
+                    <td>{{ doc.idUser }}</td>
+                    <td>{{ doc.titre }}</td>
+                    <td>{{ doc.description }}</td>
+                    <td>{{ doc.niveau }}</td>
+                    <td>{{ doc.matiere }}</td>
+                    <td><a href="{{ asset('uploads/' ~ doc.path) }}" class="add-cart item_add">Consulter document</a></td>
+                    {{ form_start(Form) }}
+                    <td>{{ form_widget(Form.etat) }}</td>
+                    <td>{{ form_widget(Form.Valider) }}</td>
+                    {{ form_end(Form) }}
+                </tr>
+        </tbody>
+    </table>
+
+
+
+{% endblock %}

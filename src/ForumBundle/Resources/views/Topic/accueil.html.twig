@@ -1,0 +1,103 @@
+{% extends '::default/Layout.html.twig' %}
+
+{%  block body %}
+
+
+    <script>
+        $(function () {
+            $("#slider").responsiveSlides({
+                auto: true,
+                nav: true,
+                speed: 500,
+                namespace: "callbacks",
+                pager: false,
+            });
+        });
+    </script>
+    {#{{asset('uploads/images/' ~ t.imageName)}}#}
+    <div class="slider" id="sliderr">
+        <div class="callbacks_container">
+            <ul class="rslides" id="slider">
+                {% for t in topics %}
+                <li>
+                    <div class="banner1" style="background-image: url('{{asset('uploads/images/' ~ t.imageName)}}')">
+                        <div class="banner-info">
+                            <h3>{{ t.sujet }}</h3>
+                            <p>{{ t.description }}</p>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="offers" style="margin-left: 500px" id="offre">
+        <div class="container">
+            <div class="offer-grids">
+                <div class="col-md-6 grid-left">
+                    <a href="#" id="cliquez"><div class="offer-grid1">
+                            <div class="ofr-pic" id="yop">
+                                <img src="{{ asset('uploads/images/star.jpg') }}" class="img-responsive" alt="" id="">
+                            </div>
+                            <div class="ofr-pic-info">
+                                <h4>Les publications <br>les plus populaires !</h4>
+                                <p>Cliquez ici !</p>
+
+                            </div>
+                            <div class="clearfix"></div>
+                        </div></a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+<div id="charti" hidden style="margin-left: 520px">
+
+    <script src="//code.highcharts.com/4.1.8/highcharts.js"></script>
+    <script src="//code.highcharts.com/4.1.8/modules/exporting.js"></script>
+    <script type="text/javascript">
+        {{ chart(piechart) }}
+    </script>
+
+    <div id="linechart" style="min-width: 600px; height: 600px; margin: 0 auto"></div>
+
+
+</div>
+
+<style>
+
+    #yop{
+
+
+    }
+
+</style>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#cliquez").click(function(){
+                $("#sliderr").hide();
+
+                $("#offre").hide();
+
+
+
+                  $("#charti").slideDown();
+
+
+
+
+
+
+            });
+
+
+        });
+
+
+    </script>
+
+
+
+{% endblock %}

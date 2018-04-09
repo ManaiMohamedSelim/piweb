@@ -1,0 +1,20 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<div class="login_sec">
+    <div class="container">
+        <br><br>
+        <h2>Réinitialisation de votre mot de passe</h2><br>
+        <p>veuillez remplir ce formulaire pour réinitialiser votre mot de passe</p>
+        <div class="col-md-6 log">
+{{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
+    {{ form_widget(form) }}
+    <div>
+        <input type="submit" value="Confirmer votre nouveau mot de passe" />
+    </div>
+{{ form_end(form) }}
+
+</div>
+
+<div class="clearfix"></div>
+</div>
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br>
