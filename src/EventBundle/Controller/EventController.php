@@ -21,6 +21,7 @@ use UtilisateurBundle\Entity\Commentaire;
 use UtilisateurBundle\Entity\Evenement;
 use Symfony\Component\HttpFoundation\Response;
 use UtilisateurBundle\Entity\Reservation;
+use UtilisateurBundle\Entity\User;
 
 class EventController extends Controller
 {
@@ -54,6 +55,18 @@ class EventController extends Controller
 
     public function modifierAction(Request $request)
     {
+        $id = $request->get('id');
+        $em = $this->getDoctrine()->getManager();
+        $evenement = $em->getRepository('UtilisateurBundle:Evenement')->find($id);
+        $form = $this->createForm(EventForm::class,$evenement);
+        $form->handleRequest($request);
+        if ($form->isValid()){
+            $em->persist($evenement);
+            $em->flush();
+            return $this->redirectToRoute('modeles');
+        }
+        return $this->render('EventBundle:Event:modifevent.html.twig', ['events' => null,'form' => $form->createView(),'tag' => 'Modifier événement']);
+
 
     }
 
@@ -68,7 +81,7 @@ class EventController extends Controller
 
     public function myEventsAction()
     {
-        return $this->render('EventBundle:Event:listevents.html.twig');
+        return $this->render('EventBundle:Event:myevents.html.twig', ['tag' => 'Mes événements', 'events'=>null,]);
     }
 
     public function detailsAction(Request $request){
@@ -152,8 +165,77 @@ class EventController extends Controller
         $start = $length?($start && ($start!=-1)?$start:0)/$length:0;
 
         $search = $request->get('search');
+
+        $user = new User();
+        $user = $this->getUser();
         $filters = [
             'query' => @$search['value'],
+            'user' => @$user,
+        ];
+
+        $events = $this->getDoctrine()->getRepository('UtilisateurBundle:Evenement')->search(
+            $filters, $start, $length
+        );
+
+        $output = array(
+            'data' => array(),
+            'recordsFiltered' => count($this->getDoctrine()->getRepository('UtilisateurBundle:Evenement')->search($filters, 0, false)),
+            'recordsTotal' => count($this->getDoctrine()->getRepository('UtilisateurBundle:Evenement')->search(array(), 0, false))
+        );
+        foreach ($events as $event) {
+            if ($event->getTypeReservation() == "Gratuite" ){
+                $output['data'][] = [
+                    'nom' => "<span class=\"glyphicon glyphicon-plus\"></span>".$event->getNom(),
+                    'type' => $event->getType(),
+                    'typeRes' => $event->getTypeReservation(),
+                    'prix' => "Entrée gratuite",
+                    'DateEvent' => $event->getDateEvent()->format('Y-m-d H:i:s'),
+                    'duree' => $event->getDuree(),
+                    'lieu' => $event->getLieu(),
+                    'nombre' => $event->getNombre(),
+                    'Description' => $event->getDescription(),
+                    'Affiche' => '<img class="aff" src="/affiches/'.$event->getAffiche().'"/>',
+                    'Details' => "<a href=".$this->generateUrl('details_event',['id' => $event->getID()])." target=\"_blank\"><span class=\"glyphicon glyphicon-plus\"></span></a>",
+                    'Modifier' => "<a href=".$this->generateUrl('modifier_event',['id' => $event->getID()])." target=\"_blank\"><span class=\"glyphicon glyphicon-plus\"></span></a>"
+                ];
+            }
+            else{
+                $output['data'][] = [
+                    'nom' => "<span class=\"glyphicon glyphicon-plus\"></span>".$event->getNom(),
+                    'type' => $event->getType(),
+                    'typeRes' => $event->getTypeReservation(),
+                    'prix' => $event->getPrix().' DT',
+                    'DateEvent' => $event->getDateEvent()->format('Y-m-d H:i:s'),
+                    'duree' => $event->getDuree(),
+                    'lieu' => $event->getLieu(),
+                    'nombre' => $event->getNombre(),
+                    'Description' => $event->getDescription(),
+                    'Affiche' => '<img class="aff" src="/affiches/'.$event->getAffiche().'"/>',
+                    'Details' => "<a href=".$this->generateUrl('details_event',['id' => $event->getID()])." target=\"_blank\"><span class=\"glyphicon glyphicon-plus\"></span></a>",
+                    'Modifier' => "<a href=".$this->generateUrl('modifier_event',['id' => $event->getID()])." target=\"_blank\"><span class=\"glyphicon glyphicon-plus\"></span></a>"
+                ];
+
+            }
+
+        }
+
+        return new Response(json_encode($output), 200, ['Content-Type' => 'application/json']);
+
+    }
+
+    public function dataAllAction(Request $request)
+    {
+        $length = $request->get('length');
+        $length = $length && ($length!=-1)?$length:0;
+
+        $start = $request->get('start');
+        $start = $length?($start && ($start!=-1)?$start:0)/$length:0;
+
+        $search = $request->get('search');
+
+        $filters = [
+            'query' => @$search['value'],
+            'user' => null,
         ];
 
         $events = $this->getDoctrine()->getRepository('UtilisateurBundle:Evenement')->search(
@@ -203,6 +285,7 @@ class EventController extends Controller
         return new Response(json_encode($output), 200, ['Content-Type' => 'application/json']);
 
     }
+
 
     public function lister1Action(Request $request)
     {

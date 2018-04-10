@@ -22,4 +22,7 @@ data_datatable:
 reporter:
     path:     /details
     defaults: { _controller: EventBundle:Event:reporter }
+dataAll_datatable:
+    path:     /dataAll_datatable
+    defaults: { _controller: EventBundle:Event:dataAll }
 

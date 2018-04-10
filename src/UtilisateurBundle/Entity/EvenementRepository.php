@@ -38,12 +38,16 @@ class EvenementRepository extends EntityRepository
     {
         $qb = $this->_em->createQueryBuilder();
         $query = isset($data['query']) && $data['query']?$data['query']:null;
+        $user = isset($data['user']) && $data['user']?$data['user']:null;
 
         $qb
             ->select('e')
             ->from('UtilisateurBundle:Evenement', 'e')
         ;
-
+        if($user){
+            $qb->where('e.idOrganisateur = :user')
+                ->setParameter('user', $user);
+        }
         if ($query){
             $qb
                 ->andWhere('e.nom like :query')
