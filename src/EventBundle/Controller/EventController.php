@@ -15,6 +15,8 @@ use EventBundle\Form\ReservationForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 use UtilisateurBundle\Entity\Commentaire;
 use UtilisateurBundle\Entity\Evenement;
 use Symfony\Component\HttpFoundation\Response;
@@ -75,6 +77,7 @@ class EventController extends Controller
         $reservation = new Reservation();
         $commentaire = new Commentaire();
 
+
         //initialisation des formulaires
         $formRes = $this->createForm(ReservationForm::class, $reservation);
         $formCom = $this->createForm(CommentaireForm::class, $commentaire);
@@ -83,6 +86,8 @@ class EventController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $event = $em->getRepository('UtilisateurBundle:Evenement')->find($id);
+        $check = count($em->getRepository('UtilisateurBundle:Reservation')->findBy(['idEvenement' => $event,
+                                   'idParticipant' => $user, 'etat' => 'Confirmé']));
         $dispo = $event->getNombre() - count($em->getRepository('UtilisateurBundle:Reservation')->findBy(["idEvenement" => $event, "etat" => "Confirmé"]));
         if ($dispo == 0){
             $dispo = "Complet";
@@ -107,6 +112,7 @@ class EventController extends Controller
                     $event->addReservation($reservation);
                     $em->persist($reservation);
                     $em->flush();
+                    return $this->redirectToRoute('details_event',['id' => $event->getId()]);
                 }
             }
         }
@@ -121,8 +127,19 @@ class EventController extends Controller
             $em->flush();
         }
 
+        //Reporter
+        $idreport = $request->request->get('idComm');
+        $commentaireRep = new Commentaire();
+        if($idreport) {
+            $commentaireRep = $em->getRepository('UtilisateurBundle:Commentaire')->find($idreport);
+            $commentaireRep->setEtatCommentaire('Reported');
+            $em->persist($commentaireRep);
+            $em->flush();
+            }
+
         return $this->render('EventBundle:Event:details.html.twig', ['event' => $event, 'events' => null, 'tag' => 'Détails',
-                                 'formRes' => $formRes->createView(),'dispo' => $dispo, 'formCom' => $formCom->createView()
+                                 'formRes' => $formRes->createView(),'dispo' => $dispo, 'formCom' => $formCom->createView(),
+                                  'check' => $check
             ]);
     }
 
@@ -204,37 +221,10 @@ class EventController extends Controller
         return $this->render('EventBundle:Event:listevents.html.twig', ['events' => null,'pagination' => $pagination, 'tag' => 'Liste des événements']);
     }
 
-    public function reserverAction(Request $request,$id){
-        if ($request->isMethod('POST')) {
-            $em = $this->getDoctrine()->getManager();
-            $event = $em->getRepository('UtilisateurBundle:Evenement')->findOneBy(["id" => $id]);
-            $numTicket = count($em->getRepository('UtilisateurBundle:Reservation')->findBy(["IdEvenement" => $event, "Etat" => "Confirmé"]));
-            $user = $this->getUser();
-            $reservation = new Reservation();
-            $reservation->setIdEvenement($user);
-            $reservation->setIdEvenement($event);
-            $reservation->setTypeReservation($event->getTypeReservation());
-            if ($event->getTypeReservation() == "Payante") {
-                $reservation->setTarif($event->getPrix());
-            }
-            if ($numTicket) {
-                $reservation->setNumeroTicket($numTicket + 1);
-            } else {
-                $reservation->setNumeroTicket(1);
-            }
-            $reservation->setEtat("Confirmé");
-
-            $event->getReservations()->addReservation($reservation);
-            $em->persist($reservation);
-            $em->flush();
-            return $this->redirectToRoute('event_homepage');
-        }
+    public function reporterAction(Request $request){
 
     }
 
-    public function commenterAction($id){
-
-    }
 
 
 

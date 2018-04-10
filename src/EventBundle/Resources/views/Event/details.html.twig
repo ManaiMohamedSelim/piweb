@@ -11,6 +11,22 @@
             background-color: #00a0dc; !important;
             border-color: #00a0dc; !important;
         }
+        .fieldset[disabled] {
+            float:right; !important;
+            color: #fff; !important;
+            background-color: #00a0dc; !important;
+            border-color: #00a0dc; !important;
+        }
+        .btn-danger[disabled]{
+            float:right; !important;
+            color: #fff; !important;
+            background-color: #00a0dc; !important;
+            border-color: #00a0dc; !important;
+        }
+        .sh {
+            float:left; !important;
+            color: black; !important;
+        }
     </style>
 {% endblock %}
 {% block home %}
@@ -41,17 +57,15 @@
                             <br>
                             <div class="product-auction-form">
                                 {%  form_theme formRes 'bootstrap_4_layout.html.twig' %}
-                                    {% for reservation in event.reservations %}
-
-                                        {% if reservation.idParticipant.id == app.user.id %}
+                                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                    {% if check == 0 %}
+                                    {{ form(formRes) }}
+                                {% else %}
                                 {{ form_start(formRes) }}
                                 {{ form_widget(formRes.valider, {'disabled' : true}) }}
                                 {{ form_end(formRes) }}
-
-                                {% else %}
-                                    {{ form(formRes) }}
                                 {% endif %}
-                                    {% endfor %}
+                                {% endif %}
 
                             </div>
                         </div>
@@ -83,7 +97,15 @@
                         </div>
                         <div class="comment-block">
                             {%  form_theme formCom 'bootstrap_4_layout.html.twig' %}
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                             {{ form(formCom) }}
+                            {% else %}
+                                {{ form_start(formCom) }}
+                                {{ form_widget(formCom.contenu) }}
+                                {{ form_widget(formCom.valider, {'disabled' : true, 'attr' : {'class' : 'btn btn-danger comm'}}) }}
+                                {{ form_end(formCom) }}
+                            {% endif %}
+
                         </div>
                     </div>
 
@@ -98,9 +120,14 @@
                             <div class="bottom-comment">
                                 <div class="comment-date">{{ commentaire.post | date(' d F Y H:i') }}</div>
                                 <ul class="comment-actions">
-                                    <li class="complain">Complain</li>
-                                    <li class="reply">Reply</li>
+                                    <li class="complain" id="{{ commentaire.id }}">Reporter</li>
+                                    <li class="reply det" id="{{ commentaire.id }}">Détails</li>
                                 </ul>
+                                <br>
+                            <div hidden class="comment-text {{ commentaire.id }} sh ">
+                                Utilisateur : {{ commentaire.idUser.username }} <br>
+                                Etat : {{ commentaire.EtatCommentaire }}
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -114,5 +141,31 @@
 
                 </div>
     </div>
+
+        <script>
+            $(document).ready(function() {
+                $('.complain').on("click",function() {
+                    var id = {"idComm" : this.id, "id" : {{ event.id }} }
+                    $.ajax({
+                        type: 'POST',
+                        url : '{{ path('details_event') }}', // La ressource ciblée
+                        data: id,
+                        success: function (id) {
+                            alert("Votre signalisation a été prise en considération");
+                        }
+                    });
+                });
+
+            });
+            </script>
+            <script>
+                $(document).ready(function() {
+                    $('.det').on("click", function () {
+                        var id = this.id
+                        $("." + id).show();
+                    });
+                });
+        </script>
 {% endif %}
+
 {% endblock %}

@@ -27,9 +27,9 @@
                           {% endif %}
                         {% endfor %}
                         {% if listfav|length > n %}
-                        <img id="{{ colocation.id }}" src="{{ asset ('uploads/star1.png') }}" class="img-responsive" alt="" style="margin-left: 170px" onclick="starAction({{ colocation.id  }})">
+                        <img id="{{ colocation.id }}" class="fav" src="{{ asset ('uploads/star1.png') }}" class="img-responsive" alt="" style="margin-left: 170px" onclick="starAction({{ colocation.id  }})">
                         {% else %}
-                            <img id="{{ colocation.id }}" src="{{ asset ('uploads/star0.png') }}" class="img-responsive" alt="" style="margin-left: 170px" onclick="starAction({{ colocation.id  }})">
+                            <img id="{{ colocation.id }}" class="dev" src="{{ asset ('uploads/star0.png') }}" class="img-responsive" alt="" style="margin-left: 170px" onclick="starAction({{ colocation.id  }})">
 
                         {% endif %}
                         <div class="more-product"><span> </span></div>

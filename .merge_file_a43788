@@ -1,0 +1,252 @@
+<?php
+
+namespace UtilisateurBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Activite
+ *
+ * @ORM\Table(name="activite")
+ * @ORM\Entity
+ */
+class Activite
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Nom", type="string", length=255, nullable=false)
+     */
+    private $nom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Discipline", type="string", length=255, nullable=false)
+     */
+    private $discipline;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="Date_Event", type="datetime", nullable=false)
+     */
+    private $dateEvent = 'CURRENT_TIMESTAMP';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Duree", type="string", length=255, nullable=false)
+     */
+    private $duree;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Lieu", type="string", length=255, nullable=false)
+     */
+    private $lieu;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Description", type="string", length=255, nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Affiche", type="string", length=255, nullable=true)
+     */
+    private $affiche;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+
+
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     *
+     * @return Activite
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * Set discipline
+     *
+     * @param string $discipline
+     *
+     * @return Activite
+     */
+    public function setDiscipline($discipline)
+    {
+        $this->discipline = $discipline;
+
+        return $this;
+    }
+
+    /**
+     * Get discipline
+     *
+     * @return string
+     */
+    public function getDiscipline()
+    {
+        return $this->discipline;
+    }
+
+    /**
+     * Set dateEvent
+     *
+     * @param \DateTime $dateEvent
+     *
+     * @return Activite
+     */
+    public function setDateEvent($dateEvent)
+    {
+        $this->dateEvent = $dateEvent;
+
+        return $this;
+    }
+
+    /**
+     * Get dateEvent
+     *
+     * @return \DateTime
+     */
+    public function getDateEvent()
+    {
+        return $this->dateEvent;
+    }
+
+    /**
+     * Set duree
+     *
+     * @param string $duree
+     *
+     * @return Activite
+     */
+    public function setDuree($duree)
+    {
+        $this->duree = $duree;
+
+        return $this;
+    }
+
+    /**
+     * Get duree
+     *
+     * @return string
+     */
+    public function getDuree()
+    {
+        return $this->duree;
+    }
+
+    /**
+     * Set lieu
+     *
+     * @param string $lieu
+     *
+     * @return Activite
+     */
+    public function setLieu($lieu)
+    {
+        $this->lieu = $lieu;
+
+        return $this;
+    }
+
+    /**
+     * Get lieu
+     *
+     * @return string
+     */
+    public function getLieu()
+    {
+        return $this->lieu;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Activite
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set affiche
+     *
+     * @param string $affiche
+     *
+     * @return Activite
+     */
+    public function setAffiche($affiche)
+    {
+        $this->affiche = $affiche;
+
+        return $this;
+    }
+
+    /**
+     * Get affiche
+     *
+     * @return string
+     */
+    public function getAffiche()
+    {
+        return $this->affiche;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+}

@@ -44,7 +44,7 @@ class CovoiturageController extends Controller
 
         return $this->render('CovoiturageBundle:Covoiturage:Lister.html.twig',array(
             "covoiturages"=>$covoiturages,
-            "notifiableEntity"=> $this->getUser(),
+            "notifiableEntity"=>$this->getUser(),
             "nManager"=>$manager
         ));
 
@@ -169,8 +169,9 @@ class CovoiturageController extends Controller
                         new ObjectNormalizer()
                     )
                 );
-                $covoiturages = $em->getRepository("UtilisateurBundle:Covoiturage")->findCustom($request->get('input'),
-                    $request->get('date'),$request->get('type'),$request->get('SortBy'));
+
+                $covoiturages = $em->getRepository("UtilisateurBundle:Covoiturage")->findCustom($request->request->get('input'),
+                    $request->get('date'),$request->request->get('type'),$request->get('SortBy'));
                 $data = $serializer->normalize($covoiturages);
                 return new JsonResponse($data);
             }

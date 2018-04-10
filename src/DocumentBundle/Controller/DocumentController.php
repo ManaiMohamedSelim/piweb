@@ -48,16 +48,19 @@ class DocumentController extends Controller
 
         if ($request->isMethod("POST")) {
             if ($request->isXmlHttpRequest()) {
-                $serializer = new Serializer(
-                    array(
-                        new ObjectNormalizer()
-                    )
-                );
-                $docs = $em->getRepository("UtilisateurBundle:Document")->findDoc($request->get('filter'));
-                //print_r($modeles);
-                $jsonContent = $serializer->normalize($docs);
-                return new JsonResponse($jsonContent);
 
+
+
+                $docs = $em->getRepository("UtilisateurBundle:Document")->findDoc($request->get('filter'));
+                $encoder = new JsonEncoder();
+                $normalizer = new ObjectNormalizer();
+                $normalizer->setCircularReferenceHandler(function($object){
+                    return $object->getId();
+                });
+                $serializer = new Serializer([$normalizer], [$encoder]);
+                //print_r($modeles);
+                $data = $serializer->normalize($docs);
+                return new JsonResponse($data);
             }
         }
 ////////////////////////////////////////////////////////////////////////

@@ -12,6 +12,7 @@
             <h2>Mes topics</h2>
 
             <div class="col-md-9 product-model-sec">
+                {% if topic %}
                 {% for t in topic %}
                     <div class="product-grid">
                         <div class="more-product"><span> </span></div>
@@ -38,6 +39,7 @@
                         </div>
                     </div>
                 {% endfor %}
+
 
             </div>
             <!--script-->
@@ -112,6 +114,7 @@
         <div class="text-center">
             {{ knp_pagination_render(topic) }}
         </div>
+        {% endif %}
     </div>
     </div>
     </div>

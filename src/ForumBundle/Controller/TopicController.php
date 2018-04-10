@@ -16,6 +16,7 @@ use Symfony\Component\DomCrawler\Image;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use UtilisateurBundle\Entity\Commentaire;
@@ -75,10 +76,15 @@ class TopicController extends Controller
 
         if ($request->isMethod("POST")) {
             if ($request->isXmlHttpRequest()) {
-                $topics = $em->getRepository(Topic::class)->findTopicAjax($request->get('user'));
+                $topics = $em->getRepository(Topic::class)->findTopicAjax($request->request->get('user'));
 //                $jsonContent = $serializer->normalize($topics);
 //                return new JsonResponse( $jsonContent);
-                $serializer = new Serializer(array(new ObjectNormalizer()));
+                $encoder = new JsonEncoder();
+                $normalizer = new ObjectNormalizer();
+                $normalizer->setCircularReferenceHandler(function($object){
+                return $object->getId();
+                });
+                $serializer = new Serializer([$normalizer], [$encoder]);
                 $data = $serializer->normalize($topics);
                 return new JsonResponse($data);
             }
@@ -142,6 +148,7 @@ class TopicController extends Controller
         $id = $request->get("id");
         $topic = $em->getRepository(Topic::class)->find($id);
         $em->remove($topic);
+
         $em->flush();
         $topics = $em->getRepository(Topic::class)->findBy(array('idUser' => $us));
         return $this->render('ForumBundle:Topic:mesTopics.html.twig', array(

@@ -15,7 +15,7 @@ class ColocationRepository extends EntityRepository
 {
     public function findcolocationAjax($prix,$user){
         $query=$this->getEntityManager()
-            ->createQuery("SELECT c FROM  UtilisateurBundle:Colocation c JOIN c.idUser u
+            ->createQuery("SELECT c FROM  ColocationBundle:Colocation c JOIN c.idUser u
                                   WHERE c.prix LIKE :prix OR u.username LIKE :user 
                                   AND c.typeColocation='Annonce'")
             ->setParameter("prix",'%'.$prix.'%' )
@@ -25,7 +25,7 @@ class ColocationRepository extends EntityRepository
     }
     public function finddemandeAjax($adresse,$user){
         $query=$this->getEntityManager()
-            ->createQuery("SELECT c FROM  UtilisateurBundle:Colocation c JOIN c.idUser u
+            ->createQuery("SELECT c FROM  ColocationBundle:Colocation c JOIN c.idUser u
                                   WHERE c.adresse LIKE :adresse AND c.typeColocation='Demande' OR u.username LIKE :user AND c.typeColocation='Demande'
                                    ")
             ->setParameter("adresse",'%'.$adresse.'%' )

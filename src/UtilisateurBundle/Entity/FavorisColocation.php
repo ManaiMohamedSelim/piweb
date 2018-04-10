@@ -34,7 +34,7 @@ class FavorisColocation
     /**
      * @var \UtilisateurBundle\Entity\Colocation
      *
-     * @ORM\ManyToOne(targetEntity="UtilisateurBundle\Entity\Colocation")
+     * @ORM\ManyToOne(targetEntity="ColocationBundle\Entity\Colocation")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_colocation", referencedColumnName="id")
      * })
@@ -84,7 +84,7 @@ class FavorisColocation
      *
      * @return FavorisColocation
      */
-    public function setIdColocation(\UtilisateurBundle\Entity\Colocation $idColocation = null)
+    public function setIdColocation(\ColocationBundle\Entity\Colocation $idColocation = null)
     {
         $this->idColocation = $idColocation;
 

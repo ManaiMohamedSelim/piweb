@@ -98,7 +98,7 @@ class Commentaire
     /**
      * @var \UtilisateurBundle\Entity\Topic
      *
-     * @ORM\ManyToOne(targetEntity="UtilisateurBundle\Entity\Topic",inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="UtilisateurBundle\Entity\Topic",inversedBy="comments",cascade={"all"})
      * @ORM\JoinColumns({
      * @ORM\JoinColumn(name="id_topic", referencedColumnName="id")
      * })

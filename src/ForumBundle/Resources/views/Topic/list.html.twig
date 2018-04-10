@@ -154,6 +154,7 @@
                     url: "{{ path('afficher_topics') }}",
                     data:data,
                     success: function(data){
+                        console.log(data);
                         $("#result").html('<div class="col-md-9 product-model-sec" id="xd">'+'</div>')
                         $.each(data,function(k,v){
                             $("#yop").hide();

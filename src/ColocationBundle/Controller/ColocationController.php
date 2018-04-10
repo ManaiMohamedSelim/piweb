@@ -8,8 +8,7 @@
 
 namespace ColocationBundle\Controller;
 
-
-use UtilisateurBundle\Entity\Colocation;
+use ColocationBundle\Entity\Colocation;
 use ColocationBundle\Form\ColocationType;
 
 
@@ -29,7 +28,7 @@ use UtilisateurBundle\Entity\FavorisColocation;
 class ColocationController extends Controller
 {
     public function ajoutColocationAction(Request $request){
-        $Colocation=new Colocation();
+        $Colocation=new \ColocationBundle\Entity\Colocation();
         $form=$this->createForm(ColocationType::class,$Colocation);
         $form->handleRequest($request);
         $us=$this->getUser();
@@ -361,8 +360,8 @@ class ColocationController extends Controller
             'typeColocation'=>'Annonce'));
         if ($request->isMethod("POST")) {
             if ($request->isXmlHttpRequest()) {
-                $idcoloc=$request->get('id');
-                $Colocation=$em->getRepository("UtilisateurBundle:Colocation")
+                $idcoloc=$request->request->get('id');
+                $Colocation=$em->getRepository("ColocationBundle:Colocation")
                     ->find($idcoloc);
                 $favoris=new FavorisColocation();
                 $favoris->setIdColocation($Colocation);
@@ -385,7 +384,7 @@ class ColocationController extends Controller
         if ($request->isMethod("POST")) {
             if ($request->isXmlHttpRequest()) {
                 $idcoloc=$request->get('id');
-                $Colocation=$em->getRepository("UtilisateurBundle:Colocation")
+                $Colocation=$em->getRepository("ColocationBundle:Colocation")
                     ->find($idcoloc);
                 $favoris=$em->getRepository("UtilisateurBundle:FavorisColocation")->findOneBy(
                     array(

@@ -1,0 +1,17 @@
+<<<<<<< HEAD
+event:
+    resource: "@EventBundle/Resources/config/routing.yml"
+    prefix:   /event
+=======
+
+document:
+    resource: "@DocumentBundle/Resources/config/routing.yml"
+    prefix:   /
+>>>>>>> cfa6cff3ee029db0e1475a4ebe76c98819c42a4d
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

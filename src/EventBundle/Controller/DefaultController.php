@@ -9,7 +9,7 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $events = $em->getRepository('UtilisateurBundle:Evenement')->findAll();
+        $events = $em->getRepository('UtilisateurBundle:Evenement')->findWeek();
         return $this->render('EventBundle:Event:events.html.twig', ['events' => $events, 'tag' => 'Evénements de la semaine']);
     }
 }

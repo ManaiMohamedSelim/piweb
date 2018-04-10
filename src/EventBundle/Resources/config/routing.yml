@@ -19,9 +19,7 @@ details_event:
 data_datatable:
     path:     /data_datatable
     defaults: { _controller: EventBundle:Event:data }
-test_event:
-    path:     /test
-    defaults: { _controller: EventBundle:Event:test }
-reserver_event:
-    path:     /details/{id]
-    defaults: { _controller: EventBundle:Event:reserver }
+reporter:
+    path:     /details
+    defaults: { _controller: EventBundle:Event:reporter }
+
