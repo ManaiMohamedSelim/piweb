@@ -51,7 +51,7 @@
                                     <a href="{{ path('lister_event') }}"><p>Liste des événements</p></a>
                                 </div>
                             </div>
-                            <div class="tab2">
+                       <!--     <div class="tab2">
                                 <ul class="place">
                                     <li class="sort"><img src="{{asset('images/activities.png')}}" alt=""></li>
                                     <li class="by">Activités</li>
@@ -74,7 +74,7 @@
                                     <a href="{{ path('modifier_event') }}"><p>Modifier un événement</p></a>
                                     <a href="{{ path('lister_event') }}"><p>Liste des événements</p></a>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="tab4">
                                 <ul class="place">
                                     <li class="sort"><img src="{{asset('images/mes_reservations.png')}}" alt=""></li>
@@ -82,9 +82,7 @@
                                     <div class="clearfix"> </div>
                                 </ul>
                                 <div class="single-bottom">
-                                    <a href="{{ path('ajouter_event') }}"><p>Ajout d'un événement</p></a>
-                                    <a href="{{ path('modifier_event') }}"><p>Modifier un événement</p></a>
-                                    <a href="{{ path('lister_event') }}"><p>Liste des événements</p></a>
+                                    <a href="{{ path('my_res') }}"><p>Mes réservations</p></a>
                                 </div>
                             </div>
 
@@ -92,10 +90,10 @@
                             <script>
                                 $(document).ready(function(){
                                     $(".tab1 .single-bottom").hide();
-                                    $(".tab2 .single-bottom").hide();
-                                    $(".tab3 .single-bottom").hide();
+                                    //$(".tab2 .single-bottom").hide();
+                                    //$(".tab3 .single-bottom").hide();
                                     $(".tab4 .single-bottom").hide();
-                                    $(".tab5 .single-bottom").hide();
+                                    //$(".tab5 .single-bottom").hide();
 
                                     $(".tab1 ul").click(function(){
                                         $(".tab1 .single-bottom").slideToggle(300);
@@ -104,7 +102,7 @@
                                         $(".tab4 .single-bottom").hide();
                                         $(".tab5 .single-bottom").hide();
                                     })
-                                    $(".tab2 ul").click(function(){
+                                    /*$(".tab2 ul").click(function(){
                                         $(".tab2 .single-bottom").slideToggle(300);
                                         $(".tab1 .single-bottom").hide();
                                         $(".tab3 .single-bottom").hide();
@@ -117,7 +115,7 @@
                                         $(".tab5 .single-bottom").hide();
                                         $(".tab2 .single-bottom").hide();
                                         $(".tab1 .single-bottom").hide();
-                                    })
+                                    })*/
                                     $(".tab4 ul").click(function(){
                                         $(".tab4 .single-bottom").slideToggle(300);
                                         $(".tab5 .single-bottom").hide();
@@ -142,7 +140,7 @@
                         </ol>
                         <div class="carousel-inner">
                             {% for event in events %}
-                                <div {% if loop.index0 == 0 %} class="item active" {% else %} class="item" {% endif %}>
+                                <div {% if loop.index0 == 0 %} class="item active" id"{{ event.id }}" {% else %} class="item" id="{{ event.id }}" {% endif %}>
                                     <a href="{{path('details_event',{'id' : event.id})}}">
                                     <img class="img-responsive center-block" src="{{ asset ('affiches/'~ event.affiche)}}"/>
                                     </a>
@@ -178,11 +176,16 @@
 
                         $(".left").click(function(){
                             $("#myCarousel").carousel("prev");
+                            var comID = $(".active").attr("id");
+                            console.log(comID);
                         });
                         $(".right").click(function(){
                             $("#myCarousel").carousel("next");
+                            var comID = $(".active").attr("id");
+                            console.log(comID);
                         });
                     </script>
+
                 {% endblock %}
                 {% block javascripts %}
                     <script src="{{ asset ('event/js/carousel.js') }}"></script>

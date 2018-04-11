@@ -25,4 +25,20 @@ reporter:
 dataAll_datatable:
     path:     /dataAll_datatable
     defaults: { _controller: EventBundle:Event:dataAll }
+supprimer_event:
+    path:     /supprimer_event
+    defaults: { _controller: EventBundle:Event:supprimer }
+my_res:
+    path:     /mes_reservations
+    defaults: { _controller: EventBundle:Event:myRes }
+dataRes_datatable:
+    path:     /dataRes_datatable
+    defaults: { _controller: EventBundle:Event:dataRes }
+annuler_res:
+    path:     /annuler_reservation
+    defaults: { _controller: EventBundle:Event:annulerRes }
+confirmer_res:
+    path:     /confirmer_reservation
+    defaults: { _controller: EventBundle:Event:confirmerRes }
+
 

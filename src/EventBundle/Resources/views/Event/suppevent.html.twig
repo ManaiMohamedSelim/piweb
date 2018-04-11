@@ -1,0 +1,12 @@
+{% extends 'EventBundle:Event:events.html.twig' %}
+{% block eventBody %}
+    <div class="col-md-6 span_2_of_3">
+        {% if app.session.flashBag.has('success') %}
+            <div class="alert alert-success">
+                {% for msg in app.session.flashBag.get('success') %}
+                    {{ msg }} Pour revenir à mes événement <a href="{{ path('my_events') }}">ici</a>.
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{%  endblock %}

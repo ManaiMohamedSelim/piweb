@@ -42,6 +42,15 @@
     {{ tag }}
 {% endblock %}
 {% block eventBody %}
+    {% if app.session.flashBag.has('success') %}
+            {% for msg in app.session.flashBag.get('success') %}
+                <script>
+                    $(document).ready(function() {
+                           alert("{{ msg }}");
+                    });
+                </script>
+            {% endfor %}
+    {% endif %}
     <div class="col-md-6 span_2_of_3">
         <div class="contact-form">
             {%  form_theme form 'bootstrap_4_layout.html.twig' %}
@@ -93,7 +102,7 @@
             </div>
 
             {{ form_label(form.description,'Description', {'label_attr':{'class' : 'desclab'}}) }}
-            {{ form_widget(form.description,{'attr': {'class' : 'desc'}}) }}
+            {{ form_widget(form.description,{'attr': {'novalidate': 'novalidate','class' : 'desc'}}) }}
             <div id="des_err">
                 {{ form_errors(form.description) }}
             </div>
@@ -163,6 +172,16 @@
                 }
             });
         });
+
+        $(document).ready(function() {
+            var check = $("#eventbundle_event_typeReservation option:selected").val();
+            console.log(check);
+            if (check == "Gratuite"){
+                $(".prix").hide();
+                $(".prixlab").hide();
+            }
+        });
+
         $(document).ready(function() {
             $('.quota').on('keyup',function() {
                 var content = $('.quota').val();

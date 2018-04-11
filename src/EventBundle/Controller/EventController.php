@@ -10,6 +10,7 @@ namespace EventBundle\Controller;
 
 
 use EventBundle\Form\CommentaireForm;
+use EventBundle\Form\EventEditForm;
 use EventBundle\Form\EventForm;
 use EventBundle\Form\ReservationForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -55,26 +56,51 @@ class EventController extends Controller
 
     public function modifierAction(Request $request)
     {
+        $user = $this->getUser();
         $id = $request->get('id');
         $em = $this->getDoctrine()->getManager();
         $evenement = $em->getRepository('UtilisateurBundle:Evenement')->find($id);
-        $form = $this->createForm(EventForm::class,$evenement);
+        $form = $this->createForm(EventEditForm::class,$evenement);
         $form->handleRequest($request);
-        if ($form->isValid()){
-            $em->persist($evenement);
-            $em->flush();
-            return $this->redirectToRoute('modeles');
+        if ($user !== null) {
+            if ($form->isValid()) {
+                $em->persist($evenement);
+                $em->flush();
+                return $this->redirectToRoute('my_events');
+            }
+        }else{
+            return $this->redirectToRoute('fos_user_registration_register');
         }
         return $this->render('EventBundle:Event:modifevent.html.twig', ['events' => null,'form' => $form->createView(),'tag' => 'Modifier événement']);
 
 
     }
 
+    public function supprimerAction(Request $request){
+        $user = $this->getUser();
+        $id = $request->get('id');
+        $em = $this->getDoctrine()->getManager();
+        $evenement = $em->getRepository('UtilisateurBundle:Evenement')->find($id);
+        if ($user !== null && $evenement->getIdOrganisateur() == $user ) {
+            $em->remove($evenement);
+            $em->flush();
+            $this->addFlash(
+                'success',
+                'Supression avec succès!'
+            );
+        }
+        else {
+            $this->addFlash(
+                'success',
+                'Vous n\'êtes éligble pour supprimer cet événement!'
+            );
+        }
+        return $this->render('EventBundle:Event:suppevent.html.twig',['events'=> null,'tag' => 'Supprimer événement']);
+    }
+
     public function listerAction(Request $request){
         return $this->render('EventBundle:Event:listevents.html.twig',['events'=>null,
             'tag'=> 'Liste des événements', 'select'=> null]);
-
-
 
     }
 
@@ -125,7 +151,7 @@ class EventController extends Controller
                     $event->addReservation($reservation);
                     $em->persist($reservation);
                     $em->flush();
-                    return $this->redirectToRoute('details_event',['id' => $event->getId()]);
+                    return $this->redirectToRoute('my_res');
                 }
             }
         }
@@ -183,12 +209,11 @@ class EventController extends Controller
             'recordsTotal' => count($this->getDoctrine()->getRepository('UtilisateurBundle:Evenement')->search(array(), 0, false))
         );
         foreach ($events as $event) {
-            if ($event->getTypeReservation() == "Gratuite" ){
                 $output['data'][] = [
                     'nom' => "<span class=\"glyphicon glyphicon-plus\"></span>".$event->getNom(),
                     'type' => $event->getType(),
                     'typeRes' => $event->getTypeReservation(),
-                    'prix' => "Entrée gratuite",
+                    'prix' => ($event->getPrix()) ? $event->getPrix(). ' DT': 'Entrée Gratuite',
                     'DateEvent' => $event->getDateEvent()->format('Y-m-d H:i:s'),
                     'duree' => $event->getDuree(),
                     'lieu' => $event->getLieu(),
@@ -196,26 +221,9 @@ class EventController extends Controller
                     'Description' => $event->getDescription(),
                     'Affiche' => '<img class="aff" src="/affiches/'.$event->getAffiche().'"/>',
                     'Details' => "<a href=".$this->generateUrl('details_event',['id' => $event->getID()])." target=\"_blank\"><span class=\"glyphicon glyphicon-plus\"></span></a>",
-                    'Modifier' => "<a href=".$this->generateUrl('modifier_event',['id' => $event->getID()])." target=\"_blank\"><span class=\"glyphicon glyphicon-plus\"></span></a>"
-                ];
-            }
-            else{
-                $output['data'][] = [
-                    'nom' => "<span class=\"glyphicon glyphicon-plus\"></span>".$event->getNom(),
-                    'type' => $event->getType(),
-                    'typeRes' => $event->getTypeReservation(),
-                    'prix' => $event->getPrix().' DT',
-                    'DateEvent' => $event->getDateEvent()->format('Y-m-d H:i:s'),
-                    'duree' => $event->getDuree(),
-                    'lieu' => $event->getLieu(),
-                    'nombre' => $event->getNombre(),
-                    'Description' => $event->getDescription(),
-                    'Affiche' => '<img class="aff" src="/affiches/'.$event->getAffiche().'"/>',
-                    'Details' => "<a href=".$this->generateUrl('details_event',['id' => $event->getID()])." target=\"_blank\"><span class=\"glyphicon glyphicon-plus\"></span></a>",
-                    'Modifier' => "<a href=".$this->generateUrl('modifier_event',['id' => $event->getID()])." target=\"_blank\"><span class=\"glyphicon glyphicon-plus\"></span></a>"
-                ];
-
-            }
+                    'Modifier' => "<a href=".$this->generateUrl('modifier_event',['id' => $event->getID()])." target=\"_blank\"><span class=\"glyphicon glyphicon-cog\"></span></a>",
+                    'Supprimer' => "<a href=".$this->generateUrl('supprimer_event',['id' => $event->getID()])." target=\"_blank\"><span class=\"glyphicon glyphicon-trash\"></span></a>"
+                    ];
 
         }
 
@@ -248,12 +256,11 @@ class EventController extends Controller
             'recordsTotal' => count($this->getDoctrine()->getRepository('UtilisateurBundle:Evenement')->search(array(), 0, false))
         );
         foreach ($events as $event) {
-            if ($event->getTypeReservation() == "Gratuite" ){
                 $output['data'][] = [
                     'nom' => "<span class=\"glyphicon glyphicon-plus\"></span>".$event->getNom(),
                     'type' => $event->getType(),
                     'typeRes' => $event->getTypeReservation(),
-                    'prix' => "Entrée gratuite",
+                    'prix' => ($event->getPrix()) ? $event->getPrix(). ' DT': 'Entrée Gratuite',
                     'DateEvent' => $event->getDateEvent()->format('Y-m-d H:i:s'),
                     'duree' => $event->getDuree(),
                     'lieu' => $event->getLieu(),
@@ -262,23 +269,6 @@ class EventController extends Controller
                     'Affiche' => '<img class="aff" src="/affiches/'.$event->getAffiche().'"/>',
                     'Details' => "<a href=".$this->generateUrl('details_event',['id' => $event->getID()])." target=\"_blank\"><span class=\"glyphicon glyphicon-plus\"></span></a>"
                 ];
-            }
-            else{
-                $output['data'][] = [
-                    'nom' => "<span class=\"glyphicon glyphicon-plus\"></span>".$event->getNom(),
-                    'type' => $event->getType(),
-                    'typeRes' => $event->getTypeReservation(),
-                    'prix' => $event->getPrix().' DT',
-                    'DateEvent' => $event->getDateEvent()->format('Y-m-d H:i:s'),
-                    'duree' => $event->getDuree(),
-                    'lieu' => $event->getLieu(),
-                    'nombre' => $event->getNombre(),
-                    'Description' => $event->getDescription(),
-                    'Affiche' => '<img class="aff" src="/affiches/'.$event->getAffiche().'"/>',
-                    'Details' => "<a href=".$this->generateUrl('details_event',['id' => $event->getID()])." target=\"_blank\"><span class=\"glyphicon glyphicon-plus\"></span></a>"
-                ];
-
-            }
 
         }
 
@@ -306,6 +296,132 @@ class EventController extends Controller
 
     public function reporterAction(Request $request){
 
+    }
+
+    public function myResAction(){
+        return $this->render('EventBundle:Event:myres.html.twig', ['tag' => 'Mes événements', 'events'=>null,]);
+    }
+
+    public function dataResAction(Request $request){
+
+        $length = $request->get('length');
+        $length = $length && ($length!=-1)?$length:0;
+
+        $start = $request->get('start');
+        $start = $length?($start && ($start!=-1)?$start:0)/$length:0;
+
+        $search = $request->query->get('search');
+
+        $user = new User();
+        $user = $this->getUser();
+        $filters = [
+            'query' => @$search['value'],
+            'user' => @$user,
+        ];
+
+        $events = $this->getDoctrine()->getRepository('UtilisateurBundle:Evenement')->searchRes(
+            $filters, $start, $length
+        );
+
+        $output = array(
+            'data' => array(),
+            'recordsFiltered' => count($this->getDoctrine()->getRepository('UtilisateurBundle:Evenement')->searchRes($filters, 0, false)),
+            'recordsTotal' => count($this->getDoctrine()->getRepository('UtilisateurBundle:Evenement')->searchRes(array(), 0, false))
+        );
+        foreach ($events as $event) {
+            $reservations = $event->getReservations();
+            foreach ($reservations as $reservation) {
+                if ($reservation->getIdParticipant() == $user && $reservation->getEtat() == "Annulé" ) {
+                        $output['data'][] = [
+
+                            'nom' => "<span class=\"glyphicon glyphicon-plus\"></span>" . $event->getNom(),
+                            'etat' => $reservation->getEtat(),
+                            'type' => $event->getType(),
+                            'typeRes' => $event->getTypeReservation(),
+                            'prix' => ($event->getPrix()) ? $event->getPrix(). ' DT': 'Entrée Gratuite',
+                            'DateEvent' => $event->getDateEvent()->format('Y-m-d H:i:s'),
+                            'duree' => $event->getDuree(),
+                            'lieu' => $event->getLieu(),
+                            'nombre' => $event->getNombre(),
+                            'Description' => $event->getDescription(),
+                            'Affiche' => '<img class="aff" src="/affiches/' . $event->getAffiche() . '"/>',
+                            'Details' => "<a href=" . $this->generateUrl('details_event', ['id' => $event->getID()]) . " target=\"_blank\"><span class=\"glyphicon glyphicon-plus\"></span></a>",
+                            'Action' => "<a href=" . $this->generateUrl('confirmer_res', ['id' => $reservation->getIdReservation()]) . " target=\"_blank\">reconfirmer<span class=\"glyphicon glyphicon-remove\"></span></a>"
+                        ];
+
+                    }
+                  else if ($reservation->getIdParticipant() == $user && $reservation->getEtat() == "Confirmé"){
+                      $output['data'][] = [
+
+                          'nom' => "<span class=\"glyphicon glyphicon-plus\"></span>" . $event->getNom(),
+                          'etat' => $reservation->getEtat(),
+                          'type' => $event->getType(),
+                          'typeRes' => $event->getTypeReservation(),
+                          'prix' => ($event->getPrix()) ? $event->getPrix(). ' DT': 'Entrée Gratuite',
+                          'DateEvent' => $event->getDateEvent()->format('Y-m-d H:i:s'),
+                          'duree' => $event->getDuree(),
+                          'lieu' => $event->getLieu(),
+                          'nombre' => $event->getNombre(),
+                          'Description' => $event->getDescription(),
+                          'Affiche' => '<img class="aff" src="/affiches/' . $event->getAffiche() . '"/>',
+                          'Details' => "<a href=" . $this->generateUrl('details_event', ['id' => $event->getID()]) . " target=\"_blank\"><span class=\"glyphicon glyphicon-plus\"></span></a>",
+                          'Action' => "<a href=" . $this->generateUrl('annuler_res', ['id' => $reservation->getIdReservation()]) . " target=\"_blank\">annuler<span class=\"glyphicon glyphicon-ok\"></span></a>"
+                      ];
+                  }
+                }
+            }
+
+
+            return new Response(json_encode($output), 200, ['Content-Type' => 'application/json']);
+
+
+
+    }
+
+    public function annulerResAction(Request $request){
+        $user = $this->getUser();
+        $id = $request->get('id');
+        $em = $this->getDoctrine()->getManager();
+        $reservation = $em->getRepository('UtilisateurBundle:Reservation')->find($id);
+        if ($user !== null && $reservation->getIdParticipant() == $user ) {
+            $reservation->setEtat("Annulé");
+            $em->persist($reservation);
+            $em->flush();
+            $this->addFlash(
+                'success',
+                'Annulation avec succès!'
+            );
+        }
+        else {
+            $this->addFlash(
+                'success',
+                'Vous n\'êtes éligble pour annuler cette réservation!'
+            );
+        }
+        return $this->render('EventBundle:Event:annulerRes.html.twig',['events'=> null,'tag' => 'Annuler réservation']);
+    }
+
+    public function confirmerResAction(Request $request){
+        $user = $this->getUser();
+        $id = $request->get('id');
+        $em = $this->getDoctrine()->getManager();
+        $reservation = $em->getRepository('UtilisateurBundle:Reservation')->find($id);
+        if ($user !== null && $reservation->getIdParticipant() == $user ) {
+            $reservation->setEtat("Confirmé");
+            $em->persist($reservation);
+            $em->flush();
+            $this->addFlash(
+                'success',
+                'Reconfirmation avec succès!'
+            );
+        }
+        else {
+            $this->addFlash(
+                'success',
+                'Vous n\'êtes éligble pour reconfirmer cette réservation!'
+            );
+        }
+        return $this->render('EventBundle:Event:annulerRes.html.twig',['events'=> null,'tag' => 'Reconfirmer réservation']);
     }
 
 
